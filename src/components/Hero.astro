@@ -1,0 +1,38 @@
+---
+// src/components/Hero.astro
+---
+<section id="inicio" class="min-h-screen flex flex-col justify-center items-center text-center pt-20 px-5 relative z-10">
+    <!-- Imagen de perfil / Logo -->
+    <img 
+        src="/avatar.png" 
+        alt="Avatar de Miguel Ángel" 
+        class="w-40 h-40 object-cover rounded-3xl bg-[#0a0508] border border-white/10 mb-8 shadow-[0_0_30px_rgba(255,170,0,0.25)] animate-[float_6s_ease-in-out_infinite]" 
+    />
+
+    <!-- Título Principal con Degradado -->
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
+        <span class="bg-gradient-to-r from-[#ff3333] via-[#ffcc00] to-[#ff3333] bg-[length:200%_auto] text-transparent bg-clip-text animate-[gradientFlow_6s_infinite_linear]">
+            Kuren
+        </span>
+    </h1>
+
+    <!-- Subtítulo -->
+    <h2 class="text-xl md:text-2xl text-white font-medium mb-6">
+        Digital Artist & Game Developer
+    </h2>
+
+    <!-- Descripción -->
+    <p class="text-[#cbd5e1] max-w-2xl mb-10 text-lg leading-relaxed">
+        Especialista en rigging, animación 3D, pixel art y diseño de interfaces. Dando vida a videojuegos mediante la integración de assets en Unreal Engine, Blender y Aseprite.
+    </p>
+
+    <!-- Botones -->
+    <div class="flex flex-wrap justify-center gap-5">
+        <a href="#sobre-mi" class="px-8 py-3 rounded-full font-bold bg-gradient-to-r from-[#cc0000] to-[#ffaa00] text-white shadow-[0_5px_15px_rgba(255,170,0,0.2)] hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(255,170,0,0.4)] transition-all duration-300">
+            Conóceme
+        </a>
+        <a href="#portfolio" class="px-8 py-3 rounded-full font-bold bg-transparent border-2 border-[#ffaa00] text-white hover:bg-[#ffaa00] hover:text-[#0a0508] hover:shadow-[0_0_15px_rgba(255,170,0,0.4)] transition-all duration-300">
+            Mi Portfolio
+        </a>
+    </div>
+</section>

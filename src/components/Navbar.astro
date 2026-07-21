@@ -1,0 +1,51 @@
+---
+// src/components/Navbar.astro
+---
+<header class="fixed top-0 w-full z-50 py-4 bg-[#0a0508]/60 backdrop-blur-lg border-b border-white/5">
+    <div class="container mx-auto px-5 flex justify-between items-center max-w-6xl">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 font-bold text-lg text-white no-underline hover:scale-105 transition-transform">
+            <!-- Usamos tu avatar aquí también para que quede consistente -->
+            <img src="/avatar.png" alt="Logo" class="w-8 h-8 rounded object-cover border border-white/10" />
+            <span>Miguel Ángel Vera Ximénez</span>
+        </a>
+
+        <!-- Enlaces Desktop -->
+        <nav>
+            <ul class="hidden md:flex gap-8 list-none m-0 p-0">
+                <li><a href="#inicio" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">Inicio</a></li>
+                <li><a href="#sobre-mi" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">Sobre Mí</a></li>
+                <li><a href="#portfolio" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">Portfolio</a></li>
+                <li><a href="#contacto" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Botón Menú Móvil -->
+        <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 cursor-pointer z-50 bg-transparent border-none">
+            <span class="w-6 h-0.5 bg-[#ffaa00] transition-transform origin-left"></span>
+            <span class="w-6 h-0.5 bg-[#ffaa00] transition-opacity"></span>
+            <span class="w-6 h-0.5 bg-[#ffaa00] transition-transform origin-left"></span>
+        </button>
+    </div>
+
+    <!-- Menú Móvil (Oculto por defecto) -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0a0508] border-b border-white/5 py-4 px-5 flex-col gap-4 text-center">
+        <a href="#inicio" class="text-[#cbd5e1] hover:text-white block py-2">Inicio</a>
+        <a href="#sobre-mi" class="text-[#cbd5e1] hover:text-white block py-2">Sobre Mí</a>
+        <a href="#portfolio" class="text-[#cbd5e1] hover:text-white block py-2">Portfolio</a>
+        <a href="#contacto" class="text-[#cbd5e1] hover:text-white block py-2">Contacto</a>
+    </div>
+</header>
+
+<script>
+    // Lógica para abrir/cerrar el menú en móviles
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (btn && menu) {
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        });
+    }
+</script>

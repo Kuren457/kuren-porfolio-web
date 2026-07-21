@@ -1,0 +1,158 @@
+---
+// src/components/Portfolio.astro
+---
+<section id="portfolio" class="py-24 px-5 relative z-10">
+    <div class="container mx-auto max-w-6xl">
+        <!-- Título de Sección -->
+        <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center">
+            <span class="bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-transparent bg-clip-text">
+                Proyectos Destacados
+            </span>
+        </h2>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 auto-rows-[250px] gap-6">
+            
+            <!-- Proyecto 1: BloodRunner (Ocupa 2 columnas) -->
+            <a href="https://abelirre.itch.io/bloodrunner" target="_blank" rel="noopener noreferrer" class="md:col-span-2 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#ffaa00]/50 transition-all duration-500">
+                
+                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
+                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 0.25 segundos de retraso, se vuelve visible -->
+                <img src="/BloodRunnerBanner.png" alt="BloodRunner" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[1000ms] group-hover:scale-105" />
+
+                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
+                <!-- Desaparece tras 0.5 segundo -->
+                <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
+
+                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón, desaparece tras el corte) -->
+                <img src="/Attack2.gif" alt="Animación de ataque" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif z-20 pointer-events-none" />
+
+                <!-- Capa 4: Efecto de Corte (Slash) -->
+                <div class="absolute inset-0 z-30 pointer-events-none flex items-center justify-center opacity-0 anim-slash overflow-hidden">
+                    <!-- La línea del corte: blanca con brillo rojo -->
+                    <div class="w-[100%] h-[10px] bg-red -rotate-1 shadow-[0_0_20px_#ff3333]"></div>
+                </div>
+
+                <!-- Capa 5: Gradiente inferior para los textos -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/90 to-transparent z-40"></div>
+                
+                <!-- Capa 6: Textos -->
+                <div class="absolute bottom-0 left-0 p-8 z-50 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#ffaa00] bg-[#ffaa00]/10 rounded-full border border-[#ffaa00]/20">Godot & Aseprite</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">BloodRunner</h3>
+                    <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        Aventura rápida y lineal. Niveles contrarreloj, platformer en estilo pixel art. Proyecto Universitario.
+                    </p>
+                </div>
+            </a>
+
+            <!-- Proyecto 2: Ourojam -->
+            <a href="https://kurenm.itch.io/ourojam" target="_blank" rel="noopener noreferrer" class="relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
+                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
+                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 0.25 segundos de retraso, se vuelve visible -->
+                <img src="/Fondo_chino.gif" alt="Ourojam" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
+
+                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
+                <!-- Desaparece tras 0.5 segundos -->
+                <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
+
+                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
+                <img src="/Dragon_pasando_nubes.gif" alt="Animación de dragón" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif-dragon z-20 pointer-events-none" />
+
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                
+                <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#cbd5e1] bg-white/10 rounded-full border border-white/20">Godot & Aseprite</span>
+                    <h3 class="text-xl font-bold text-white mb-2">OuroJam</h3>
+                    <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        Wukong no deja a Ouroboros comer mermelada. Juego de puzles para la JAM de GMTK de 2025. Temática Loop, 3 días.
+                    </p>
+                </div>
+            </a>
+
+            <!-- Proyecto 3: Blender 3D -->
+            <a href="#" class="relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
+                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
+                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 1 segundo de retraso, se vuelve visible -->
+                <img src="/ProceduralBuilding.gif" alt="Edificiios" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
+
+                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
+                <!-- Desaparece tras 0.5 segundos -->
+                <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
+
+                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
+                <img src="/KatoJumpscare.gif" alt="Animación de gato" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-gato z-20 pointer-events-none" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                
+                <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#ff3333] bg-[#ff3333]/10 rounded-full border border-[#ff3333]/20">Blender</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Modelado, Rig y Animación</h3>
+                    <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        Modelado, flujos de trabajo de animación y rig de personajes 3D optimizados para tiempo real.
+                    </p>
+                </div>
+            </a>
+
+            <!-- Proyecto 4: Unreal Engine Collab (Ocupa 2 columnas) -->
+            <a href="https://kurenm.itch.io/neorb" target="_blank" rel="noopener noreferrer" class="md:col-span-2 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
+                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
+                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 1 segundo de retraso, se vuelve visible -->
+                <img src="/header.png" alt="Edificiios" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
+
+                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
+                <!-- Desaparece tras 0.5 segundos -->
+                <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[1000ms] z-10"></div>
+
+                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
+                <img src="/Croac.gif" alt="Animación de gato" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-rana z-20 pointer-events-none" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                
+                <div class="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-white bg-white/10 rounded-full border border-white/20">Unreal Engine</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">Desarrollo Cooperativo (Tech Art)</h3>
+                    <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        Gestión de la capa visual del juego. Integración de animaciones, blueprints y materiales en colaboración técnica para implementar mecánicas.
+                    </p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Animación del GIF: Aparece al instante con Tailwind, pero lo ocultamos a .2 segundos */
+    .group:hover .anim-gif {
+        animation: hideGif 0.05s ease-in 0.2s forwards;
+    }
+
+    /* Animación del GIF: Aparece al instante con Tailwind, pero lo ocultamos a .2 segundos */
+    .group:hover .anim-gif-dragon {
+        animation: hideGif 0.05s ease-in 1s forwards;
+    }
+
+    /* Animación del GIF: Aparece al instante con Tailwind, pero lo ocultamos a .2 segundos */
+    .group:hover .anim-gif-gato {
+        animation: hideGif 0.05s ease-in 0.3s forwards;
+    }
+
+    /* Animación del GIF: Aparece al instante con Tailwind, pero lo ocultamos a .2 segundos */
+    .group:hover .anim-gif-rana {
+        animation: hideGif 0.1s ease-in 0.8s forwards;
+    }
+
+    /* Animación del Corte (Slash): Aparece de golpe a los 0.9s (justo antes del fade) y se expande */
+    .group:hover .anim-slash {
+        animation: slashEffect 0.15s ease-out 0.3s forwards;
+    }
+
+    @keyframes hideGif {
+        to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes slashEffect {
+        0% { opacity: 0; transform: scaleX(0); }
+        50% { opacity: 1; transform: scaleX(1); }
+        100% { opacity: 0; transform: scaleX(1.5) scaleY(15); } /* Se expande y desaparece */
+    }
+</style>
