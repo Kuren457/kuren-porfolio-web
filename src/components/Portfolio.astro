@@ -16,32 +16,29 @@
             <!-- Proyecto 1: BloodRunner (Ocupa 2 columnas) -->
             <a href="https://abelirre.itch.io/bloodrunner" target="_blank" rel="noopener noreferrer" class="md:col-span-2 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#ffaa00]/50 transition-all duration-500">
                 
-                <!-- LOGO CENTRAL (Visible siempre en móvil y escritorio) -->
-                <!-- Usamos flex para centrarlo perfectamente -->
-                <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
+                <!-- LOGO CENTRAL: z-20 para estar SIEMPRE por encima del fondo oscuro -->
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0">
                     <img src="/BloodRunnerLogo.png" alt="Logo bloodrunner" class="w-32 h-auto drop-shadow-md" />
                 </div>
-                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
-                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 0.25 segundos de retraso, se vuelve visible -->
+
+                <!-- Capa 1: Banner del juego (z-0 por defecto) -->
                 <img src="/BloodRunnerBanner.png" alt="BloodRunner" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[1000ms] group-hover:scale-105" />
 
-                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
-                <!-- Desaparece tras 0.5 segundo -->
+                <!-- Capa 2: Fondo oscuro sólido (z-10: oculta el banner, pero queda bajo el logo) -->
                 <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
 
-                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón, desaparece tras el corte) -->
-                <img src="/Attack2.gif" alt="Animación de ataque" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif z-20 pointer-events-none" />
+                <!-- Capa 3: Tu GIF de Aseprite (z-30: por encima de todo al aparecer) -->
+                <img src="/Attack2.gif" alt="Animación de ataque" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif z-30 pointer-events-none" />
 
-                <!-- Capa 4: Efecto de Corte (Slash) -->
-                <div class="absolute inset-0 z-30 pointer-events-none flex items-center justify-center opacity-0 anim-slash overflow-hidden">
-                    <!-- La línea del corte: blanca con brillo rojo -->
+                <!-- Capa 4: Efecto de Corte (Slash) (z-40) -->
+                <div class="absolute inset-0 z-40 pointer-events-none flex items-center justify-center opacity-0 anim-slash overflow-hidden">
                     <div class="w-[100%] h-[10px] bg-red -rotate-1 shadow-[0_0_20px_#ff3333]"></div>
                 </div>
 
-                <!-- Capa 5: Gradiente inferior para los textos -->
+                <!-- Capa 5: Gradiente inferior (z-40) -->
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/90 to-transparent z-40"></div>
                 
-                <!-- Capa 6: Textos -->
+                <!-- Capa 6: Textos (z-50: Intocables por las animaciones) -->
                 <div class="absolute bottom-0 left-0 p-8 z-50 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#ffaa00] bg-[#ffaa00]/10 rounded-full border border-[#ffaa00]/20">Godot & Aseprite</span>
                     <h3 class="text-2xl font-bold text-white mb-2">BloodRunner</h3>
@@ -53,25 +50,25 @@
 
             <!-- Proyecto 2: Ourojam -->
             <a href="https://kurenm.itch.io/ourojam" target="_blank" rel="noopener noreferrer" class="relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
-                <!-- LOGO CENTRAL (Visible siempre en móvil y escritorio) -->
-                <!-- Usamos flex para centrarlo perfectamente -->
-                <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
+                
+                <!-- LOGO CENTRAL -->
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0">
                     <img src="/LogoDragon.png" alt="Logo Dragón" class="w-32 h-auto drop-shadow-md" />
                 </div>
-                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
-                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 0.25 segundos de retraso, se vuelve visible -->
+
+                <!-- Capa 1: Banner -->
                 <img src="/Fondo_chino.gif" alt="Ourojam" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
 
-                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
-                <!-- Desaparece tras 0.5 segundos -->
+                <!-- Capa 2: Fondo oscuro -->
                 <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
 
-                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
-                <img src="/Dragon_pasando_nubes.gif" alt="Animación de dragón" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif-dragon z-20 pointer-events-none" />
+                <!-- Capa 3: GIF -->
+                <img src="/Dragon_pasando_nubes.gif" alt="Animación de dragón" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48*2 opacity-0 group-hover:opacity-100 anim-gif-dragon z-30 pointer-events-none" />
 
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-40"></div>
                 
-                <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <!-- Textos -->
+                <div class="absolute bottom-0 left-0 p-6 z-50 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#cbd5e1] bg-white/10 rounded-full border border-white/20">Godot & Aseprite</span>
                     <h3 class="text-xl font-bold text-white mb-2">OuroJam</h3>
                     <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -82,25 +79,25 @@
 
             <!-- Proyecto 3: Blender 3D -->
             <a href="#" class="relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
-                <!-- LOGO CENTRAL (Visible siempre en móvil y escritorio) -->
-                <!-- Usamos flex para centrarlo perfectamente -->
-                <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-                    <img src="/BlenderLogo.png" alt="Logo Dragón" class="w-32 h-auto drop-shadow-md" />
+                
+                <!-- LOGO CENTRAL -->
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0">
+                    <img src="/BlenderLogo.png" alt="Logo Blender" class="w-32 h-auto drop-shadow-md" />
                 </div>
 
-                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
-                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 1 segundo de retraso, se vuelve visible -->
-                <img src="/ProceduralBuilding.gif" alt="Edificiios" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
+                <!-- Capa 1: Banner -->
+                <img src="/ProceduralBuilding.gif" alt="Edificios" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
 
-                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
-                <!-- Desaparece tras 0.5 segundos -->
+                <!-- Capa 2: Fondo oscuro -->
                 <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[500ms] z-10"></div>
 
-                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
-                <img src="/KatoJumpscare.gif" alt="Animación de gato" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-gato z-20 pointer-events-none" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                <!-- Capa 3: GIF -->
+                <img src="/KatoJumpscare.gif" alt="Animación de gato" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-gato z-30 pointer-events-none" />
                 
-                <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-40"></div>
+                
+                <!-- Textos -->
+                <div class="absolute bottom-0 left-0 p-6 z-50 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-[#ff3333] bg-[#ff3333]/10 rounded-full border border-[#ff3333]/20">Blender</span>
                     <h3 class="text-xl font-bold text-white mb-2">Modelado, Rig y Animación</h3>
                     <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -111,24 +108,25 @@
 
             <!-- Proyecto 4: Unreal Engine Collab (Ocupa 2 columnas) -->
             <a href="https://kurenm.itch.io/neorb" target="_blank" rel="noopener noreferrer" class="md:col-span-2 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#1a050a] hover:border-[#ffaa00]/50 transition-all duration-500">
-                <!-- LOGO CENTRAL (Visible siempre en móvil y escritorio) -->
-                <!-- Usamos flex para centrarlo perfectamente -->
-                <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-                    <img src="/NeorbLogo.png" alt="Logo Dragón" class="w-32 h-auto drop-shadow-md" />
+                
+                <!-- LOGO CENTRAL -->
+                <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0">
+                    <img src="/NeorbLogo.png" alt="Logo Neorb" class="w-32 h-auto drop-shadow-md" />
                 </div>
-                <!-- Capa 1: Banner del juego (Fondo final revelado) -->
-                <!-- Usamos opacity-0 por defecto. Al hacer hover, tras 1 segundo de retraso, se vuelve visible -->
-                <img src="/header.png" alt="Edificiios" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
 
-                <!-- Capa 2: Fondo oscuro sólido que oculta el banner inicialmente -->
-                <!-- Desaparece tras 0.5 segundos -->
+                <!-- Capa 1: Banner -->
+                <img src="/header.png" alt="Header" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300 delay-[250ms] group-hover:scale-105" />
+
+                <!-- Capa 2: Fondo oscuro -->
                 <div class="absolute inset-0 bg-[#0a0508] group-hover:opacity-0 transition-opacity duration-300 delay-[1000ms] z-10"></div>
 
-                <!-- Capa 3: Tu GIF de Aseprite (Aparece al pasar el ratón) -->
-                <img src="/Croac.gif" alt="Animación de gato" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-rana z-20 pointer-events-none" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-10"></div>
+                <!-- Capa 3: GIF -->
+                <img src="/Croac.gif" alt="Animación de rana" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 opacity-0 group-hover:opacity-100 anim-gif-rana z-30 pointer-events-none" />
                 
-                <div class="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508] via-[#0a0508]/80 to-transparent z-40"></div>
+                
+                <!-- Textos -->
+                <div class="absolute bottom-0 left-0 p-8 z-50 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span class="inline-block px-3 py-1 mb-3 text-xs font-bold text-white bg-white/10 rounded-full border border-white/20">Unreal Engine</span>
                     <h3 class="text-2xl font-bold text-white mb-2">Desarrollo Cooperativo (Tech Art)</h3>
                     <p class="text-[#cbd5e1] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
