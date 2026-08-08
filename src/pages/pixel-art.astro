@@ -1,0 +1,446 @@
+---
+import Layout from '../layouts/layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Contacto from '../components/Contacto.astro';
+---
+
+<Layout>
+    <Navbar />
+    
+    <!-- Cabecera de Pixel Art -->
+    <section class="pt-40 pb-12 px-5 text-center relative z-10">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
+            <span class="bg-gradient-to-r from-[#fa5c5c] via-[#ffaa00] to-[#fa5c5c] bg-[length:200%_auto] text-transparent bg-clip-text animate-[gradientFlow_6s_infinite_linear]">
+                Pixel Art
+            </span>
+        </h1>
+        <p class="text-[#cbd5e1] text-lg max-w-2xl mx-auto">
+            Exploración visual, diseño de personajes, escenarios y animaciones frame a frame creadas en Aseprite.
+        </p>
+    </section>
+
+    <!-- Galería de Pixel Art -->
+    <section class="py-10 px-5 relative z-10">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Columnas CSS puro para el efecto Masonry -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                
+                <!-- Tarjeta 1 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Attack2.gif">
+                    <img src="/Pixel-art/Attack2.gif" alt="Animación Ataque" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Ataque Rápido</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Dragon_pasando_nubes.gif">
+                    <img src="/Pixel-art/Dragon_pasando_nubes.gif" alt="Dragón Nubes" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Dragón</h3>
+                        <p class="text-[#cbd5e1] text-sm">Escenario y ciclo</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Boss_dead.gif">
+                    <img src="/Pixel-art/Boss_dead.gif" alt="Boss" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Boss</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Cyntia.gif">
+                    <img src="/Pixel-art/Cyntia.gif" alt="Cyntia" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Cyntia</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 5 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Escena_Coche_2.gif">
+                    <img src="/Pixel-art/Escena_Coche_2.gif" alt="Coche" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Escena intermedia del coche</h3>
+                        <p class="text-[#cbd5e1] text-sm">Escenario y ciclo</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 6 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Fondo_chino.gif">
+                    <img src="/Pixel-art/Fondo_chino.gif" alt="Fondo_chino" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Fondo para Jam</h3>
+                        <p class="text-[#cbd5e1] text-sm">Escenario y ciclo</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 7 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Idle.gif">
+                    <img src="/Pixel-art/Idle.gif" alt="Idle" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Idle Personaje Principal</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 8 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jump.gif">
+                    <img src="/Pixel-art/Jump.gif" alt="Jump" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Saltar Personaje Principal</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 9 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Robar_Galletas.gif">
+                    <img src="/Pixel-art/Robar_Galletas.gif" alt="Galletas" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Escena de contexto para juego</h3>
+                        <p class="text-[#cbd5e1] text-sm">Escenario y Animación</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 10 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Run.gif">
+                    <img src="/Pixel-art/Run.gif" alt="Run" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Correr Personaje Principal</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 11 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/TodosEnemigos.gif">
+                    <img src="/Pixel-art/TodosEnemigos.gif" alt="Enemigos" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Enemigos para Jam</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 12 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Transform_air.gif">
+                    <img src="/Pixel-art/Transform_air.gif" alt="Transform" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Transformación Personaje Principal</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 13 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Emma_Frost.png">
+                    <img src="/Pixel-art/Emma_Frost.png" alt="Emma" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 14 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jeff.png">
+                    <img src="/Pixel-art/Jeff.png" alt="Jeff" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 15 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Luna.png">
+                    <img src="/Pixel-art/Luna.png" alt="Luna" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 16 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magik.png">
+                    <img src="/Pixel-art/Magik.png" alt="Transform" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 17 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magneto.png">
+                    <img src="/Pixel-art/Magneto.png" alt="Mag" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 19 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Psylocke.png">
+                    <img src="/Pixel-art/Psylocke.png" alt="Psy" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 20 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Winter.png">
+                    <img src="/Pixel-art/Winter.png" alt="Winter" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 21 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Strange.gif">
+                    <img src="/Pixel-art/Strange.gif" alt="Strange" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 22 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Humo_Clove.gif">
+                    <img src="/Pixel-art/Humo_Clove.gif" alt="Clove" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Habilidad/VFX</h3>
+                        <p class="text-[#cbd5e1] text-sm">VFX</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 23 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Samurai.gif">
+                    <img src="/Pixel-art/Samurai.gif" alt="Samurai" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Personaje</h3>
+                        <p class="text-[#cbd5e1] text-sm">Animación de Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 24 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Tutorial_6_Conejo.gif">
+                    <img src="/Pixel-art/Tutorial_6_Conejo.gif" alt="Conejo" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Primeros pasos en la animación</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 25 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Anim_Dragon.gif">
+                    <img src="/Pixel-art/Anim_Dragon.gif" alt="Dragon_Anim" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Animación para Jam</h3>
+                        <p class="text-[#cbd5e1] text-sm">Escenario y Animación</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 26 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Wingman.gif">
+                    <img src="/Pixel-art/Wingman.gif" alt="Wingman" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Primeros pasos en la animación</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 27 -->
+                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Yippiee.gif">
+                    <img src="/Pixel-art/Yippiee.gif" alt="Yippiee" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-xl font-bold text-white mb-1">Primeros pasos en la animación</h3>
+                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <Contacto />
+
+    <!-- ========================================= -->
+    <!-- MODAL / LIGHTBOX (Con Zoom y SVGs)        -->
+    <!-- ========================================= -->
+    <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-[#0a0508]/75 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        
+        <!-- Controles de Zoom (Arriba a la izquierda) -->
+        <div class="absolute top-6 left-6 md:top-10 md:left-10 flex gap-2 z-50 bg-[#0a0508]/80 p-1.5 rounded-xl border border-white/10 backdrop-blur-md">
+            <button id="zoom-out" class="text-white hover:text-[#fa5c5c] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">-</button>
+            <button id="zoom-reset" class="text-white/80 hover:text-white w-10 flex items-center justify-center text-sm font-medium transition-colors cursor-pointer select-none rounded hover:bg-white/10">1x</button>
+            <button id="zoom-in" class="text-white hover:text-[#fa5c5c] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">+</button>
+        </div>
+
+        <!-- Botón de cerrar (la X) -->
+        <button id="lightbox-close" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-[#fa5c5c] text-5xl font-light z-50 transition-colors cursor-pointer">&times;</button>
+        
+        <!-- Flecha Izquierda -->
+        <button id="lightbox-prev" class="absolute left-2 md:left-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[#fa5c5c] z-50 transition-colors cursor-pointer select-none p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Contenedor de la imagen maximizada -->
+        <!-- Se ha reducido el tiempo de transición para que el zoom sea más rápido y reactivo -->
+        <img id="lightbox-img" src="" alt="Arte maximizado" style="image-rendering: pixelated;" class="max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(250,92,92,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
+
+        <!-- Flecha Derecha -->
+        <button id="lightbox-next" class="absolute right-2 md:right-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[#fa5c5c] z-50 transition-colors cursor-pointer select-none p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+    </div>
+</Layout>
+
+<!-- ========================================= -->
+<!-- LÓGICA JAVASCRIPT PARA EL LIGHTBOX        -->
+<!-- ========================================= -->
+<script>
+    const triggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    
+    // Controles de zoom
+    const zoomInBtn = document.getElementById('zoom-in');
+    const zoomOutBtn = document.getElementById('zoom-out');
+    const zoomResetBtn = document.getElementById('zoom-reset');
+
+    let currentIndex = 0;
+    let currentZoom = 1; // Tamaño original = 1
+
+    if (lightbox && lightboxImg) {
+        
+        // --- FUNCIONES DE ZOOM ---
+        const applyZoom = () => {
+            // Aplicamos la escala al CSS directamente y actualizamos el texto del botón
+            lightboxImg.style.transform = `scale(${currentZoom})`;
+            if (zoomResetBtn) zoomResetBtn.innerText = `${Math.round(currentZoom * 10) / 10}x`;
+        };
+
+        const resetZoom = () => {
+            currentZoom = 1;
+            lightboxImg.style.transform = ''; 
+            if (zoomResetBtn) zoomResetBtn.innerText = '1x';
+            // Mantenemos la clase de Tailwind abierta
+            lightboxImg.classList.add('scale-100'); 
+        };
+
+        // 1. Zoom con Rueda del Ratón
+        lightbox.addEventListener('wheel', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                e.preventDefault(); // Evitamos que la página por debajo haga scroll
+                if (e.deltaY < 0) {
+                    currentZoom = Math.min(currentZoom + 0.25, 4); // Límite máximo: 4x
+                } else {
+                    currentZoom = Math.max(currentZoom - 0.25, 0.5); // Límite mínimo: 0.5x
+                }
+                applyZoom();
+            }
+        });
+
+        // 2. Zoom con Botones
+        zoomInBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentZoom = Math.min(currentZoom + 0.5, 4);
+            applyZoom();
+        });
+        
+        zoomOutBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentZoom = Math.max(currentZoom - 0.5, 0.5);
+            applyZoom();
+        });
+
+        zoomResetBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetZoom();
+        });
+
+
+        // --- FUNCIONES DE GALERÍA ---
+        const showImage = (index) => {
+            const src = triggers[index].getAttribute('data-src');
+            if (src) {
+                lightboxImg.src = src;
+                resetZoom(); // Si pasas a otra imagen, el zoom vuelve a 1x
+            }
+        };
+
+        triggers.forEach((trigger, index) => {
+            trigger.addEventListener('click', () => {
+                currentIndex = index;
+                showImage(currentIndex);
+                
+                lightbox.classList.remove('hidden');
+                setTimeout(() => {
+                    lightbox.classList.remove('opacity-0');
+                    lightboxImg.classList.remove('scale-95');
+                    lightboxImg.classList.add('scale-100');
+                }, 10);
+                
+                document.body.style.overflow = 'hidden'; 
+            });
+        });
+
+        const goNext = () => {
+            currentIndex = (currentIndex + 1) % triggers.length;
+            showImage(currentIndex);
+        };
+
+        const goPrev = () => {
+            currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
+            showImage(currentIndex);
+        };
+
+        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goNext(); });
+        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goPrev(); });
+
+        const closeLightbox = () => {
+            resetZoom(); // Quitamos el zoom para que la animación de cierre no se vea rota
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = ''; 
+                document.body.style.overflow = ''; 
+            }, 300); 
+        };
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') goNext();
+                if (e.key === 'ArrowLeft') goPrev();
+                
+                // Teclas rápidas para hacer zoom
+                if (e.key === '+') {
+                    currentZoom = Math.min(currentZoom + 0.5, 4);
+                    applyZoom();
+                }
+                if (e.key === '-') {
+                    currentZoom = Math.max(currentZoom - 0.5, 0.5);
+                    applyZoom();
+                }
+            }
+        });
+    }
+</script>
