@@ -370,7 +370,11 @@ import Contacto from '../components/Contacto.astro';
 
         <!-- Contenedor de la imagen maximizada -->
         <!-- Se ha reducido el tiempo de transición para que el zoom sea más rápido y reactivo -->
-        <img id="lightbox-img" src="" alt="Arte maximizado" style="image-rendering: pixelated;" class="max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(250,92,92,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
+        <img id="lightbox-img" src="" alt="Arte maximizado" style="image-rendering: pixelated;" class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(250,92,92,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
+        
+        <!-- Contenedor de vídeo maximizado (Necesario para el script) -->
+        <video id="lightbox-video" src="" autoplay loop muted playsinline class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(250,92,92,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform"></video>
+
 
         <!-- Flecha Derecha -->
         <button id="lightbox-next" class="absolute right-2 md:right-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[#fa5c5c] z-50 transition-colors cursor-pointer select-none p-4">
