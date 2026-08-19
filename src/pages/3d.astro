@@ -21,9 +21,10 @@ import Contacto from '../components/Contacto.astro';
 
     <!-- Galería 3D -->
     <section class="py-10 px-5 relative z-10">
-        <div class="container mx-auto max-w-6xl">
-            <!-- Columnas CSS puro para el efecto Masonry -->
-            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        <!-- Hacemos el contenedor elástico hasta los 4000px -->
+        <div class="w-full max-w-[4000px] mx-auto">
+            <!-- columns-[300px] crea automáticamente las columnas que quepan según el ancho/zoom -->
+            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6">
                 
                 <!-- Tarjeta 1 (WEBM/MP4) -->
                 <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ComicMat.webm">
@@ -231,6 +232,7 @@ import Contacto from '../components/Contacto.astro';
 <!-- LÓGICA JAVASCRIPT PARA EL LIGHTBOX        -->
 <!-- ========================================= -->
 <script>
+    // 1. OBTENEMOS TODOS LOS ELEMENTOS DEL DOM
     const triggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
@@ -239,21 +241,27 @@ import Contacto from '../components/Contacto.astro';
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
     
+    // Botones de zoom
     const zoomInBtn = document.getElementById('zoom-in');
     const zoomOutBtn = document.getElementById('zoom-out');
     const zoomResetBtn = document.getElementById('zoom-reset');
 
+    // 2. VARIABLES DE ESTADO
     let currentIndex = 0;
-    let currentZoom = 1;
+    let currentZoom = 1; // 1 = 100% (Tamaño original)
 
     if (lightbox && lightboxImg && lightboxVideo) {
         
+        // --- FUNCIONES DE ZOOM ---
+        
+        // Aplica el nivel de zoom actual a la imagen o vídeo
         const applyZoom = () => {
             lightboxImg.style.transform = `scale(${currentZoom})`;
             lightboxVideo.style.transform = `scale(${currentZoom})`;
             if (zoomResetBtn) zoomResetBtn.innerText = `${Math.round(currentZoom * 10) / 10}x`;
         };
 
+        // Resetea el zoom al estado original al cambiar de foto o cerrar
         const resetZoom = () => {
             currentZoom = 1;
             lightboxImg.style.transform = ''; 
@@ -263,18 +271,20 @@ import Contacto from '../components/Contacto.astro';
             lightboxVideo.classList.add('scale-100'); 
         };
 
+        // Evento: Zoom con la rueda del ratón
         lightbox.addEventListener('wheel', (e) => {
             if (!lightbox.classList.contains('hidden')) {
-                e.preventDefault(); 
+                e.preventDefault(); // Evita que la web haga scroll por detrás
                 if (e.deltaY < 0) {
-                    currentZoom = Math.min(currentZoom + 0.25, 4); 
+                    currentZoom = Math.min(currentZoom + 0.25, 4); // Límite máximo: 4x
                 } else {
-                    currentZoom = Math.max(currentZoom - 0.25, 0.5); 
+                    currentZoom = Math.max(currentZoom - 0.25, 0.5); // Límite mínimo: 0.5x
                 }
                 applyZoom();
             }
         });
 
+        // Eventos: Zoom con los botones de la interfaz
         zoomInBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
             currentZoom = Math.min(currentZoom + 0.5, 4);
@@ -292,6 +302,44 @@ import Contacto from '../components/Contacto.astro';
             resetZoom();
         });
 
+        // --- NUEVO: FUNCIONES DE ZOOM TÁCTIL (MÓVILES) ---
+        let initialDistance = 0;
+        let initialZoom = 1;
+
+        lightbox.addEventListener('touchstart', (e) => {
+            // Si el usuario toca la pantalla exactamente con dos dedos
+            if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
+                // Calculamos la distancia inicial entre los dedos (hipotenusa)
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                initialZoom = currentZoom;
+            }
+        });
+
+        lightbox.addEventListener('touchmove', (e) => {
+            // Mientras los dedos se mueven por la pantalla
+            if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
+                e.preventDefault(); // Bloquea el zoom nativo del navegador móvil
+                
+                // Calculamos la nueva distancia
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                
+                // Aplicamos la proporción (si se alejan aumenta, si se juntan disminuye)
+                const zoomFactor = currentDistance / initialDistance;
+                currentZoom = Math.min(Math.max(initialZoom * zoomFactor, 0.5), 4);
+                applyZoom();
+            }
+        }, { passive: false }); // Permite que funcione el preventDefault() en touchmove
+
+
+        // --- FUNCIONES DE GALERÍA Y MULTIMEDIA ---
+        
+        // Carga el archivo y decide si debe usar <img> o <video>
         const showMedia = (index) => {
             const src = triggers[index].getAttribute('data-src');
             if (src) {
@@ -317,6 +365,7 @@ import Contacto from '../components/Contacto.astro';
             }
         };
 
+        // Evento: Abrir el modal al hacer click en una tarjeta
         triggers.forEach((trigger, index) => {
             trigger.addEventListener('click', () => {
                 currentIndex = index;
@@ -331,10 +380,11 @@ import Contacto from '../components/Contacto.astro';
                     lightboxVideo.classList.add('scale-100');
                 }, 10);
                 
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden'; // Evita scroll en la página de fondo
             });
         });
 
+        // Controles Anterior / Siguiente
         const goNext = () => {
             currentIndex = (currentIndex + 1) % triggers.length;
             showMedia(currentIndex);
@@ -348,6 +398,7 @@ import Contacto from '../components/Contacto.astro';
         nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goNext(); });
         prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goPrev(); });
 
+        // Evento: Cerrar el modal
         const closeLightbox = () => {
             resetZoom(); 
             lightbox.classList.add('opacity-0');
@@ -355,20 +406,24 @@ import Contacto from '../components/Contacto.astro';
             lightboxVideo.classList.remove('scale-100');
             lightboxImg.classList.add('scale-95');
             lightboxVideo.classList.add('scale-95');
+            
+            // Retraso para dejar que la transición visual termine
             setTimeout(() => {
                 lightbox.classList.add('hidden');
                 lightboxImg.src = ''; 
                 lightboxVideo.src = ''; 
-                document.body.style.overflow = ''; 
+                document.body.style.overflow = ''; // Devuelve el scroll a la página
             }, 300); 
         };
 
+        // Cerrar al hacer click en la X o en el fondo oscuro
         closeBtn?.addEventListener('click', closeLightbox);
         
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
         
+        // Atajos de Teclado
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('hidden')) {
                 if (e.key === 'Escape') closeLightbox();
