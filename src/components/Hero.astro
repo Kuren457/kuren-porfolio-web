@@ -1,53 +1,45 @@
 ---
 // src/components/Hero.astro
 ---
-<section id="inicio" class="min-h-screen flex flex-col justify-center items-center text-center pt-20 px-5 relative z-10">
-    <!-- Imagen de perfil / Logo -->
-    <img 
-        src="/png-banners/avatar.png" 
-        alt="Avatar de Miguel Ángel" 
-        class="w-40 h-40 object-cover rounded-3xl bg-[#0a0508] border border-white/10 mb-8 shadow-[0_0_30px_rgba(255,170,0,0.25)] animate-[float_6s_ease-in-out_infinite]" 
-    />
+<!-- Inicio / Cabecera -->
+<section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center px-5 relative z-10 pt-20">
+    
+    <!-- Avatar (Corregido el rounded-xl) -->
+    <img src="/png-banners/avatar.png" alt="Kuren" class="rounded-xl object-cover mb-8 shadow-lg shadow-orange-500/20 w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64" />
 
-    <!-- Título Principal con Degradado -->
-    <h1 class="text-5xl md:text-7xl font-extrabold mb-4">
-        <span class="bg-gradient-to-r from-[#ff3333] via-[#ffcc00] to-[#ff3333] bg-[length:200%_auto] text-transparent bg-clip-text animate-[gradientFlow_6s_infinite_linear]">
-            Kuren
-        </span>
+    <!-- Título -->
+    <h1 class="font-extrabold mb-4 text-5xl md:text-7xl lg:text-8xl leading-tight text-white">
+        Kuren
     </h1>
 
     <!-- Subtítulo -->
-    <h2 class="text-xl md:text-2xl text-white font-medium mb-6">
+    <h2 class="font-bold text-white mb-6 text-2xl md:text-3xl lg:text-4xl">
         Digital Artist & Game Developer
     </h2>
 
-    <!-- Descripción -->
-    <p class="text-[#cbd5e1] max-w-2xl mb-10 text-lg leading-relaxed">
+    <!-- Párrafo -->
+    <p class="text-[#cbd5e1] mx-auto text-lg md:text-xl max-w-3xl">
         Especialista en animación 3D, rigging, pixel art y diseño de interfaces. Dando vida a videojuegos mediante la integración de assets en Unreal Engine, Blender y Aseprite.
     </p>
 
     <!-- Botones de Acción -->
-<div class="flex flex-wrap justify-center gap-4 mt-8 md:mt-12 relative z-20">
-    
-    <!-- Botón Conóceme (Tu estilo original) -->
-    <a href="#sobre-mi" class="px-8 py-3 rounded-full bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-orange-500/20">
-        Conóceme
-    </a>
+    <div class="flex flex-wrap justify-center gap-4 mt-8 md:mt-12 relative z-20">
+        
+        <a href="#sobre-mi" class="px-8 py-3 text-base md:text-lg rounded-full bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-orange-500/20">
+            Conóceme
+        </a>
 
-    <!-- Botón Mi Portfolio (Tu estilo original) -->
-    <a href="#portfolio" class="px-8 py-3 rounded-full bg-[#0a0508] text-white font-bold border border-white/20 hover:bg-white/10 hover:scale-105 transition-all">
-        Mi Portfolio
-    </a>
+        <a href="#portfolio" class="px-8 py-3 text-base md:text-lg rounded-full bg-[#0a0508] text-white font-bold border border-white/20 hover:bg-white/10 hover:scale-105 transition-all">
+            Mi Portfolio
+        </a>
 
-    <!-- Botón Pixel Art -->
-    <a href="/pixel-art" class="px-8 py-3 rounded-full bg-[#0a0508] text-[#fa5c5c] font-bold border border-[#fa5c5c]/50 hover:bg-[#fa5c5c]/10 hover:scale-105 hover:shadow-[0_0_15px_rgba(250,92,92,0.3)] transition-all flex items-center gap-2">
-        Pixel Art
-    </a>
+        <a href="/pixel-art" class="px-8 py-3 text-base md:text-lg rounded-full bg-[#0a0508] text-[#fa5c5c] font-bold border border-[#fa5c5c]/50 hover:bg-[#fa5c5c]/10 hover:scale-105 hover:shadow-[0_0_15px_rgba(250,92,92,0.3)] transition-all flex items-center gap-2">
+            Pixel Art
+        </a>
 
-    <!-- Botón Diseño 3D -->
-    <a href="/3d" class="px-8 py-3 rounded-full bg-[#0a0508] text-[#00ff66] font-bold border border-[#00ff66]/50 hover:bg-[#00ff66]/10 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,255,102,0.3)] transition-all flex items-center gap-2">
-        Diseño 3D
-    </a>
+        <a href="/3d" class="px-8 py-3 text-base md:text-lg rounded-full bg-[#0a0508] text-[#00ff66] font-bold border border-[#00ff66]/50 hover:bg-[#00ff66]/10 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,255,102,0.3)] transition-all flex items-center gap-2">
+            Diseño 3D
+        </a>
 
-</div>
+    </div>
 </section>
