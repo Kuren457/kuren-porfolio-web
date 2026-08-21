@@ -20,7 +20,31 @@ import Contacto from '../components/Contacto.astro';
     </section>
 
     <!-- Galería de Pixel Art -->
-    <section class="py-10 px-5 relative z-10">
+    <section class="pb-10 px-5 relative z-10">
+
+        <div class="container mx-auto max-w-6xl">
+            
+            <!-- NUEVO: Botones de Filtro -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <!-- El botón "Todos" empieza activo (con el fondo rojo) -->
+                <button class="filter-btn active-filter px-6 py-2 rounded-full font-bold transition-all bg-[#fa5c5c] text-white shadow-[0_0_15px_rgba(250,92,92,0.3)]" data-filter="All">Todos</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Personaje">Personajes</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Animacion">Animación</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Escenario">Escenarios</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="VFX">VFX</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Marvel Rivals">Marvel Rivals</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="BloodRunner">BloodRunner</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Jams">Jams</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Valorant">Valorant</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Memes">Memes</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#fa5c5c]/50" data-filter="Tutorial">Tutorial</button>   
+            </div>
+
+            <!-- Columnas CSS puro para el efecto Masonry -->
+            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6" id="gallery-container">
+            </div>
+        </div>
+
         <!-- Hacemos el contenedor elástico hasta los 4000px -->
         <div class="w-full max-w-[4000px] mx-auto">
             <!-- columns-[300px] crea automáticamente las columnas que quepan según el ancho/zoom -->
@@ -31,7 +55,7 @@ import Contacto from '../components/Contacto.astro';
                 
 
                 <!-- MR Adam -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/AdamNL.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/AdamNL.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/AdamNL.png" alt="AdamMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -40,7 +64,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Angela -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Angela.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Angela.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Angela.png" alt="AngelaMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -49,7 +73,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Black Cat -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackCat.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackCat.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/BlackCat.png" alt="BlackCatMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -58,7 +82,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Black Panther -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackPanther.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackPanther.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/BlackPanther.png" alt="BlackPantherMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -67,7 +91,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Black Widow -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackWidow.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/BlackWidow.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/BlackWidow.png" alt="BlackWidowrMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -76,7 +100,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Blade -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Blade.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Blade.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Blade.png" alt="BladeMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -85,7 +109,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Bruce/Hulk -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Bruce.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Bruce.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Bruce.png" alt="BruceMR" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -94,7 +118,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Emma -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Emma_Frost.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Emma_Frost.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Emma_Frost.png" alt="Emma" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -103,7 +127,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Jeff -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jeff.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jeff.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Jeff.png" alt="Jeff" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -112,7 +136,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Luna -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Luna.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Luna.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Luna.png" alt="Luna" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -121,7 +145,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Magik -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magik.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magik.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Magik.png" alt="Transform" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -130,7 +154,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Magneto -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magneto.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Magneto.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Magneto.png" alt="Mag" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -139,7 +163,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Psylocke -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Psylocke.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Psylocke.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Psylocke.png" alt="Psy" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -148,7 +172,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Winter -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Winter.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Winter.png" data-category="Personaje Marvel Rivals">
                     <img src="/Pixel-art/Winter.png" alt="Winter" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -157,7 +181,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- MR Strange -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Strange.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Strange.gif" data-category="Personaje Animacion Marvel Rivals">
                     <img src="/Pixel-art/Strange.gif" alt="Strange" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje de Marvel</h3>
@@ -170,7 +194,7 @@ import Contacto from '../components/Contacto.astro';
 
 
                 <!-- BloodRunner Attack -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Attack2.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Attack2.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Attack2.gif" alt="Ataque" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Ataque Personaje Principal</h3>
@@ -179,7 +203,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Idle -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Idle.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Idle.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Idle.gif" alt="Idle" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Idle Personaje Principal</h3>
@@ -188,7 +212,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Jump -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jump.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Jump.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Jump.gif" alt="Jump" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Saltar Personaje Principal</h3>
@@ -197,7 +221,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Run -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Run.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Run.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Run.gif" alt="Run" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Correr Personaje Principal</h3>
@@ -206,7 +230,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Transform -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Transform_air.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Transform_air.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Transform_air.gif" alt="Transform" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Transformación Personaje Principal</h3>
@@ -215,7 +239,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Boss -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Boss_dead.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Boss_dead.gif" data-category="Personaje Animacion BloodRunner">
                     <img src="/Pixel-art/Boss_dead.gif" alt="Boss" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Boss</h3>
@@ -224,7 +248,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- BloodRunner Car Scene -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Escena_Coche_2.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Escena_Coche_2.gif" data-category="Escenario BloodRunner">
                     <img src="/Pixel-art/Escena_Coche_2.gif" alt="Coche" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Escena intermedia del coche</h3>
@@ -237,7 +261,7 @@ import Contacto from '../components/Contacto.astro';
 
 
                 <!-- Jam Dragon Clouds -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Dragon_pasando_nubes.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Dragon_pasando_nubes.gif" data-category="Personaje Animacion Jams">
                     <img src="/Pixel-art/Dragon_pasando_nubes.gif" alt="Dragón Nubes" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Dragón</h3>
@@ -246,7 +270,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Jam Dragon Background -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Fondo_chino.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Fondo_chino.gif" data-category="Escenario Jams">
                     <img src="/Pixel-art/Fondo_chino.gif" alt="Fondo_chino" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Fondo para Jam</h3>
@@ -255,7 +279,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Jam Dragon Anim -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Anim_Dragon.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Anim_Dragon.gif" data-category="Escenario Animacion Jams">
                     <img src="/Pixel-art/Anim_Dragon.gif" alt="Dragon_Anim" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación para Jam</h3>
@@ -264,7 +288,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Jam Character Cyntia -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Cyntia.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Cyntia.gif" data-category="Personaje Animacion Jams">
                     <img src="/Pixel-art/Cyntia.gif" alt="Cyntia" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Cyntia</h3>
@@ -273,16 +297,16 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Jam Character Anim Cookie -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Robar_Galletas.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Robar_Galletas.gif" data-category="Personaje Animacion Jams">
                     <img src="/Pixel-art/Robar_Galletas.gif" alt="Galletas" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Escena de contexto para juego</h3>
-                        <p class="text-[#cbd5e1] text-sm">Escenario y Animación</p>
+                        <p class="text-[#cbd5e1] text-sm">Personajes y Animación</p>
                     </div>
                 </div>
 
                 <!-- Jam Enenmies  -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/TodosEnemigos.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/TodosEnemigos.gif" data-category="Personaje Animacion Jams">
                     <img src="/Pixel-art/TodosEnemigos.gif" alt="Enemigos" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Enemigos para Jam</h3>
@@ -295,7 +319,7 @@ import Contacto from '../components/Contacto.astro';
 
 
                 <!-- Valo Clove -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Humo_Clove.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Humo_Clove.gif" data-category="VFX Valorant">
                     <img src="/Pixel-art/Humo_Clove.gif" alt="Clove" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Habilidad/VFX</h3>
@@ -304,7 +328,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Valo Wingman -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Wingman.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Wingman.gif" data-category="Personaje Animacion Valorant">
                     <img src="/Pixel-art/Wingman.gif" alt="Wingman" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación de broma</h3>
@@ -317,16 +341,16 @@ import Contacto from '../components/Contacto.astro';
 
 
                 <!-- Meme Samurai -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Samurai.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Samurai.gif" data-category="Personaje Animacion Memes">
                     <img src="/Pixel-art/Samurai.gif" alt="Samurai" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Personaje</h3>
-                        <p class="text-[#cbd5e1] text-sm">Animación de personaje</p>
+                        <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje</h3>
+                        <p class="text-[#cbd5e1] text-sm">Ppersonaje</p>
                     </div>
                 </div>
 
                 <!-- Meme Hollow Knight HK -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/HKDanceWBackGround.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/HKDanceWBackGround.gif" data-category="Personaje Animacion Memes">
                     <img src="/Pixel-art/HKDanceWBackGround.gif" alt="HK" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación de broma</h3>
@@ -335,7 +359,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Meme Yippiee -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Yippiee.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Yippiee.gif" data-category="Personaje Animacion Memes">
                     <img src="/Pixel-art/Yippiee.gif" alt="Yippiee" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Primeros pasos en la animación</h3>
@@ -348,7 +372,7 @@ import Contacto from '../components/Contacto.astro';
 
 
                 <!-- Tutorial Bunny -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Tutorial_6_Conejo.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#fa5c5c]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/Pixel-art/Tutorial_6_Conejo.gif" data-category="Personaje Animacion Tutorial">
                     <img src="/Pixel-art/Tutorial_6_Conejo.gif" alt="Conejo" style="image-rendering: pixelated;" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Primeros pasos en la animación</h3>
@@ -416,6 +440,42 @@ import Contacto from '../components/Contacto.astro';
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
+
+    // --- LÓGICA DE FILTROS ---
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 1. Quitar el estilo activo de todos los botones
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-[#fa5c5c]', 'text-white', 'shadow-[0_0_15px_rgba(250,92,92,0.3)]');
+                b.classList.add('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
+            });
+
+            // 2. Poner el estilo activo al botón que hemos clicado
+            btn.classList.remove('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
+            btn.classList.add('bg-[#fa5c5c]', 'text-white', 'shadow-[0_0_15px_rgba(250,92,92,0.3)]');
+
+            // 3. Filtrar las tarjetas
+            const filterValue = btn.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                // Obtenemos todas las categorías de la tarjeta juntas
+                const itemCategories = item.getAttribute('data-category') || '';
+
+                // Usamos .includes() para ver si el filtro buscado está dentro del texto
+                if (filterValue === 'All' || itemCategories.includes(filterValue)) {
+                    item.classList.remove('hidden');
+                    // Un pequeño truco para que la animación de masonry no sea brusca
+                    setTimeout(() => item.style.opacity = '1', 50); 
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.classList.add('hidden'), 300); 
+                }
+            });
+        });
+    });
     
     // Botones de zoom
     const zoomInBtn = document.getElementById('zoom-in');

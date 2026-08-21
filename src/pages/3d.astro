@@ -20,15 +20,26 @@ import Contacto from '../components/Contacto.astro';
     </section>
 
     <!-- Galería 3D -->
-    <section class="py-10 px-5 relative z-10">
-        <!-- Hacemos el contenedor elástico hasta los 4000px -->
+    <section class="pb-10 px-5 relative z-10">
+        <!-- Contenedor unificado para botones y galería -->
         <div class="w-full max-w-[4000px] mx-auto">
-            <!-- columns-[300px] crea automáticamente las columnas que quepan según el ancho/zoom -->
-            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6">
+            
+            <!-- Botones de Filtro (Temática Verde 3D) -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active-filter px-6 py-2 rounded-full font-bold transition-all bg-[#00ff66] text-[#0a0508] shadow-[0_0_15px_rgba(0,255,102,0.3)]" data-filter="All">Todos</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Modelado">Modelado</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Personaje">Personajes</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Animación">Animación</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Materiales">Materiales</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Procedural">Procedural</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="VFX">VFX</button>
+            </div>
+
+            <!-- Columnas CSS puro para el efecto Masonry -->
+            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6" id="gallery-container">
                 
                 <!-- Tarjeta 1 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ComicMat.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ComicMat.webm" data-category="Materiales">
                     <video src="/3D/ComicMat.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Material estilo comic</h3>
@@ -37,8 +48,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 2 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FrogCrystal.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FrogCrystal.webm" data-category="Materiales Modelado">
                     <video src="/3D/FrogCrystal.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Material estilo cristal</h3>
@@ -47,8 +57,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 3 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Fire.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Fire.webm" data-category="VFX Animación">
                     <video src="/3D/Fire.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación y VFX</h3>
@@ -57,8 +66,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 4 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Flower2.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Flower2.webm" data-category="Procedural Animación">
                     <video src="/3D/Flower2.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
@@ -67,8 +75,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 5 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Kato.mp4">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Kato.mp4" data-category="Personaje Animación">
                     <video src="/3D/Kato.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje Idle</h3>
@@ -77,8 +84,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 6 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoE.mp4">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoE.mp4" data-category="Personaje Animación">
                     <video src="/3D/KatoE.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje</h3>
@@ -87,7 +93,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 7 (PNG/JPG) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoJumpscare.gif">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoJumpscare.gif" data-category="Personaje Animación">
                     <img src="/3D/KatoJumpscare.gif" alt="KatoJumpscare" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje Correr</h3>
@@ -96,7 +102,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 8 (PNG/JPG) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Lego.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Lego.png" data-category="Modelado">
                     <img src="/3D/Lego.png" alt="Lego" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Primeros modelos</h3>
@@ -105,8 +111,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 9 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralBuilding.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralBuilding.webm" data-category="Procedural Animación">
                     <video src="/3D/ProceduralBuilding.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
@@ -115,8 +120,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 10 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralFlowerGoofy.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralFlowerGoofy.webm" data-category="Procedural Animación">
                     <video src="/3D/ProceduralFlowerGoofy.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
@@ -125,8 +129,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 11 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Projectile.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Projectile.webm" data-category="VFX Animación">
                     <video src="/3D/Projectile.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Animación y VFX</h3>
@@ -135,7 +138,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 12 (PNG/JPG) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra1.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra1.png" data-category="Personaje Modelado">
                     <img src="/3D/Pyra1.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje estilo anime</h3>
@@ -144,7 +147,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 13 (PNG/JPG) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra2.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra2.png" data-category="Personaje Modelado">
                     <img src="/3D/Pyra2.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Personaje estilo anime</h3>
@@ -153,7 +156,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 14 (PNG/JPG) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Tanque.png">
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Tanque.png" data-category="Modelado">
                     <img src="/3D/Tanque.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Primeros modelos</h3>
@@ -162,8 +165,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
                 
                 <!-- Tarjeta 15 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FlowerCrystal.mp4">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FlowerCrystal.mp4" data-category="Procedural Materiales">
                     <video src="/3D/FlowerCrystal.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Material y Nodos de Geometría</h3>
@@ -172,8 +174,7 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 16 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Horse.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Horse.webm" data-category="Materiales Modelado">
                     <video src="/3D/Horse.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Material estilo cristal</h3>
@@ -182,15 +183,13 @@ import Contacto from '../components/Contacto.astro';
                 </div>
 
                 <!-- Tarjeta 17 (WEBM/MP4) -->
-                <div class="lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/IsometricRoom.webm">
-                    <!-- Es vital incluir autoplay, loop, muted y playsinline para que actúe como un GIF -->
+                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/IsometricRoom.webm" data-category="Modelado Escenario">
                     <video src="/3D/IsometricRoom.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
                     <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                         <h3 class="text-xl font-bold text-white mb-1">Habitación Isométrica</h3>
                         <p class="text-[#cbd5e1] text-sm">Modelado</p>
                     </div>
                 </div>
-                <!-- Pega más tarjetas aquí siguiendo el modelo de Imagen o Vídeo según necesites -->
 
             </div>
         </div>
@@ -241,6 +240,39 @@ import Contacto from '../components/Contacto.astro';
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
     
+    // --- LÓGICA DE FILTROS ---
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 1. Quitar el estilo activo de todos los botones (estilo 3D)
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-[#00ff66]', 'text-[#0a0508]', 'shadow-[0_0_15px_rgba(0,255,102,0.3)]');
+                b.classList.add('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
+            });
+
+            // 2. Poner el estilo activo al botón que hemos clicado
+            btn.classList.remove('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
+            btn.classList.add('bg-[#00ff66]', 'text-[#0a0508]', 'shadow-[0_0_15px_rgba(0,255,102,0.3)]');
+
+            // 3. Filtrar las tarjetas usando includes() para buscar dentro de las etiquetas múltiples
+            const filterValue = btn.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const itemCategories = item.getAttribute('data-category') || '';
+
+                if (filterValue === 'All' || itemCategories.includes(filterValue)) {
+                    item.classList.remove('hidden');
+                    setTimeout(() => item.style.opacity = '1', 50); 
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.classList.add('hidden'), 300); 
+                }
+            });
+        });
+    });
+
     // Botones de zoom
     const zoomInBtn = document.getElementById('zoom-in');
     const zoomOutBtn = document.getElementById('zoom-out');
@@ -248,20 +280,18 @@ import Contacto from '../components/Contacto.astro';
 
     // 2. VARIABLES DE ESTADO
     let currentIndex = 0;
-    let currentZoom = 1; // 1 = 100% (Tamaño original)
+    let currentZoom = 1; 
 
     if (lightbox && lightboxImg && lightboxVideo) {
         
         // --- FUNCIONES DE ZOOM ---
         
-        // Aplica el nivel de zoom actual a la imagen o vídeo
         const applyZoom = () => {
             lightboxImg.style.transform = `scale(${currentZoom})`;
             lightboxVideo.style.transform = `scale(${currentZoom})`;
             if (zoomResetBtn) zoomResetBtn.innerText = `${Math.round(currentZoom * 10) / 10}x`;
         };
 
-        // Resetea el zoom al estado original al cambiar de foto o cerrar
         const resetZoom = () => {
             currentZoom = 1;
             lightboxImg.style.transform = ''; 
@@ -271,20 +301,18 @@ import Contacto from '../components/Contacto.astro';
             lightboxVideo.classList.add('scale-100'); 
         };
 
-        // Evento: Zoom con la rueda del ratón
         lightbox.addEventListener('wheel', (e) => {
             if (!lightbox.classList.contains('hidden')) {
-                e.preventDefault(); // Evita que la web haga scroll por detrás
+                e.preventDefault(); 
                 if (e.deltaY < 0) {
-                    currentZoom = Math.min(currentZoom + 0.25, 4); // Límite máximo: 4x
+                    currentZoom = Math.min(currentZoom + 0.25, 4); 
                 } else {
-                    currentZoom = Math.max(currentZoom - 0.25, 0.5); // Límite mínimo: 0.5x
+                    currentZoom = Math.max(currentZoom - 0.25, 0.5); 
                 }
                 applyZoom();
             }
         });
 
-        // Eventos: Zoom con los botones de la interfaz
         zoomInBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
             currentZoom = Math.min(currentZoom + 0.5, 4);
@@ -307,9 +335,7 @@ import Contacto from '../components/Contacto.astro';
         let initialZoom = 1;
 
         lightbox.addEventListener('touchstart', (e) => {
-            // Si el usuario toca la pantalla exactamente con dos dedos
             if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
-                // Calculamos la distancia inicial entre los dedos (hipotenusa)
                 initialDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
@@ -319,27 +345,23 @@ import Contacto from '../components/Contacto.astro';
         });
 
         lightbox.addEventListener('touchmove', (e) => {
-            // Mientras los dedos se mueven por la pantalla
             if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
-                e.preventDefault(); // Bloquea el zoom nativo del navegador móvil
+                e.preventDefault(); 
                 
-                // Calculamos la nueva distancia
                 const currentDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
                     e.touches[0].clientY - e.touches[1].clientY
                 );
                 
-                // Aplicamos la proporción (si se alejan aumenta, si se juntan disminuye)
                 const zoomFactor = currentDistance / initialDistance;
                 currentZoom = Math.min(Math.max(initialZoom * zoomFactor, 0.5), 4);
                 applyZoom();
             }
-        }, { passive: false }); // Permite que funcione el preventDefault() en touchmove
+        }, { passive: false }); 
 
 
         // --- FUNCIONES DE GALERÍA Y MULTIMEDIA ---
         
-        // Carga el archivo y decide si debe usar <img> o <video>
         const showMedia = (index) => {
             const src = triggers[index].getAttribute('data-src');
             if (src) {
@@ -365,7 +387,6 @@ import Contacto from '../components/Contacto.astro';
             }
         };
 
-        // Evento: Abrir el modal al hacer click en una tarjeta
         triggers.forEach((trigger, index) => {
             trigger.addEventListener('click', () => {
                 currentIndex = index;
@@ -380,11 +401,10 @@ import Contacto from '../components/Contacto.astro';
                     lightboxVideo.classList.add('scale-100');
                 }, 10);
                 
-                document.body.style.overflow = 'hidden'; // Evita scroll en la página de fondo
+                document.body.style.overflow = 'hidden'; 
             });
         });
 
-        // Controles Anterior / Siguiente
         const goNext = () => {
             currentIndex = (currentIndex + 1) % triggers.length;
             showMedia(currentIndex);
@@ -398,7 +418,6 @@ import Contacto from '../components/Contacto.astro';
         nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goNext(); });
         prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goPrev(); });
 
-        // Evento: Cerrar el modal
         const closeLightbox = () => {
             resetZoom(); 
             lightbox.classList.add('opacity-0');
@@ -407,23 +426,20 @@ import Contacto from '../components/Contacto.astro';
             lightboxImg.classList.add('scale-95');
             lightboxVideo.classList.add('scale-95');
             
-            // Retraso para dejar que la transición visual termine
             setTimeout(() => {
                 lightbox.classList.add('hidden');
                 lightboxImg.src = ''; 
                 lightboxVideo.src = ''; 
-                document.body.style.overflow = ''; // Devuelve el scroll a la página
+                document.body.style.overflow = ''; 
             }, 300); 
         };
 
-        // Cerrar al hacer click en la X o en el fondo oscuro
         closeBtn?.addEventListener('click', closeLightbox);
         
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
         
-        // Atajos de Teclado
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('hidden')) {
                 if (e.key === 'Escape') closeLightbox();
