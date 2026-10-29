@@ -1,4 +1,45 @@
 @import "tailwindcss";
+@import "./marcos-vegetales.css";
+
+/* --- FUENTE PIXEL ART --- */
+/* Tiny5 Duo mide 8 px de alto por em: solo se ve nítida en tamaños múltiplos de 8,
+   así que la escala de Tailwind se redondea a esos tamaños (con interlineados también múltiplos de 8). */
+@theme inline {
+    --font-sans: var(--font-tiny5);
+}
+
+@theme {
+    --text-xs: 16px;   --text-xs--line-height: 24px;
+    --text-sm: 16px;   --text-sm--line-height: 24px;
+    --text-base: 16px; --text-base--line-height: 24px;
+    --text-lg: 16px;   --text-lg--line-height: 24px;
+    --text-xl: 24px;   --text-xl--line-height: 32px;
+    --text-2xl: 24px;  --text-2xl--line-height: 32px;
+    --text-3xl: 32px;  --text-3xl--line-height: 40px;
+    --text-4xl: 40px;  --text-4xl--line-height: 48px;
+    --text-5xl: 48px;  --text-5xl--line-height: 56px;
+    --text-6xl: 56px;  --text-6xl--line-height: 64px;
+    --text-7xl: 64px;  --text-7xl--line-height: 72px;
+    --text-8xl: 80px;  --text-8xl--line-height: 88px;
+    --text-9xl: 96px;  --text-9xl--line-height: 104px;
+
+    /* Solo el grosor 400 cae en la rejilla de píxeles; los demás difuminan los bordes */
+    --font-weight-thin: 400;
+    --font-weight-extralight: 400;
+    --font-weight-light: 400;
+    --font-weight-medium: 400;
+    --font-weight-semibold: 400;
+    --font-weight-bold: 400;
+    --font-weight-extrabold: 400;
+    --font-weight-black: 400;
+}
+
+@layer base {
+    b, strong {
+        font-weight: inherit;
+        color: var(--text-primary); /* El énfasis se marca con color en vez de negrita */
+    }
+}
 
 /* --- VARIABLES GLOBALES --- */
 :root {
@@ -19,16 +60,20 @@
 
 /* --- RESET BÁSICO --- */
 body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    background-color: #06130f; /* Color base verde oscuro para los laterales */
+    /* Combinamos tu imagen de fondo centrada, sin repetición, 
+       y le añadimos un degradado radial o lineal que funde los bordes */
+    background-image: 
+        radial-gradient(circle at center, transparent 40%, #06130f 90%), 
+        url('/Pixel-art/FundaAjoloteSinAgujero.png'); /* Pon aquí el nombre exacto de tu fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
 }
 
 /* --- CAPA 1: DEGRADADO LÍQUIDO ANIMADO --- */
-body::before {
+/* body::before {
     content: '';
     position: fixed;
     top: 0;
@@ -45,7 +90,7 @@ body::before {
     filter: blur(65px);
     opacity: 0.8;
     animation: liquidFlow 25s ease infinite alternate;
-}
+} */
 
 /* --- CAPA 2: FILTRO OSCURO --- */
 body::after {
@@ -56,7 +101,7 @@ body::after {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: rgba(10, 5, 8, 0.85);
+    background: rgba(10, 5, 8, 0.55);
     backdrop-filter: blur(5px);
 }
 
@@ -64,6 +109,91 @@ body::after {
     0% { background-position: 0% 0%; }
     50% { background-position: 100% 100%; }
     100% { background-position: 30% 60%; }
+}
+
+/* --- TARJETA CON MARCO PIXEL ART --- */
+/* El marco es MarcoUniversal_1x.png (100x84, sin margen) recortado en 9-slice:
+   las esquinas no se deforman y los bordes se estiran al tamaño de la tarjeta.
+   El corte izquierdo (56) es tan ancho que la esquina superior izquierda incluye
+   el hueco de la pestaña, así el hueco nunca se estira. */
+.pixel-card {
+    --px: 2px;                          /* Tamaño en pantalla de 1 píxel del marco */
+    padding-top: calc(13 * var(--px));  /* Hueco para el logo que sobresale por arriba */
+}
+
+.pixel-card__frame {
+    position: relative;
+    padding: calc(5 * var(--px));       /* El contenido empieza justo dentro del borde */
+}
+
+.pixel-card__frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    border-style: solid;
+    border-width: calc(5 * var(--px)) calc(5 * var(--px)) calc(5 * var(--px)) calc(56 * var(--px));
+    border-image-source: var(--marco, url('/Pixel-art/UI Elements/MarcoUniversal_1x_gris.png')); /* Lo pone PixelCard según el tema */
+    border-image-slice: 5 5 5 56;
+    image-rendering: pixelated;
+}
+
+/* Logo de 32x32 px centrado en el hueco de la pestaña */
+.pixel-card__logo {
+    position: absolute;
+    z-index: 40;
+    left: calc(17 * var(--px));
+    top: calc(-13 * var(--px));
+    width: calc(32 * var(--px));
+    height: calc(32 * var(--px));
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+/* --- MARCOS VEGETALES (página principal) --- */
+/* Se aplican con la clase .marco-vegetal o .marco-ajolote (ver src/utils/marcoAleatorio.ts).
+   ::after dibuja el borde liso en 9-slice y ::before pega encima la decoración de las esquinas sin estirarla.
+   Las imágenes y medidas de cada marco están en marcos-vegetales.css (generado con `npm run marcos`).
+   El elemento no puede llevar overflow-hidden ni border: recortarían o desplazarían el marco. */
+.marco-vegetal,
+.marco-ajolote {
+    --px: 2px;
+    --marco-margen: calc(8 * var(--px)); /* Lo que puede sobresalir la enredadera por los lados */
+    position: relative;
+    isolation: isolate;
+    border-radius: calc(17 * var(--px)); /* Curva que queda justo bajo las esquinas pixeladas */
+}
+
+/* Botones: a 1 px por píxel para que las esquinas quepan en su altura */
+.marco-boton {
+    --px: 1px;
+}
+
+.marco-vegetal::before,
+.marco-ajolote::before,
+.marco-vegetal::after,
+.marco-ajolote::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+.marco-vegetal::after,
+.marco-ajolote::after {
+    border-style: solid;
+    border-width: calc(13 * var(--px));
+    border-image-slice: 13;
+}
+
+.marco-vegetal::before,
+.marco-ajolote::before {
+    inset: 0 calc(-1 * var(--marco-margen));
+    z-index: 101;
+    background-repeat: no-repeat;
 }
 
 /* --- ANIMACIONES EXTRA --- */

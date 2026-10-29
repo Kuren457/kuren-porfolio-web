@@ -2,6 +2,7 @@
 import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
+import PixelCard from '../components/PixelCard.astro';
 ---
 
 <Layout>
@@ -39,157 +40,162 @@ import Contacto from '../components/Contacto.astro';
             <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6" id="gallery-container">
                 
                 <!-- Tarjeta 1 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ComicMat.webm" data-category="Materiales">
-                    <video src="/3D/ComicMat.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Material estilo comic</h3>
-                        <p class="text-[#cbd5e1] text-sm">Materiales</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/ComicMat.webm"
+                    category="Materiales"
+                    title="Material estilo comic"
+                    description="Materiales"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 2 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FrogCrystal.webm" data-category="Materiales Modelado">
-                    <video src="/3D/FrogCrystal.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Material estilo cristal</h3>
-                        <p class="text-[#cbd5e1] text-sm">Materiales + Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/FrogCrystal.webm"
+                    category="Materiales Modelado"
+                    title="Material estilo cristal"
+                    description="Materiales + Modelado"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 3 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Fire.webm" data-category="VFX Animación">
-                    <video src="/3D/Fire.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación y VFX</h3>
-                        <p class="text-[#cbd5e1] text-sm">VFX</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Fire.webm"
+                    category="VFX Animación"
+                    title="Animación y VFX"
+                    description="VFX"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 4 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Flower2.webm" data-category="Procedural Animación">
-                    <video src="/3D/Flower2.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
-                        <p class="text-[#cbd5e1] text-sm">Procedural</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Flower2.webm"
+                    category="Procedural Animación"
+                    title="Animación y Nodos de Geometría"
+                    description="Procedural"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 5 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Kato.mp4" data-category="Personaje Animación">
-                    <video src="/3D/Kato.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje Idle</h3>
-                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Kato.mp4"
+                    category="Personaje Animación"
+                    title="Animación de Personaje Idle"
+                    description="Personaje"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 6 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoE.mp4" data-category="Personaje Animación">
-                    <video src="/3D/KatoE.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje</h3>
-                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/KatoE.mp4"
+                    category="Personaje Animación"
+                    title="Animación de Personaje"
+                    description="Personaje"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 7 (PNG/JPG) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/KatoJumpscare.gif" data-category="Personaje Animación">
-                    <img src="/3D/KatoJumpscare.gif" alt="KatoJumpscare" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación de Personaje Correr</h3>
-                        <p class="text-[#cbd5e1] text-sm">Personaje</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/KatoJumpscare.gif"
+                    alt="KatoJumpscare"
+                    category="Personaje Animación"
+                    title="Animación de Personaje Correr"
+                    description="Personaje"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 8 (PNG/JPG) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Lego.png" data-category="Modelado">
-                    <img src="/3D/Lego.png" alt="Lego" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Primeros modelos</h3>
-                        <p class="text-[#cbd5e1] text-sm">Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Lego.png"
+                    alt="Lego"
+                    category="Modelado"
+                    title="Primeros modelos"
+                    description="Modelado"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 9 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralBuilding.webm" data-category="Procedural Animación">
-                    <video src="/3D/ProceduralBuilding.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
-                        <p class="text-[#cbd5e1] text-sm">Procedural</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/ProceduralBuilding.webm"
+                    category="Procedural Animación"
+                    title="Animación y Nodos de Geometría"
+                    description="Procedural"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 10 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/ProceduralFlowerGoofy.webm" data-category="Procedural Animación">
-                    <video src="/3D/ProceduralFlowerGoofy.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación y Nodos de Geometría</h3>
-                        <p class="text-[#cbd5e1] text-sm">Procedural</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/ProceduralFlowerGoofy.webm"
+                    category="Procedural Animación"
+                    title="Animación y Nodos de Geometría"
+                    description="Procedural"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 11 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Projectile.webm" data-category="VFX Animación">
-                    <video src="/3D/Projectile.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Animación y VFX</h3>
-                        <p class="text-[#cbd5e1] text-sm">VFX</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Projectile.webm"
+                    category="VFX Animación"
+                    title="Animación y VFX"
+                    description="VFX"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 12 (PNG/JPG) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra1.png" data-category="Personaje Modelado">
-                    <img src="/3D/Pyra1.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Personaje estilo anime</h3>
-                        <p class="text-[#cbd5e1] text-sm">Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Pyra1.png"
+                    alt="Pyra"
+                    category="Personaje Modelado"
+                    title="Personaje estilo anime"
+                    description="Modelado"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 13 (PNG/JPG) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Pyra2.png" data-category="Personaje Modelado">
-                    <img src="/3D/Pyra2.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Personaje estilo anime</h3>
-                        <p class="text-[#cbd5e1] text-sm">Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Pyra2.png"
+                    alt="Pyra"
+                    category="Personaje Modelado"
+                    title="Personaje estilo anime"
+                    description="Modelado"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 14 (PNG/JPG) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Tanque.png" data-category="Modelado">
-                    <img src="/3D/Tanque.png" alt="Pyra" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Primeros modelos</h3>
-                        <p class="text-[#cbd5e1] text-sm">Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Tanque.png"
+                    alt="Pyra"
+                    category="Modelado"
+                    title="Primeros modelos"
+                    description="Modelado"
+                    tema="blender"
+                />
                 
                 <!-- Tarjeta 15 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/FlowerCrystal.mp4" data-category="Procedural Materiales">
-                    <video src="/3D/FlowerCrystal.mp4" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Material y Nodos de Geometría</h3>
-                        <p class="text-[#cbd5e1] text-sm">Procedural + Materiales</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/FlowerCrystal.mp4"
+                    category="Procedural Materiales"
+                    title="Material y Nodos de Geometría"
+                    description="Procedural + Materiales"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 16 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/Horse.webm" data-category="Materiales Modelado">
-                    <video src="/3D/Horse.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Material estilo cristal</h3>
-                        <p class="text-[#cbd5e1] text-sm">Materiales + Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/Horse.webm"
+                    category="Materiales Modelado"
+                    title="Material estilo cristal"
+                    description="Materiales + Modelado"
+                    tema="blender"
+                />
 
                 <!-- Tarjeta 17 (WEBM/MP4) -->
-                <div class="gallery-item lightbox-trigger relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0a0508] hover:border-[#00ff66]/50 transition-all duration-300 break-inside-avoid cursor-pointer" data-src="/3D/IsometricRoom.webm" data-category="Modelado Escenario">
-                    <video src="/3D/IsometricRoom.webm" autoplay loop muted playsinline class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                    <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                        <h3 class="text-xl font-bold text-white mb-1">Habitación Isométrica</h3>
-                        <p class="text-[#cbd5e1] text-sm">Modelado</p>
-                    </div>
-                </div>
+                <PixelCard
+                    src="/3D/IsometricRoom.webm"
+                    category="Modelado Escenario"
+                    title="Habitación Isométrica"
+                    description="Modelado"
+                    tema="blender"
+                />
 
             </div>
         </div>

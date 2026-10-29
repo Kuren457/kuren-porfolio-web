@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -7,5 +7,18 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  // Fuente pixel art (OFL). Es variable: grosor 100-900
+  fonts: [{
+    provider: fontProviders.local(),
+    name: 'Tiny5 Duo',
+    cssVariable: '--font-tiny5',
+    options: {
+      variants: [
+        { src: ['./src/assets/fonts/Tiny5Duo.ttf'], weight: '100 900', style: 'normal' },
+        { src: ['./src/assets/fonts/Tiny5Duo-Italic.ttf'], weight: '100 900', style: 'italic' },
+      ],
+    },
+  }]
 });

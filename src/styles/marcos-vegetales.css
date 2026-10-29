@@ -1,0 +1,45 @@
+/* GENERADO por scripts/marcos-vegetales.mjs (npm run marcos). No editar a mano. */
+
+.enredadera-izq {
+    --enredadera: url('/Pixel-art/UI Elements/EnredaderasBorde_izq.gif');
+    --enredadera-pos: left calc(var(--marco-margen) + -5 * var(--px)) center;
+    --enredadera-size: calc(14 * var(--px)) calc(33 * var(--px));
+}
+
+.enredadera-der {
+    --enredadera: url('/Pixel-art/UI Elements/EnredaderasBorde_der.gif');
+    --enredadera-pos: right calc(var(--marco-margen) + -5 * var(--px)) center;
+    --enredadera-size: calc(14 * var(--px)) calc(33 * var(--px));
+}
+
+.marco-vegetal::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base.png');
+}
+
+.marco-vegetal::before {
+    background-image: url('/Pixel-art/UI Elements/Marco2Vegetal_tr.png'), url('/Pixel-art/UI Elements/Marco2Vegetal_bl.png'), var(--enredadera, none);
+    background-position: right var(--marco-margen) top 0, left var(--marco-margen) bottom 0, var(--enredadera-pos, 0 0);
+    background-size: calc(13 * var(--px)) calc(14 * var(--px)), calc(40 * var(--px)) calc(16 * var(--px)), var(--enredadera-size, auto);
+}
+
+.marco-boton.marco-vegetal::before {
+    background-image: url('/Pixel-art/UI Elements/Marco2Vegetal_tr.png'), url('/Pixel-art/UI Elements/Marco2Vegetal_bl.png'), var(--enredadera, none);
+    background-position: right var(--marco-margen) top 0, left var(--marco-margen) bottom 0, var(--enredadera-pos, 0 0);
+    background-size: calc(13 * var(--px)) calc(14 * var(--px)), calc(40 * var(--px)) calc(16 * var(--px)), var(--enredadera-size, auto);
+}
+
+.marco-ajolote::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_base.png');
+}
+
+.marco-ajolote::before {
+    background-image: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_tr.png'), url('/Pixel-art/UI Elements/Marco2VegetalAjolote_bl.png'), var(--enredadera, none);
+    background-position: right var(--marco-margen) top 0, left var(--marco-margen) bottom 0, var(--enredadera-pos, 0 0);
+    background-size: calc(24 * var(--px)) calc(50 * var(--px)), calc(50 * var(--px)) calc(26 * var(--px)), var(--enredadera-size, auto);
+}
+
+.marco-boton.marco-ajolote::before {
+    background-image: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_bl.png'), var(--enredadera, none);
+    background-position: left var(--marco-margen) bottom 0, var(--enredadera-pos, 0 0);
+    background-size: calc(50 * var(--px)) calc(26 * var(--px)), var(--enredadera-size, auto);
+}
