@@ -38,10 +38,10 @@ export const proyectos: Proyecto[] = [
         obras: deTema('ourojam'),
     },
     {
-        nombre: 'Gambling Jam',
+        nombre: 'Hells Gamble',
         descripcion: 'Diseño de personaje principal y enemigos, animaciones, secuencias animadas del juego, escenario, tiles y props.',
         herramientas: 'Godot & Aseprite',
-        enlace: '#',
+        enlace: 'https://kurenm.itch.io/hells-gamble',
         logo: '/Pixel-art/UI Elements/LogoGambling.png',
         logoPixelado: true,
         obras: deTema('gambling'),
