@@ -1,0 +1,30 @@
+---
+// src/components/Carrusel.astro
+// Fila de tarjetas que se desplaza sola en bucle y se para al pasar el ratón (estilo y ajustes en global.css
+// y src/scripts/carruseles.ts). Las tarjetas se pintan dos veces seguidas: la segunda tanda (copia) entra
+// por detrás de la primera para que el bucle no tenga corte.
+import PixelCard from './PixelCard.astro';
+import type { Obra } from '../data/tipos';
+
+interface Props {
+    titulo: string;
+    obras: Obra[];
+    inverso?: boolean; // Se mueve hacia la derecha en vez de hacia la izquierda
+}
+
+const { titulo, obras, inverso = false } = Astro.props;
+---
+
+<section class="carrusel" data-galeria data-inverso={inverso || undefined} aria-label={titulo}>
+    <h2 class="carrusel__titulo text-2xl text-white">{titulo}</h2>
+    <div class="carrusel__ventana">
+        <div class="carrusel__pista">
+            {obras.map((obra) => <PixelCard {...obra} variante="carrusel" />)}
+            {obras.map((obra) => <PixelCard {...obra} variante="carrusel" copia />)}
+        </div>
+    </div>
+</section>
+
+<script>
+    import '../scripts/carruseles';
+</script>

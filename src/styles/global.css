@@ -228,6 +228,80 @@ body::after {
     visibility: hidden;
 }
 
+/* --- CARRUSELES (vista "Colecciones") --- */
+/* Filas en bucle (Carrusel.astro): la pista se desplaza --desplazamiento (el ancho de una tanda de tarjetas,
+   lo calcula src/scripts/carruseles.ts) y vuelve al inicio justo cuando la copia ocupa el sitio del original. */
+.carrusel {
+    --alto-carrusel: 240px; /* Alto de la imagen de cada tarjeta; el ancho sale de sus proporciones */
+}
+
+.carrusel__titulo {
+    max-width: 72rem;
+    margin-inline: auto;
+}
+
+.carrusel__ventana {
+    overflow: hidden;
+    padding-block: 24px; /* Sitio para la tarjeta ampliada al pasar el ratón */
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.carrusel__pista {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    width: max-content;
+    animation: carrusel-avanza var(--duracion, 60s) linear infinite;
+}
+
+.carrusel[data-inverso] .carrusel__pista {
+    animation-direction: reverse;
+}
+
+.carrusel:hover .carrusel__pista {
+    animation-play-state: paused;
+}
+
+@keyframes carrusel-avanza {
+    to { transform: translateX(calc(-1 * var(--desplazamiento, 0px))); }
+}
+
+/* Tarjeta del carrusel: altura fija y ancho natural; al pasar el ratón crece por encima de las vecinas */
+.pixel-card--carrusel {
+    position: relative;
+    flex: none;
+    transition: transform 250ms ease-out;
+}
+
+.pixel-card--carrusel:hover {
+    z-index: 10;
+    transform: scale(1.08);
+}
+
+.pixel-card--carrusel .pixel-card__media {
+    width: auto;
+    height: var(--alto-carrusel);
+}
+
+/* Sin movimiento: filas que caben enteras en pantalla, y el modo de animaciones suaves (que se recorre a mano) */
+.carrusel--quieto .carrusel__pista,
+.intro-suave .carrusel__pista {
+    animation: none;
+}
+
+.carrusel--quieto .carrusel__pista {
+    margin-inline: auto;
+}
+
+.carrusel--quieto [data-copia],
+.intro-suave .carrusel [data-copia] {
+    display: none;
+}
+
+.intro-suave .carrusel__ventana {
+    overflow-x: auto;
+}
+
 /* --- ANIMACIONES EXTRA --- */
 @keyframes float {
     0%, 100% { transform: translateY(0); }

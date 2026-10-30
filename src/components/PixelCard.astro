@@ -21,7 +21,7 @@ const TEMAS = {
     blender:     { logo: 'LogoBlender.png',     intro: 'LogoBlender_intro.gif',  logoAlt: 'Logo Blender',       marco: 'naranja', render: true },
 };
 
-interface Props {
+export interface Props {
     src: string;
     alt?: string;
     category: string;
@@ -30,9 +30,13 @@ interface Props {
     tema?: keyof typeof TEMAS;  // Sin tema: marco gris y sin logo
     logo?: string;              // Sustituye el logo del tema
     logoAlt?: string;
+    ancho?: number;             // Solo vídeos: ancho y alto en píxeles (en las imágenes se leen solos)
+    alto?: number;
+    variante?: 'galeria' | 'carrusel'; // galeria: columnas de "Todos"; carrusel: altura fija y ancho natural
+    copia?: boolean;            // Segunda tanda de un carrusel, solo para que el bucle no tenga corte
 }
 
-const { src, alt = '', category, title, description, tema } = Astro.props;
+const { src, alt = '', category, title, description, tema, variante = 'galeria', copia = false } = Astro.props;
 const temaActual: { logo?: string; intro?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
 const logo = Astro.props.logo ?? (temaActual?.logo && UI + temaActual.logo);
 // Un logo sustituido a mano no tiene animación de aparición
@@ -45,21 +49,25 @@ const esVideo = /\.(webm|mp4)$/i.test(src);
 
 // Ancho y alto reales de la imagen (se leen al generar la página): así el navegador reserva su hueco antes
 // de descargarla y la galería no se recoloca al cargar, que es lo que necesita la aparición al entrar en pantalla
-const { width, height } = esVideo ? {} : await imageMetadata(await readFile(join(process.cwd(), 'public', src)), src);
+// (los vídeos no se pueden leer así: sus medidas vienen en los datos)
+const { width, height } = esVideo
+    ? { width: Astro.props.ancho, height: Astro.props.alto }
+    : await imageMetadata(await readFile(join(process.cwd(), 'public', src)), src);
 
 // Los renders 3D se escalan suavizados; el pixel art, sin suavizar
 const estiloMedia = temaActual?.render ? undefined : 'image-rendering: pixelated;';
-const claseMedia = 'w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500';
+const claseMedia = 'pixel-card__media w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500';
+const claseVariante = variante === 'carrusel' ? 'pixel-card--carrusel' : 'gallery-item break-inside-avoid';
 ---
 
-<div class="gallery-item lightbox-trigger pixel-card group break-inside-avoid cursor-pointer transition-opacity duration-300" data-src={src} data-category={category} style={`--marco: url('${marco}');`}>
+<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
     <!-- data-aparicion: aparece con un pop al entrar en pantalla y arranca las animaciones del marco y el logo (src/scripts/aparicion.ts) -->
     <div class="pixel-card__frame" data-aparicion data-intro-marco={marcoIntro}>
 
         <!-- Contenido central -->
         <div class="relative overflow-hidden bg-[#0a0508]">
             {esVideo
-                ? <video src={src} autoplay loop muted playsinline style={estiloMedia} class={claseMedia}></video>
+                ? <video data-video={src} width={width} height={height} loop muted playsinline preload="none" style={estiloMedia} class={claseMedia}></video>
                 : <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia} />}
             <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                 <h3 class="text-xl font-bold text-white mb-1">{title}</h3>
@@ -74,4 +82,5 @@ const claseMedia = 'w-full h-auto object-cover group-hover:scale-105 transition-
 
 <script>
     import '../scripts/aparicion';
+    import '../scripts/videos';
 </script>

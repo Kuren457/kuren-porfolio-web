@@ -3,6 +3,8 @@ import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
 import PixelCard from '../components/PixelCard.astro';
+import Carrusel from '../components/Carrusel.astro';
+import { obras, colecciones } from '../data/tresD';
 ---
 
 <Layout>
@@ -26,8 +28,9 @@ import PixelCard from '../components/PixelCard.astro';
         <div class="w-full max-w-[4000px] mx-auto">
             
             <!-- Botones de Filtro (Temática Verde 3D) -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button class="filter-btn active-filter px-6 py-2 rounded-full font-bold transition-all bg-[#00ff66] text-[#0a0508] shadow-[0_0_15px_rgba(0,255,102,0.3)]" data-filter="All">Todos</button>
+            <div id="filtros" class="flex flex-wrap justify-center gap-3 mb-12" data-activo="bg-[#00ff66] text-[#0a0508] shadow-[0_0_15px_rgba(0,255,102,0.3)]">
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#00ff66] text-[#0a0508] shadow-[0_0_15px_rgba(0,255,102,0.3)]" data-filter="Colecciones">Colecciones</button>
+                <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="All">Todos</button>
                 <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Modelado">Modelado</button>
                 <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Personaje">Personajes</button>
                 <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="Animación">Animación</button>
@@ -36,167 +39,20 @@ import PixelCard from '../components/PixelCard.astro';
                 <button class="filter-btn px-6 py-2 rounded-full font-bold transition-all bg-[#0a0508] border border-white/20 text-[#cbd5e1] hover:border-[#00ff66]/50" data-filter="VFX">VFX</button>
             </div>
 
-            <!-- Columnas CSS puro para el efecto Masonry -->
-            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6" id="gallery-container">
-                
-                <!-- Tarjeta 1 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/ComicMat.webm"
-                    category="Materiales"
-                    title="Material estilo comic"
-                    description="Materiales"
-                    tema="blender"
-                />
+        </div>
 
-                <!-- Tarjeta 2 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/FrogCrystal.webm"
-                    category="Materiales Modelado"
-                    title="Material estilo cristal"
-                    description="Materiales + Modelado"
-                    tema="blender"
-                />
+        <!-- Vista "Colecciones" (por defecto): un carrusel por colección (src/data/tresD.ts) -->
+        <div id="colecciones" class="space-y-12">
+            {colecciones.map((coleccion, i) => (
+                <Carrusel titulo={coleccion.titulo} obras={obras.filter(coleccion.incluye)} inverso={i % 2 === 1} />
+            ))}
+        </div>
 
-                <!-- Tarjeta 3 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/Fire.webm"
-                    category="VFX Animación"
-                    title="Animación y VFX"
-                    description="VFX"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 4 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/Flower2.webm"
-                    category="Procedural Animación"
-                    title="Animación y Nodos de Geometría"
-                    description="Procedural"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 5 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/Kato.mp4"
-                    category="Personaje Animación"
-                    title="Animación de Personaje Idle"
-                    description="Personaje"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 6 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/KatoE.mp4"
-                    category="Personaje Animación"
-                    title="Animación de Personaje"
-                    description="Personaje"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 7 (PNG/JPG) -->
-                <PixelCard
-                    src="/3D/KatoJumpscare.gif"
-                    alt="KatoJumpscare"
-                    category="Personaje Animación"
-                    title="Animación de Personaje Correr"
-                    description="Personaje"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 8 (PNG/JPG) -->
-                <PixelCard
-                    src="/3D/Lego.png"
-                    alt="Lego"
-                    category="Modelado"
-                    title="Primeros modelos"
-                    description="Modelado"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 9 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/ProceduralBuilding.webm"
-                    category="Procedural Animación"
-                    title="Animación y Nodos de Geometría"
-                    description="Procedural"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 10 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/ProceduralFlowerGoofy.webm"
-                    category="Procedural Animación"
-                    title="Animación y Nodos de Geometría"
-                    description="Procedural"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 11 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/Projectile.webm"
-                    category="VFX Animación"
-                    title="Animación y VFX"
-                    description="VFX"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 12 (PNG/JPG) -->
-                <PixelCard
-                    src="/3D/Pyra1.png"
-                    alt="Pyra"
-                    category="Personaje Modelado"
-                    title="Personaje estilo anime"
-                    description="Modelado"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 13 (PNG/JPG) -->
-                <PixelCard
-                    src="/3D/Pyra2.png"
-                    alt="Pyra"
-                    category="Personaje Modelado"
-                    title="Personaje estilo anime"
-                    description="Modelado"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 14 (PNG/JPG) -->
-                <PixelCard
-                    src="/3D/Tanque.png"
-                    alt="Pyra"
-                    category="Modelado"
-                    title="Primeros modelos"
-                    description="Modelado"
-                    tema="blender"
-                />
-                
-                <!-- Tarjeta 15 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/FlowerCrystal.mp4"
-                    category="Procedural Materiales"
-                    title="Material y Nodos de Geometría"
-                    description="Procedural + Materiales"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 16 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/Horse.webm"
-                    category="Materiales Modelado"
-                    title="Material estilo cristal"
-                    description="Materiales + Modelado"
-                    tema="blender"
-                />
-
-                <!-- Tarjeta 17 (WEBM/MP4) -->
-                <PixelCard
-                    src="/3D/IsometricRoom.webm"
-                    category="Modelado Escenario"
-                    title="Habitación Isométrica"
-                    description="Modelado"
-                    tema="blender"
-                />
-
+        <!-- Vista "Todos" (y el resto de filtros): todas las obras en columnas. El contenedor es elástico hasta
+             los 4000px y columns-[300px] crea automáticamente las columnas que quepan según el ancho/zoom -->
+        <div id="galeria-todos" class="hidden w-full max-w-[4000px] mx-auto" data-galeria>
+            <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6">
+                {obras.map((obra) => <PixelCard {...obra} />)}
             </div>
         </div>
     </section>
@@ -237,223 +93,5 @@ import PixelCard from '../components/PixelCard.astro';
 <!-- LÓGICA JAVASCRIPT PARA EL LIGHTBOX        -->
 <!-- ========================================= -->
 <script>
-    // 1. OBTENEMOS TODOS LOS ELEMENTOS DEL DOM
-    const triggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-    const lightboxVideo = document.getElementById('lightbox-video') as HTMLVideoElement;
-    const closeBtn = document.getElementById('lightbox-close');
-    const prevBtn = document.getElementById('lightbox-prev');
-    const nextBtn = document.getElementById('lightbox-next');
-    
-    // --- LÓGICA DE FILTROS ---
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // 1. Quitar el estilo activo de todos los botones (estilo 3D)
-            filterBtns.forEach(b => {
-                b.classList.remove('bg-[#00ff66]', 'text-[#0a0508]', 'shadow-[0_0_15px_rgba(0,255,102,0.3)]');
-                b.classList.add('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
-            });
-
-            // 2. Poner el estilo activo al botón que hemos clicado
-            btn.classList.remove('bg-[#0a0508]', 'border', 'border-white/20', 'text-[#cbd5e1]');
-            btn.classList.add('bg-[#00ff66]', 'text-[#0a0508]', 'shadow-[0_0_15px_rgba(0,255,102,0.3)]');
-
-            // 3. Filtrar las tarjetas usando includes() para buscar dentro de las etiquetas múltiples
-            const filterValue = btn.getAttribute('data-filter');
-
-            galleryItems.forEach(item => {
-                const itemCategories = item.getAttribute('data-category') || '';
-
-                if (filterValue === 'All' || itemCategories.includes(filterValue)) {
-                    item.classList.remove('hidden');
-                    setTimeout(() => item.style.opacity = '1', 50); 
-                } else {
-                    item.style.opacity = '0';
-                    setTimeout(() => item.classList.add('hidden'), 300); 
-                }
-            });
-        });
-    });
-
-    // Botones de zoom
-    const zoomInBtn = document.getElementById('zoom-in');
-    const zoomOutBtn = document.getElementById('zoom-out');
-    const zoomResetBtn = document.getElementById('zoom-reset');
-
-    // 2. VARIABLES DE ESTADO
-    let currentIndex = 0;
-    let currentZoom = 1; 
-
-    if (lightbox && lightboxImg && lightboxVideo) {
-        
-        // --- FUNCIONES DE ZOOM ---
-        
-        const applyZoom = () => {
-            lightboxImg.style.transform = `scale(${currentZoom})`;
-            lightboxVideo.style.transform = `scale(${currentZoom})`;
-            if (zoomResetBtn) zoomResetBtn.innerText = `${Math.round(currentZoom * 10) / 10}x`;
-        };
-
-        const resetZoom = () => {
-            currentZoom = 1;
-            lightboxImg.style.transform = ''; 
-            lightboxVideo.style.transform = ''; 
-            if (zoomResetBtn) zoomResetBtn.innerText = '1x';
-            lightboxImg.classList.add('scale-100'); 
-            lightboxVideo.classList.add('scale-100'); 
-        };
-
-        lightbox.addEventListener('wheel', (e) => {
-            if (!lightbox.classList.contains('hidden')) {
-                e.preventDefault(); 
-                if (e.deltaY < 0) {
-                    currentZoom = Math.min(currentZoom + 0.25, 4); 
-                } else {
-                    currentZoom = Math.max(currentZoom - 0.25, 0.5); 
-                }
-                applyZoom();
-            }
-        });
-
-        zoomInBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentZoom = Math.min(currentZoom + 0.5, 4);
-            applyZoom();
-        });
-        
-        zoomOutBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentZoom = Math.max(currentZoom - 0.5, 0.5);
-            applyZoom();
-        });
-
-        zoomResetBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            resetZoom();
-        });
-
-        // --- NUEVO: FUNCIONES DE ZOOM TÁCTIL (MÓVILES) ---
-        let initialDistance = 0;
-        let initialZoom = 1;
-
-        lightbox.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
-                initialDistance = Math.hypot(
-                    e.touches[0].clientX - e.touches[1].clientX,
-                    e.touches[0].clientY - e.touches[1].clientY
-                );
-                initialZoom = currentZoom;
-            }
-        });
-
-        lightbox.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 2 && !lightbox.classList.contains('hidden')) {
-                e.preventDefault(); 
-                
-                const currentDistance = Math.hypot(
-                    e.touches[0].clientX - e.touches[1].clientX,
-                    e.touches[0].clientY - e.touches[1].clientY
-                );
-                
-                const zoomFactor = currentDistance / initialDistance;
-                currentZoom = Math.min(Math.max(initialZoom * zoomFactor, 0.5), 4);
-                applyZoom();
-            }
-        }, { passive: false }); 
-
-
-        // --- FUNCIONES DE GALERÍA Y MULTIMEDIA ---
-        
-        const showMedia = (index) => {
-            const src = triggers[index].getAttribute('data-src');
-            if (src) {
-                resetZoom(); 
-                
-                const isVideo = src.endsWith('.webm') || src.endsWith('.mp4');
-                
-                if (isVideo) {
-                    lightboxImg.classList.add('hidden');
-                    lightboxImg.src = '';
-                    
-                    lightboxVideo.src = src;
-                    lightboxVideo.classList.remove('hidden');
-                    lightboxVideo.play();
-                } else {
-                    lightboxVideo.classList.add('hidden');
-                    lightboxVideo.pause();
-                    lightboxVideo.src = '';
-                    
-                    lightboxImg.src = src;
-                    lightboxImg.classList.remove('hidden');
-                }
-            }
-        };
-
-        triggers.forEach((trigger, index) => {
-            trigger.addEventListener('click', () => {
-                currentIndex = index;
-                showMedia(currentIndex);
-                
-                lightbox.classList.remove('hidden');
-                setTimeout(() => {
-                    lightbox.classList.remove('opacity-0');
-                    lightboxImg.classList.remove('scale-95');
-                    lightboxVideo.classList.remove('scale-95');
-                    lightboxImg.classList.add('scale-100');
-                    lightboxVideo.classList.add('scale-100');
-                }, 10);
-                
-                document.body.style.overflow = 'hidden'; 
-            });
-        });
-
-        const goNext = () => {
-            currentIndex = (currentIndex + 1) % triggers.length;
-            showMedia(currentIndex);
-        };
-
-        const goPrev = () => {
-            currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-            showMedia(currentIndex);
-        };
-
-        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goNext(); });
-        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goPrev(); });
-
-        const closeLightbox = () => {
-            resetZoom(); 
-            lightbox.classList.add('opacity-0');
-            lightboxImg.classList.remove('scale-100');
-            lightboxVideo.classList.remove('scale-100');
-            lightboxImg.classList.add('scale-95');
-            lightboxVideo.classList.add('scale-95');
-            
-            setTimeout(() => {
-                lightbox.classList.add('hidden');
-                lightboxImg.src = ''; 
-                lightboxVideo.src = ''; 
-                document.body.style.overflow = ''; 
-            }, 300); 
-        };
-
-        closeBtn?.addEventListener('click', closeLightbox);
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('hidden')) {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowRight') goNext();
-                if (e.key === 'ArrowLeft') goPrev();
-                if (e.key === '+') { currentZoom = Math.min(currentZoom + 0.5, 4); applyZoom(); }
-                if (e.key === '-') { currentZoom = Math.max(currentZoom - 0.5, 0.5); applyZoom(); }
-            }
-        });
-    }
+    import '../scripts/galeria';
 </script>
