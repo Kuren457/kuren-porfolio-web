@@ -2,16 +2,16 @@
 // (clase .aparecido, ver global.css) y en ese momento arrancan, una sola vez, las animaciones de su marco
 // (data-intro-marco, sustituye al --marco fijo) y de su logo (img[data-intro], sustituye al src fijo).
 //
-// Cada tarjeta usa su propia copia del GIF (una URL blob:): el navegador comparte la animación entre todas
-// las imágenes con la misma URL, así que sin esto las tarjetas que aparecen más tarde verían el GIF ya terminado.
+// Cada tarjeta usa su propia copia del GIF (ver gifs.ts): sin esto, las tarjetas que aparecen más tarde
+// verían el GIF ya terminado.
 //
 // El modo lo marca una clase en <html> (la pone el layout y la cambia BotonAnimaciones):
 //  - .intro-activa: todo lo anterior
 //  - .intro-suave: la tarjeta y el marco se ven fijos desde el principio y solo se anima el logo
+import { copiaPropia, descargar } from './gifs';
 
 const RETARDO_ENTRE_TARJETAS = 80; // ms entre tarjetas que entran en pantalla a la vez
 
-const gifs = new Map<string, Promise<Blob | null>>();
 const copias = new WeakMap<HTMLElement, string[]>(); // URLs blob: de cada tarjeta, para liberarlas al repetir
 let observador: IntersectionObserver | null = null;
 let ronda = 0; // Cambia en cada reinicio, para descartar apariciones que estaban a medias
@@ -19,17 +19,6 @@ let ronda = 0; // Cambia en cada reinicio, para descartar apariciones que estaba
 const leerModo = () => {
     const clases = document.documentElement.classList;
     return clases.contains('intro-activa') ? 'completo' : clases.contains('intro-suave') ? 'suave' : null;
-};
-
-const descargar = (url: string) => {
-    if (!gifs.has(url)) gifs.set(url, fetch(url).then((r) => (r.ok ? r.blob() : null)).catch(() => null));
-    return gifs.get(url)!;
-};
-
-const copiaPropia = async (url?: string) => {
-    if (!url) return null;
-    const blob = await descargar(url);
-    return blob && URL.createObjectURL(blob);
 };
 
 // Deja la tarjeta como estaba antes de aparecer (marco y logo fijos), para poder repetir la aparición

@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "marcos": "node scripts/recolor-marco.mjs && node scripts/marcos-vegetales.mjs && node scripts/intros-logos.mjs"
+    "marcos": "node scripts/recolor-marco.mjs && node scripts/marcos-vegetales.mjs && node scripts/intros-logos.mjs && node scripts/mascotas.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

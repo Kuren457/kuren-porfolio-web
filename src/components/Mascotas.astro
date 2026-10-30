@@ -1,0 +1,42 @@
+---
+// src/components/Mascotas.astro
+// Mascotas interactivas de la página principal. Empiezan ocultas: src/scripts/mascotas.ts pone cada una sobre
+// una tarjeta distinta ([data-sitio-mascota]) elegida al azar, de pie sobre su borde superior o, por dentro,
+// sobre su borde inferior.
+//
+// Medidas en píxeles del sprite a 1x (--ancho, --alto), filas vacías bajo los pies (--pies, para apoyarlos
+// justo en el borde) y posición de la mano de los mimos respecto al sprite (--mano-x, --mano-y).
+// Los sprites *_1x se generan con `npm run marcos`.
+const UI = '/Pixel-art/UI Elements/';
+---
+
+<div id="mascotas" hidden>
+    <!-- HK: cada click alterna entre el idle y el breakdance -->
+    <button type="button" class="mascota" data-mascota="hk" aria-label="HK: haz click para que baile"
+        style="--ancho: 48; --alto: 48; --pies: 7;">
+        <img class="mascota__sprite" src={`${UI}HKDanceIdle_1x.gif`} alt=""
+            data-baile={`${UI}HKDanceBreakdance_1x.gif`} />
+    </button>
+
+    <!-- Gato: cada click, mimo (mano) y maullido; a los 25 clicks explota y vuelve a los 5 segundos -->
+    <button type="button" class="mascota" data-mascota="mimos" aria-label="Gato: dale mimos"
+        data-sonido="/audio/kittymeow.wav"
+        data-explota="25" data-sonido-explosion="/audio/explosion.wav"
+        style="--ancho: 32; --alto: 32; --pies: 7; --mano-x: 0; --mano-y: -7;">
+        <img class="mascota__sprite" src={`${UI}KittyExplosionIdle_1x.png`} alt=""
+            data-explosion={`${UI}KittyExplosionExplosion_1x.gif`} />
+        <img class="mascota__mano" alt="" hidden data-mano={`${UI}HandAnim_1x.gif`} />
+    </button>
+
+    <!-- Juno: cada click, mimo (mano) -->
+    <button type="button" class="mascota" data-mascota="mimos" aria-label="Juno: dale mimos"
+        data-sonido-mano="/audio/pat.wav"
+        style="--ancho: 48; --alto: 48; --pies: 7; --mano-x: 4; --mano-y: -5;">
+        <img class="mascota__sprite" src={`${UI}Juno_1x.png`} alt="" />
+        <img class="mascota__mano" alt="" hidden data-mano={`${UI}HandAnim_1x.gif`} />
+    </button>
+</div>
+
+<script>
+    import '../scripts/mascotas';
+</script>
