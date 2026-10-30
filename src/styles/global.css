@@ -228,9 +228,9 @@ body::after {
     visibility: hidden;
 }
 
-/* --- CARRUSELES (vista "Colecciones") --- */
-/* Filas en bucle (Carrusel.astro): la pista se desplaza --desplazamiento (el ancho de una tanda de tarjetas,
-   lo calcula src/scripts/carruseles.ts) y vuelve al inicio justo cuando la copia ocupa el sitio del original. */
+/* --- CARRUSELES --- */
+/* Filas en bucle (Carrusel.astro). El movimiento, el arrastre y la rueda los lleva src/scripts/carruseles.ts,
+   que desplaza la pista con transform. */
 .carrusel {
     --alto-carrusel: 240px; /* Alto de la imagen de cada tarjeta; el ancho sale de sus proporciones */
 }
@@ -244,6 +244,13 @@ body::after {
     overflow: hidden;
     padding-block: 24px; /* Sitio para la tarjeta ampliada al pasar el ratón */
     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    cursor: grab;
+    touch-action: pan-y; /* En móvil, deslizar en vertical baja la página; en horizontal, mueve el carrusel */
+    user-select: none;
+}
+
+.carrusel--arrastrando .carrusel__ventana {
+    cursor: grabbing;
 }
 
 .carrusel__pista {
@@ -251,19 +258,7 @@ body::after {
     align-items: flex-end;
     gap: 24px;
     width: max-content;
-    animation: carrusel-avanza var(--duracion, 60s) linear infinite;
-}
-
-.carrusel[data-inverso] .carrusel__pista {
-    animation-direction: reverse;
-}
-
-.carrusel:hover .carrusel__pista {
-    animation-play-state: paused;
-}
-
-@keyframes carrusel-avanza {
-    to { transform: translateX(calc(-1 * var(--desplazamiento, 0px))); }
+    will-change: transform;
 }
 
 /* Tarjeta del carrusel: altura fija y ancho natural; al pasar el ratón crece por encima de las vecinas */
@@ -283,23 +278,48 @@ body::after {
     height: var(--alto-carrusel);
 }
 
-/* Sin movimiento: filas que caben enteras en pantalla, y el modo de animaciones suaves (que se recorre a mano) */
-.carrusel--quieto .carrusel__pista,
-.intro-suave .carrusel__pista {
-    animation: none;
+/* Filas que caben enteras en pantalla: quietas, centradas y sin copias */
+.carrusel--quieto .carrusel__ventana {
+    cursor: auto;
 }
 
 .carrusel--quieto .carrusel__pista {
     margin-inline: auto;
 }
 
-.carrusel--quieto [data-copia],
-.intro-suave .carrusel [data-copia] {
+.carrusel--quieto [data-copia] {
     display: none;
 }
 
-.intro-suave .carrusel__ventana {
-    overflow-x: auto;
+/* Carrusel mini (filas de proyectos): más bajo y con los marcos a 1 px por píxel */
+.carrusel--mini {
+    --alto-carrusel: 140px;
+}
+
+.carrusel--mini .pixel-card {
+    --px: 1px;
+}
+
+/* --- PROYECTOS (página principal) --- */
+/* Cada fila: tarjeta con el logo | nombre y descripción | mini carrusel con sus obras (Portfolio.astro).
+   En móvil, una cosa debajo de otra */
+.proyecto {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* Sin esto, la columna crece hasta el ancho de toda la tira del carrusel */
+    gap: 24px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .proyecto {
+        grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1.6fr);
+    }
+}
+
+.proyecto__tarjeta {
+    width: 180px;
+    aspect-ratio: 1;
+    justify-self: center;
 }
 
 /* --- MASCOTAS (página principal) --- */
@@ -317,6 +337,14 @@ body::after {
     cursor: pointer;
     image-rendering: pixelated;
     visibility: hidden; /* Hasta que su tarjeta ha aparecido */
+}
+
+/* En móvil, a la mitad de tamaño: así caben en los huecos libres (la pantalla tiene densidad de sobra para que
+   se sigan viendo nítidas) */
+@media (max-width: 639px) {
+    .mascota {
+        --px: 1px;
+    }
 }
 
 .mascota--visible {

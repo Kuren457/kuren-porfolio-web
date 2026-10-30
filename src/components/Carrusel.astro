@@ -7,16 +7,18 @@ import PixelCard from './PixelCard.astro';
 import type { Obra } from '../data/tipos';
 
 interface Props {
-    titulo: string;
+    titulo?: string;   // Sin título, se usa etiqueta para los lectores de pantalla
+    etiqueta?: string;
     obras: Obra[];
     inverso?: boolean; // Se mueve hacia la derecha en vez de hacia la izquierda
+    mini?: boolean;    // Más bajo y con marcos más finos (p. ej. dentro de las filas de proyectos)
 }
 
-const { titulo, obras, inverso = false } = Astro.props;
+const { titulo, etiqueta = titulo, obras, inverso = false, mini = false } = Astro.props;
 ---
 
-<section class="carrusel" data-galeria data-inverso={inverso || undefined} aria-label={titulo}>
-    <h2 class="carrusel__titulo text-2xl text-white">{titulo}</h2>
+<section class:list={['carrusel', { 'carrusel--mini': mini }]} data-galeria data-inverso={inverso || undefined} aria-label={etiqueta}>
+    {titulo && <h2 class="carrusel__titulo text-2xl text-white">{titulo}</h2>}
     <div class="carrusel__ventana">
         <div class="carrusel__pista">
             {obras.map((obra) => <PixelCard {...obra} variante="carrusel" />)}

@@ -1,0 +1,47 @@
+---
+// src/components/Lightbox.astro
+// Visor a pantalla completa (con zoom) de las obras: se abre al pulsar cualquier .lightbox-trigger de la
+// página. La lógica está en src/scripts/galeria.ts.
+interface Props {
+    acento: string;       // Color de los controles al pasar el ratón
+    acentoSuave: string;  // Color del resplandor alrededor de la obra
+    pixelado?: boolean;   // Ampliar sin suavizar (pixel art)
+}
+
+const { acento, acentoSuave, pixelado = false } = Astro.props;
+---
+
+<div id="lightbox" class="fixed inset-0 z-[100] hidden bg-[#0a0508]/75 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" style={`--acento: ${acento}; --acento-suave: ${acentoSuave};`}>
+
+    <!-- Controles de Zoom (Arriba a la izquierda) -->
+    <div class="absolute top-6 left-6 md:top-10 md:left-10 flex gap-2 z-50 bg-[#0a0508]/80 p-1.5 rounded-xl border border-white/10 backdrop-blur-md">
+        <button id="zoom-out" class="text-white hover:text-[var(--acento)] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">-</button>
+        <button id="zoom-reset" class="text-white/80 hover:text-white w-10 flex items-center justify-center text-sm font-medium transition-colors cursor-pointer select-none rounded hover:bg-white/10">1x</button>
+        <button id="zoom-in" class="text-white hover:text-[var(--acento)] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">+</button>
+    </div>
+
+    <!-- Botón de cerrar (la X) -->
+    <button id="lightbox-close" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-[var(--acento)] text-5xl font-light z-50 transition-colors cursor-pointer">&times;</button>
+
+    <!-- Flecha Izquierda -->
+    <button id="lightbox-prev" class="absolute left-2 md:left-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[var(--acento)] z-50 transition-colors cursor-pointer select-none p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+
+    <!-- Imagen o vídeo maximizados (la transición es corta para que el zoom sea rápido y reactivo) -->
+    <img id="lightbox-img" src="" alt="Arte maximizado" style={pixelado ? 'image-rendering: pixelated;' : undefined} class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_var(--acento-suave)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
+    <video id="lightbox-video" src="" autoplay loop muted playsinline class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_var(--acento-suave)] scale-95 transition-transform duration-150 z-40 will-change-transform"></video>
+
+    <!-- Flecha Derecha -->
+    <button id="lightbox-next" class="absolute right-2 md:right-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[var(--acento)] z-50 transition-colors cursor-pointer select-none p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+</div>
+
+<script>
+    import '../scripts/galeria';
+</script>

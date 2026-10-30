@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
 import PixelCard from '../components/PixelCard.astro';
 import Carrusel from '../components/Carrusel.astro';
+import Lightbox from '../components/Lightbox.astro';
 import { obras, colecciones } from '../data/tresD';
 ---
 
@@ -59,39 +60,5 @@ import { obras, colecciones } from '../data/tresD';
 
     <Contacto />
 
-    <!-- ========================================= -->
-    <!-- MODAL / LIGHTBOX (Soporte Imagen y Vídeo) -->
-    <!-- ========================================= -->
-    <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-[#0a0508]/75 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        
-        <!-- Controles de Zoom -->
-        <div class="absolute top-6 left-6 md:top-10 md:left-10 flex gap-2 z-50 bg-[#0a0508]/80 p-1.5 rounded-xl border border-white/10 backdrop-blur-md">
-            <button id="zoom-out" class="text-white hover:text-[#00ff66] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">-</button>
-            <button id="zoom-reset" class="text-white/80 hover:text-white w-10 flex items-center justify-center text-sm font-medium transition-colors cursor-pointer select-none rounded hover:bg-white/10">1x</button>
-            <button id="zoom-in" class="text-white hover:text-[#00ff66] w-8 h-8 flex items-center justify-center text-2xl font-bold transition-colors cursor-pointer select-none rounded hover:bg-white/10">+</button>
-        </div>
-
-        <button id="lightbox-close" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-[#00ff66] text-5xl font-light z-50 transition-colors cursor-pointer">&times;</button>
-        
-        <button id="lightbox-prev" class="absolute left-2 md:left-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[#00ff66] z-50 transition-colors cursor-pointer select-none p-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-
-        <!-- Contenedores maximizados (Uno para IMG y otro para VIDEO) -->
-        <img id="lightbox-img" src="" alt="Arte maximizado" class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(0,255,102,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
-        
-        <video id="lightbox-video" src="" autoplay loop muted playsinline class="hidden max-w-full max-h-[90vh] object-contain drop-shadow-[0_0_50px_rgba(0,255,102,0.15)] scale-95 transition-transform duration-150 z-40 will-change-transform"></video>
-
-        <button id="lightbox-next" class="absolute right-2 md:right-10 top-1/2 -translate-y-1/2 text-white/50 hover:text-[#00ff66] z-50 transition-colors cursor-pointer select-none p-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-
-    </div>
+    <Lightbox acento="#00ff66" acentoSuave="rgba(0,255,102,0.15)" />
 </Layout>
-
-<!-- ========================================= -->
-<!-- LÓGICA JAVASCRIPT PARA EL LIGHTBOX        -->
-<!-- ========================================= -->
-<script>
-    import '../scripts/galeria';
-</script>

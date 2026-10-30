@@ -2,29 +2,29 @@
 // src/components/Hero.astro
 import { marcoAleatorio } from '../utils/marcoAleatorio';
 ---
-<!-- Inicio / Cabecera -->
-<section id="inicio" class="min-h-screen flex flex-col items-center justify-center text-center px-5 relative z-10 pt-20">
+<!-- Inicio / Cabecera (compacta: justo debajo van los trabajos personales y los proyectos) -->
+<section id="inicio" class="flex flex-col items-center justify-center text-center px-5 relative z-10 pt-28 pb-10">
     
     <!-- Avatar (Corregido el rounded-xl) -->
-    <img src="/png-banners/avatar.png" alt="Kuren" class="rounded-xl object-cover mb-8 shadow-lg shadow-orange-500/20 w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64" />
+    <img src="/png-banners/avatar.png" alt="Miguel Ángel Vera Ximénez" class="rounded-xl object-cover mb-6 shadow-lg shadow-orange-500/20 w-24 h-24 md:w-32 md:h-32" />
 
     <!-- Título -->
-    <h1 class="font-extrabold mb-4 text-5xl md:text-7xl lg:text-8xl leading-tight text-white">
-        Kuren
+    <h1 class="font-extrabold mb-3 text-3xl md:text-5xl leading-tight text-white">
+        Miguel Ángel Vera Ximénez
     </h1>
 
     <!-- Subtítulo -->
-    <h2 class="font-bold text-white mb-6 text-2xl md:text-3xl lg:text-4xl">
+    <h2 class="font-bold text-white mb-4 text-xl md:text-2xl">
         Digital Artist & Game Developer
     </h2>
 
     <!-- Párrafo -->
-    <p class="text-[#cbd5e1] mx-auto text-lg md:text-xl max-w-3xl">
+    <p class="text-[#cbd5e1] mx-auto text-base max-w-2xl">
         Especialista en animación 3D, rigging, pixel art y diseño de interfaces. Dando vida a videojuegos mediante la integración de assets en Unreal Engine, Blender y Aseprite.
     </p>
 
     <!-- Botones de Acción -->
-    <div class="flex flex-wrap justify-center gap-4 mt-8 md:mt-12 relative z-20">
+    <div class="flex flex-wrap justify-center gap-4 mt-6 relative z-20">
         
         <a href="#sobre-mi" class={`marco-boton ${marcoAleatorio()} px-8 py-3 text-base md:text-lg bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-orange-500/20`}>
             Conóceme
@@ -42,14 +42,4 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
             Diseño 3D
         </a>
     </div>
-
-    <!-- Indicador de Disponibilidad -->
-    <div class={`marco-boton ${marcoAleatorio()} inline-flex items-center justify-center gap-3 px-5 py-2 mt-8 md:mt-12 mx-auto bg-[#00ff66]/10 text-[#00ff66] text-sm md:text-base font-semibold shadow-[0_0_15px_rgba(0,255,102,0.15)] relative z-20`}>
-        <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff66] opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#00ff66]"></span>
-        </span>
-        Disponible para trabajar (Madrid / Remoto)
-    </div>
-    
 </section>
