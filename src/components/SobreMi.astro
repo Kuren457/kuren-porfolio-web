@@ -13,7 +13,7 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <!-- Columna de Texto -->
-            <div class={`${marcoAleatorio()} space-y-6 text-[#cbd5e1] text-lg leading-relaxed bg-[#1a050a]/40 p-8 backdrop-blur-md shadow-[0_0_30px_rgba(255,170,0,0.05)]`}>
+            <div data-aparicion class={`${marcoAleatorio()} space-y-6 text-[#cbd5e1] text-lg leading-relaxed bg-[#1a050a]/40 p-8 backdrop-blur-md shadow-[0_0_30px_rgba(255,170,0,0.05)]`}>
                 <p>
                     Soy artista digital y estudiante universitario de desarrollo de videojuegos, especializado en abarcar todo el espectro visual de un proyecto interactivo.
                 </p>
@@ -28,22 +28,22 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
             <!-- Columna de Herramientas -->
             <div class="grid grid-cols-2 gap-4">
                 <!-- Tarjeta Unreal Engine -->
-                <div class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
-                    <img src="/Pixel-art/UI Elements/LogoUE.png" alt="Logo Unreal Engine" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
+                <div data-aparicion class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                    <img src="/Pixel-art/UI Elements/LogoUE.png" data-intro="/Pixel-art/UI Elements/LogoUE_intro.gif" alt="Logo Unreal Engine" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Unreal Engine</h3>
                     <p class="text-sm text-[#94a3b8]">Blueprints, Materiales, Level Sequences</p>
                 </div>
 
                 <!-- Tarjeta Blender -->
-                <div class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
-                    <img src="/Pixel-art/UI Elements/LogoBlender.png" alt="Logo Blender" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
+                <div data-aparicion class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                    <img src="/Pixel-art/UI Elements/LogoBlender.png" data-intro="/Pixel-art/UI Elements/LogoBlender_intro.gif" alt="Logo Blender" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Blender</h3>
                     <p class="text-sm text-[#94a3b8]">Modelado 3D, Rigging, Animación</p>
                 </div>
 
                 <!-- Tarjeta Aseprite (ocupa las 2 columnas para cerrar la rejilla) -->
-                <div class={`col-span-2 ${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
-                    <img src="/Pixel-art/UI Elements/LogoAseprite.png" alt="Logo Aseprite" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
+                <div data-aparicion class={`col-span-2 ${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                    <img src="/Pixel-art/UI Elements/LogoAseprite.png" data-intro="/Pixel-art/UI Elements/LogoAseprite_intro.gif" alt="Logo Aseprite" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Aseprite</h3>
                     <p class="text-sm text-[#94a3b8]">Pixel Art, UI, Sprite Sheets</p>
                 </div>
@@ -51,3 +51,8 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
         </div>
     </div>
 </section>
+
+<!-- Las tarjetas con data-aparicion aparecen con un pop al entrar en pantalla (y los logos con data-intro se animan) -->
+<script>
+    import '../scripts/aparicion';
+</script>

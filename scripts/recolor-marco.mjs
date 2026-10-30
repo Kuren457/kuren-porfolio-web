@@ -1,10 +1,12 @@
 // Genera una versión de color del marco por cada tema, sustituyendo los 5 grises
 // del marco original por la rampa del tema (de exterior/claro a interior/oscuro).
+// Hace lo mismo con la animación de aparición del marco, que se exporta para reproducirse una sola vez.
 // Uso: npm run marcos
 import sharp from 'sharp';
 
 const DIR = 'public/Pixel-art/UI Elements/';
 const ORIGEN = DIR + 'MarcoUniversal_1x.png';
+const ORIGEN_ANIM = DIR + 'MarcoUniversal_Anim.gif';  // A 10x y sin margen, como MarcoUniversal_1x pero animado
 
 // Grises del marco original, de fuera hacia dentro
 const GRISES = ['#ffffff', '#b4b6b4', '#838583', '#5a5d5a', '#393c39'];
@@ -21,22 +23,36 @@ const TEMAS = {
 };
 
 const hexARgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
-
-const { data, info } = await sharp(ORIGEN).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
 const grises = GRISES.map(hexARgb);
 
-for (const [nombre, rampa] of Object.entries(TEMAS)) {
+const recolorear = (data, rampa) => {
     const colores = rampa.map(hexARgb);
     const salida = Buffer.from(data);
-
     for (let i = 0; i < salida.length; i += 4) {
         if (salida[i + 3] === 0) continue;
         const tono = grises.findIndex(([r, g, b]) => r === data[i] && g === data[i + 1] && b === data[i + 2]);
         if (tono === -1) throw new Error(`Color inesperado en el marco: ${data[i]},${data[i + 1]},${data[i + 2]}`);
         salida.set(colores[tono], i);
     }
+    return salida;
+};
 
+const fijo = await sharp(ORIGEN).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+
+const { delay } = await sharp(ORIGEN_ANIM, { animated: true }).metadata();
+const anim = await sharp(ORIGEN_ANIM, { animated: true })
+    .resize(fijo.info.width, fijo.info.height, { kernel: 'nearest' })  // En animaciones el tamaño es por fotograma
+    .ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+
+for (const [nombre, rampa] of Object.entries(TEMAS)) {
     const archivo = `${DIR}MarcoUniversal_1x_${nombre}.png`;
-    await sharp(salida, { raw: info }).png().toFile(archivo);
-    console.log('Generado', archivo);
+    await sharp(recolorear(fijo.data, rampa), { raw: fijo.info }).png().toFile(archivo);
+
+    // loop: 1 = sin bucle (se reproduce una vez y se queda en el último fotograma)
+    const archivoAnim = `${DIR}MarcoUniversal_intro_${nombre}.gif`;
+    const { width, height, pageHeight } = anim.info;
+    await sharp(recolorear(anim.data, rampa), { raw: { width, height, channels: 4, pageHeight } })
+        .gif({ loop: 1, delay }).toFile(archivoAnim);
+
+    console.log('Generado', archivo, 'y', archivoAnim);
 }

@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets';
+import BotonAnimaciones from '../components/BotonAnimaciones.astro';
 import '../styles/global.css';
 ---
 
@@ -13,8 +14,23 @@ import '../styles/global.css';
         
         <!-- Fuente pixel art (configurada en astro.config.mjs) -->
         <Font cssVariable="--font-tiny5" preload={[{ style: 'normal' }]} />
+
+        <!-- Elige la aparición de las tarjetas (src/scripts/aparicion.ts): completa (pop + marco + logo) o suave
+             (solo el logo). Manda lo elegido con BotonAnimaciones; si no se ha elegido, el ajuste "reducir movimiento".
+             Va en línea en el <head> para que las tarjetas no lleguen a verse antes de ocultarse -->
+        <script is:inline>
+            let modo;
+            try {
+                modo = localStorage.getItem('modoAnimaciones');
+            } catch {}
+            if (modo !== 'completo' && modo !== 'suave') {
+                modo = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'suave' : 'completo';
+            }
+            document.documentElement.classList.add(modo === 'completo' ? 'intro-activa' : 'intro-suave');
+        </script>
 	</head>
 	<body class="antialiased">
 		<slot />
+		<BotonAnimaciones />
 	</body>
 </html>

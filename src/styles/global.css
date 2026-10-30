@@ -196,6 +196,38 @@ body::after {
     background-repeat: no-repeat;
 }
 
+/* --- APARICIÓN DE TARJETAS --- */
+/* Los [data-aparicion] empiezan ocultos y aparecen con un pop al entrar en pantalla (src/scripts/aparicion.ts).
+   Solo con .intro-activa en <html>: sin JS o con "reducir movimiento" se ven fijos desde el principio.
+   La curva sube por encima de 1 al final, que es lo que da el pequeño rebote. */
+.intro-activa [data-aparicion]:not(.aparecido) {
+    opacity: 0;
+}
+
+.aparecido {
+    animation: aparicion-pop 450ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+@keyframes aparicion-pop {
+    from { opacity: 0; transform: scale(0.3); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Botón flotante para elegir el modo (BotonAnimaciones.astro). La posición va aquí y no con clases de Tailwind
+   porque .marco-vegetal fija position: relative, y este CSS sin capa ganaría a la utilidad `fixed` */
+.boton-animaciones {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 40; /* Por debajo de la barra de navegación (50) y del lightbox (100) */
+}
+
+/* Versión suave ("reducir movimiento"): tarjetas y marcos fijos, solo se anima el logo.
+   El logo se oculta hasta que empieza su animación para que no se vea primero el fijo y luego desaparezca */
+.intro-suave img[data-intro]:not(.intro-lista) {
+    visibility: hidden;
+}
+
 /* --- ANIMACIONES EXTRA --- */
 @keyframes float {
     0%, 100% { transform: translateY(0); }

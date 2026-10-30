@@ -1,0 +1,35 @@
+---
+// src/components/BotonAnimaciones.astro
+// Botón flotante para elegir la aparición de las tarjetas: completa (pop + marco + logo) o suave (solo el logo).
+// Por defecto se sigue el ajuste "reducir movimiento" del sistema (ver layout.astro); la elección se recuerda.
+---
+<button id="boton-animaciones" type="button" aria-pressed="false" class="boton-animaciones marco-boton marco-vegetal px-4 py-2 text-xs bg-[#0a0508]/90 text-[#cbd5e1] opacity-80 hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer">
+    Animaciones: <span data-estado>completas</span>
+</button>
+
+<script>
+    import { iniciarAparicion } from '../scripts/aparicion';
+
+    const boton = document.getElementById('boton-animaciones')!;
+    const estado = boton.querySelector('[data-estado]')!;
+    const clases = document.documentElement.classList;
+
+    const pintar = () => {
+        const completas = clases.contains('intro-activa');
+        estado.textContent = completas ? 'completas' : 'suaves';
+        boton.setAttribute('aria-pressed', String(completas));
+    };
+
+    boton.addEventListener('click', () => {
+        const completas = !clases.contains('intro-activa');
+        clases.toggle('intro-activa', completas);
+        clases.toggle('intro-suave', !completas);
+        try {
+            localStorage.setItem('modoAnimaciones', completas ? 'completo' : 'suave');
+        } catch {}
+        pintar();
+        iniciarAparicion(); // Repite la aparición de las tarjetas visibles con el nuevo modo
+    });
+
+    pintar();
+</script>

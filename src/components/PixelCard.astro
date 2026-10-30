@@ -1,19 +1,24 @@
 ---
 // src/components/PixelCard.astro
 // Tarjeta de la galería envuelta en el marco pixel art (9-slice, ver .pixel-card en global.css)
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { imageMetadata } from 'astro/assets/utils';
+
 const UI = '/Pixel-art/UI Elements/';
 
-// Cada tema elige el logo de la pestaña y el color del marco (generado con `npm run marcos`)
+// Cada tema elige el logo de la pestaña (y su animación de aparición) y el color del marco
+// (los archivos de color y las animaciones *_intro.gif se generan con `npm run marcos`)
 const TEMAS = {
-    marvel:      { logo: 'LogoMR.png',          logoAlt: 'Logo Marvel Rivals', marco: 'amarillo' },
-    valorant:    { logo: 'LogoValo.png',        logoAlt: 'Logo Valorant',      marco: 'rojo' },
-    memes:       { logo: 'LogoMemes.png',       logoAlt: 'Logo Memes',         marco: 'gris' },
-    og:          { logo: 'LogoOG.png',          logoAlt: 'Logo OG',            marco: 'verde' },
-    tutorial:    { logo: 'LogoOG.png',          logoAlt: 'Logo OG',            marco: 'verde' },
-    bloodrunner: { logo: 'LogoBloodRunner.png', logoAlt: 'Logo BloodRunner',   marco: 'rojoOscuro' },
-    ourojam:     { logo: 'LogoOurojam.png',     logoAlt: 'Logo Ourojam',       marco: 'azul' },
-    gambling:    { logo: 'LogoGambling.png',    logoAlt: 'Logo Gambling',      marco: 'azul' },
-    blender:     { logo: 'LogoBlender.png',     logoAlt: 'Logo Blender',       marco: 'naranja', render: true },
+    marvel:      { logo: 'LogoMR.png',          intro: 'LogoMR_intro.gif',       logoAlt: 'Logo Marvel Rivals', marco: 'amarillo' },
+    valorant:    { logo: 'LogoValo.png',        intro: 'LogoValo_intro.gif',     logoAlt: 'Logo Valorant',      marco: 'rojo' },
+    memes:       { logo: 'LogoMemes.png',       intro: 'LogoMemes_intro.gif',    logoAlt: 'Logo Memes',         marco: 'gris' },
+    og:          { logo: 'LogoOG.png',          intro: 'LogoOG_intro.gif',       logoAlt: 'Logo OG',            marco: 'verde' },
+    tutorial:    { logo: 'LogoOG.png',          intro: 'LogoOG_intro.gif',       logoAlt: 'Logo OG',            marco: 'verde' },
+    bloodrunner: { logo: 'LogoBloodRunner.png', intro: 'LogoBR_intro.gif',       logoAlt: 'Logo BloodRunner',   marco: 'rojoOscuro' },
+    ourojam:     { logo: 'LogoOurojam.png',     intro: 'LogoOurojam_intro.gif',  logoAlt: 'Logo Ourojam',       marco: 'azul' },
+    gambling:    { logo: 'LogoGambling.png',    intro: 'LogoGambling_intro.gif', logoAlt: 'Logo Gambling',      marco: 'azul' },
+    blender:     { logo: 'LogoBlender.png',     intro: 'LogoBlender_intro.gif',  logoAlt: 'Logo Blender',       marco: 'naranja', render: true },
 };
 
 interface Props {
@@ -28,25 +33,34 @@ interface Props {
 }
 
 const { src, alt = '', category, title, description, tema } = Astro.props;
-const temaActual: { logo?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
+const temaActual: { logo?: string; intro?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
 const logo = Astro.props.logo ?? (temaActual?.logo && UI + temaActual.logo);
+// Un logo sustituido a mano no tiene animación de aparición
+const logoIntro = Astro.props.logo ? undefined : temaActual?.intro && UI + temaActual.intro;
 const logoAlt = Astro.props.logoAlt ?? temaActual?.logoAlt ?? '';
 const marco = `${UI}MarcoUniversal_1x_${temaActual?.marco ?? 'gris'}.png`;
+const marcoIntro = `${UI}MarcoUniversal_intro_${temaActual?.marco ?? 'gris'}.gif`;
 
 const esVideo = /\.(webm|mp4)$/i.test(src);
+
+// Ancho y alto reales de la imagen (se leen al generar la página): así el navegador reserva su hueco antes
+// de descargarla y la galería no se recoloca al cargar, que es lo que necesita la aparición al entrar en pantalla
+const { width, height } = esVideo ? {} : await imageMetadata(await readFile(join(process.cwd(), 'public', src)), src);
+
 // Los renders 3D se escalan suavizados; el pixel art, sin suavizar
 const estiloMedia = temaActual?.render ? undefined : 'image-rendering: pixelated;';
 const claseMedia = 'w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500';
 ---
 
 <div class="gallery-item lightbox-trigger pixel-card group break-inside-avoid cursor-pointer transition-opacity duration-300" data-src={src} data-category={category} style={`--marco: url('${marco}');`}>
-    <div class="pixel-card__frame">
+    <!-- data-aparicion: aparece con un pop al entrar en pantalla y arranca las animaciones del marco y el logo (src/scripts/aparicion.ts) -->
+    <div class="pixel-card__frame" data-aparicion data-intro-marco={marcoIntro}>
 
         <!-- Contenido central -->
         <div class="relative overflow-hidden bg-[#0a0508]">
             {esVideo
                 ? <video src={src} autoplay loop muted playsinline style={estiloMedia} class={claseMedia}></video>
-                : <img src={src} alt={alt} style={estiloMedia} class={claseMedia} />}
+                : <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia} />}
             <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                 <h3 class="text-xl font-bold text-white mb-1">{title}</h3>
                 <p class="text-[#cbd5e1] text-sm">{description}</p>
@@ -54,6 +68,10 @@ const claseMedia = 'w-full h-auto object-cover group-hover:scale-105 transition-
         </div>
 
         <!-- Logo en el hueco de la pestaña -->
-        {logo && <img src={logo} alt={logoAlt} class="pixel-card__logo" />}
+        {logo && <img src={logo} alt={logoAlt} data-intro={logoIntro} class="pixel-card__logo" />}
     </div>
 </div>
+
+<script>
+    import '../scripts/aparicion';
+</script>
