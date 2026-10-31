@@ -12,6 +12,9 @@ export interface Proyecto {
     enlace: string;
     logo: string;
     logoPixelado?: boolean; // El logo es pixel art pequeño y se amplía sin suavizar
+    logoAncho?: number;     // Ancho del logo en px (en pixel art, un múltiplo de su tamaño a 1x para que se vea nítido)
+    marco?: string;         // GIF propio que envuelve la tarjeta en vez del marco vegetal (64x64 a 1x)
+    persecucion?: boolean;  // El demonio persigue a la galleta alrededor de la tarjeta (Persecucion.astro)
     obras: Obra[];
 }
 
@@ -34,7 +37,10 @@ export const proyectos: Proyecto[] = [
         descripcion: 'Diseño de personaje principal, animaciones, secuencias animadas del juego, escenario, tiles y props',
         herramientas: 'Godot & Aseprite',
         enlace: 'https://kurenm.itch.io/ourojam',
-        logo: '/Logos/LogoDragon.png',
+        logo: '/Pixel-art/UI Elements/Wukong.png',
+        logoPixelado: true,
+        logoAncho: 128, // 64 px a 1x, a 2 px por píxel: llena el hueco del dragón
+        marco: '/Pixel-art/UI Elements/Dar_vueltas_dragon_1x.gif',
         obras: deTema('ourojam'),
     },
     {
@@ -44,6 +50,7 @@ export const proyectos: Proyecto[] = [
         enlace: 'https://kurenm.itch.io/hells-gamble',
         logo: '/Pixel-art/UI Elements/LogoGambling.png',
         logoPixelado: true,
+        persecucion: true,
         obras: deTema('gambling'),
     },
     {
@@ -57,7 +64,7 @@ export const proyectos: Proyecto[] = [
             // Fragmentos de gameplay (solo aquí, no en la galería 3D)
             { src: '/3D/Dash.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Dash', description: 'Gameplay de Neorb', tema: 'blender' },
             { src: '/3D/Intro.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Intro', description: 'Gameplay de Neorb', tema: 'blender' },
-            { src: '/3D/StompAndInception.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Stomp e Inception', description: 'Gameplay de Neorb', tema: 'blender' },
+            { src: '/3D/StompAndInception.mp4', ancho: 1280, alto: 720, category: 'Gameplay', title: 'Stomp e Inception', description: 'Gameplay de Neorb', tema: 'blender' },
             { src: '/3D/Vines.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Vines', description: 'Gameplay de Neorb', tema: 'blender' },
         ],
     },

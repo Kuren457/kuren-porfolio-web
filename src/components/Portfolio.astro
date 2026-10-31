@@ -2,7 +2,10 @@
 // src/components/Portfolio.astro
 // Proyectos de la página principal: una fila por proyecto con su tarjeta (enlace a itch.io), nombre,
 // descripción y un mini carrusel con sus obras. Los datos están en src/data/proyectos.ts.
+// La tarjeta lleva un marco vegetal al azar o, si el proyecto tiene uno propio (marco), ese GIF por encima;
+// con persecucion, además, el demonio y la galleta corren a su alrededor.
 import Carrusel from './Carrusel.astro';
+import Persecucion from './Persecucion.astro';
 import { proyectos } from '../data/proyectos';
 import { marcoAleatorio } from '../utils/marcoAleatorio';
 ---
@@ -15,17 +18,25 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
             </span>
         </h2>
 
-        <div class="space-y-12">
+        <!-- Separación de 64 px: el sitio por el que corre la persecución -->
+        <div class="space-y-16">
             {proyectos.map((proyecto, i) => (
                 <article class="proyecto">
-                    <!-- Tarjeta con el logo: enlace a itch.io -->
-                    <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" data-aparicion data-sitio-mascota
-                        class={`${marcoAleatorio()} proyecto__tarjeta group bg-[#0a0508] flex items-center justify-center`}
-                        aria-label={`${proyecto.nombre} en itch.io`}>
-                        <img src={proyecto.logo} alt="" style={proyecto.logoPixelado ? 'image-rendering: pixelated;' : undefined}
-                            class="w-3/5 h-auto drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
-                        <span class="absolute bottom-4 inset-x-0 text-center text-xs text-[#cbd5e1] opacity-0 group-hover:opacity-100 transition-opacity">Ver en itch.io ↗</span>
-                    </a>
+                    <div class="proyecto__lugar">
+                        <!-- Tarjeta con el logo: enlace a itch.io -->
+                        <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" data-aparicion data-sitio-mascota
+                            class:list={['proyecto__tarjeta group flex items-center justify-center',
+                                proyecto.marco ? 'proyecto__tarjeta--marco' : `${marcoAleatorio()} bg-[#0a0508]`]}
+                            aria-label={`${proyecto.nombre} en itch.io`}>
+                            {proyecto.marco && <div class="proyecto__fondo"></div>}
+                            <img src={proyecto.logo} alt=""
+                                style={[proyecto.logoPixelado && 'image-rendering: pixelated;', proyecto.logoAncho && `width: ${proyecto.logoAncho}px;`].filter(Boolean).join(' ') || undefined}
+                                class="proyecto__logo w-3/5 h-auto drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                            <span class="proyecto__aviso absolute bottom-4 inset-x-0 text-center text-xs text-[#cbd5e1] opacity-0 group-hover:opacity-100 transition-opacity">Ver en itch.io ↗</span>
+                            {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" />}
+                        </a>
+                        {proyecto.persecucion && <Persecucion />}
+                    </div>
 
                     <!-- Nombre y descripción -->
                     <div class="proyecto__texto">

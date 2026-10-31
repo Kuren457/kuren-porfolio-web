@@ -15,7 +15,8 @@
 //  - data-mascota="mimos": cada click reproduce una vez la mano; con data-explota="N", al click N reproduce
 //    data-explosion, desaparece 5 s y vuelve
 //    Sonidos opcionales: data-sonido (cada click), data-sonido-mano (con la mano), data-sonido-explosion
-import { copiaPropia, duracionGif } from './gifs';
+import { duracionGif, esperar, ponerGif } from './gifs';
+import { cargarSonido, sonar } from './sonidos';
 
 const PX = 2;                // Píxeles de pantalla por píxel de los marcos vegetales
 const BORDE = 3;             // Grosor en píxeles del borde de los marcos vegetales
@@ -25,18 +26,8 @@ const AIRE = 6;              // px de separación mínima con cada obstáculo
 const TIEMPO_FUERA = 5000;   // ms que desaparece el gato tras explotar
 
 // Lo que una mascota no puede tapar
-const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block';
+const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block, .persecucion';
 
-const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-const cargarSonido = (url?: string) => (url ? new Audio(url) : null);
-
-// Reproduce desde el principio (si ya estaba sonando, vuelve a empezar)
-const sonar = (sonido: HTMLAudioElement | null) => {
-    if (!sonido) return;
-    sonido.currentTime = 0;
-    sonido.play().catch(() => {});
-};
 
 // --- COLOCACIÓN ---
 
@@ -86,10 +77,11 @@ const sitiosPosibles = (mascota: HTMLElement, tarjetas: HTMLElement[]) => {
 };
 
 const obstaculos = () => [...document.querySelectorAll<HTMLElement>(OBSTACULOS)]
-    // Fuera: lo que no está en la página (oculto o fijo en pantalla), las propias mascotas y lo que va dentro
-    // de un carrusel (ya cuenta el carrusel entero)
-    .filter((el) => el.offsetParent && !el.closest('header, .mascota, #boton-animaciones, #lightbox')
-        && (el.matches('.carrusel__ventana') || !el.closest('.carrusel__ventana')))
+    // Fuera: lo que no está en la página (oculto o fijo en pantalla), las propias mascotas, los marcos animados
+    // (se puede estar de pie encima) y lo que va dentro de un carrusel o de una persecución (ya cuentan enteros)
+    .filter((el) => el.offsetParent && !el.closest('header, .mascota, #boton-animaciones, #lightbox') && !el.matches('.proyecto__marco')
+        && (el.matches('.carrusel__ventana') || !el.closest('.carrusel__ventana'))
+        && (el.matches('.persecucion') || !el.closest('.persecucion')))
     .map(enPagina);
 
 const mostrarCuandoAparezca = (mascota: HTMLElement, tarjeta: HTMLElement) => {
@@ -159,13 +151,6 @@ document.fonts.ready.then(() => {
 });
 
 // --- COMPORTAMIENTOS ---
-
-// Pone en una imagen una copia propia del GIF (empieza desde el primer fotograma) y libera la anterior
-const ponerGif = async (imagen: HTMLImageElement, url: string) => {
-    const copia = await copiaPropia(url);
-    if (imagen.src.startsWith('blob:')) URL.revokeObjectURL(imagen.src);
-    imagen.src = copia ?? url;
-};
 
 const hk = (mascota: HTMLElement) => {
     const sprite = mascota.querySelector<HTMLImageElement>('.mascota__sprite')!;

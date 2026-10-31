@@ -18,6 +18,15 @@ export const copiaPropia = async (url?: string) => {
     return blob && URL.createObjectURL(blob);
 };
 
+// Pone en una imagen una copia propia del GIF (empieza desde el primer fotograma) y libera la copia anterior
+export const ponerGif = async (imagen: HTMLImageElement, url: string) => {
+    const copia = await copiaPropia(url);
+    if (imagen.src.startsWith('blob:')) URL.revokeObjectURL(imagen.src);
+    imagen.src = copia ?? url;
+};
+
+export const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 // Duración total de un GIF en ms (la suma de los tiempos de sus fotogramas), leída de sus bloques
 export const duracionGif = async (url: string) => {
     const blob = await descargar(url);

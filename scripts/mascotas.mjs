@@ -1,5 +1,6 @@
-// Prepara los sprites de las mascotas de la página principal: los reduce a 1x (la web los muestra a 2 px por
-// píxel) y deja sin bucle las animaciones que solo deben verse una vez (se quedan en el último fotograma).
+// Prepara los sprites de las mascotas y de los marcos animados de los proyectos de la página principal: los
+// reduce a 1x (la web los amplía sin suavizar) y deja sin bucle las animaciones que solo deben verse una vez
+// (se quedan en el último fotograma).
 // Genera <nombre>_1x.<ext>. Uso: npm run marcos
 import sharp from 'sharp';
 
@@ -13,6 +14,15 @@ const SPRITES = {
     'KittyExplosionExplosion.gif': [10, false],
     'HandAnim.gif':                [10, false],
     'Juno.png':                    [10],
+    // OuroJam: marco del dragón
+    'Dar_vueltas_dragon.gif':      [10, true],
+    // Hells Gamble: el demonio persigue a la galleta alrededor de la tarjeta
+    'Cookie_Idle.gif':             [10, true],
+    'Cookie_Explosion.gif':        [10, false],
+    'Personaje_Demon_Run.gif':     [10, true],
+    'Personaje_Demon_Sad.gif':     [6, false],
+    'Personaje_Demon_Cry.gif':     [10, true],
+    'Personaje_Demon_WakeUp.gif':  [10, false],
 };
 
 for (const [archivo, [escala, bucle]] of Object.entries(SPRITES)) {

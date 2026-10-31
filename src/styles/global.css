@@ -310,16 +310,97 @@ body::after {
     align-items: center;
 }
 
+/* La primera columna deja 44 px a cada lado de la tarjeta: con el hueco entre columnas, el sitio por el que
+   corre la persecución (64 px) sin tapar el texto */
 @media (min-width: 768px) {
     .proyecto {
-        grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1.6fr);
+        grid-template-columns: 280px minmax(0, 1fr) minmax(0, 1.6fr);
     }
 }
 
-.proyecto__tarjeta {
-    width: 180px;
-    aspect-ratio: 1;
+/* Tarjeta de 192 px: los marcos propios son de 64 px y se ven a 3 px por píxel exactos */
+.proyecto__lugar {
+    position: relative;
+    width: 192px;
+    height: 192px;
     justify-self: center;
+}
+
+.proyecto__tarjeta {
+    width: 100%;
+    height: 100%;
+}
+
+/* En móvil, con todo en columna, sitio arriba y abajo para la persecución (con los 24 px de separación, algo
+   más que los 64 px del carril: en las esquinas, girados, ocupan un poco más) */
+@media (max-width: 767px) {
+    .proyecto__lugar:has(.persecucion) {
+        margin-block: 48px;
+    }
+}
+
+/* Marco propio (p. ej. el dragón de OuroJam): el GIF por encima de todo, y el fondo oscuro solo en su hueco */
+.proyecto__tarjeta--marco {
+    position: relative;
+}
+
+.proyecto__marco {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.proyecto__fondo {
+    position: absolute;
+    inset: 39px; /* 13 px del marco a 3 px por píxel: un poco por debajo del anillo */
+    background: #0a0508;
+}
+
+.proyecto__tarjeta--marco .proyecto__logo {
+    position: relative;
+    width: 45%; /* Cabe en el hueco del marco */
+}
+
+.proyecto__tarjeta--marco .proyecto__aviso {
+    display: none; /* Quedaría tapado por el marco */
+}
+
+/* Persecución (Persecucion.astro): ocupa la tarjeta más un carril de 64 px alrededor; los corredores se
+   colocan con transform desde su esquina (src/scripts/persecucion.ts) */
+.persecucion {
+    position: absolute;
+    inset: -64px;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.corredor {
+    --px: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--ancho) * var(--px));
+    height: calc(var(--alto) * var(--px));
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    transform-origin: 0 0;
+    image-rendering: pixelated;
+}
+
+.corredor img {
+    width: 100%;
+    height: 100%;
+}
+
+.corredor--fuera {
+    visibility: hidden;
 }
 
 /* --- MASCOTAS (página principal) --- */

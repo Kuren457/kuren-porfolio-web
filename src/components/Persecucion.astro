@@ -1,0 +1,29 @@
+---
+// src/components/Persecucion.astro
+// Hells Gamble: el demonio persigue a la galleta dando vueltas alrededor de la tarjeta del proyecto. Al pulsar
+// a cualquiera de los dos, la galleta explota y el demonio se pone triste, llora unos segundos y, cuando la
+// galleta vuelve, se despierta y siguen corriendo (src/scripts/persecucion.ts).
+// Va dentro de .proyecto__lugar, junto a la tarjeta. Medidas como en Mascotas.astro: sprite a 1x (--ancho,
+// --alto) y filas vacías bajo los pies (--pies). Los sprites *_1x se generan con `npm run marcos`.
+const UI = '/Pixel-art/UI Elements/';
+---
+
+<div class="persecucion">
+    <button type="button" class="corredor" data-corredor="galleta" aria-label="Galleta: haz click"
+        data-sonido-explosion="/audio/explosion.wav"
+        style="--ancho: 16; --alto: 16; --pies: 4;">
+        <img src={`${UI}Cookie_Idle_1x.gif`} alt="" data-explosion={`${UI}Cookie_Explosion_1x.gif`} />
+    </button>
+
+    <button type="button" class="corredor" data-corredor="demonio" aria-label="Demonio: haz click"
+        style="--ancho: 32; --alto: 32; --pies: 0;">
+        <img src={`${UI}Personaje_Demon_Run_1x.gif`} alt=""
+            data-triste={`${UI}Personaje_Demon_Sad_1x.gif`}
+            data-llora={`${UI}Personaje_Demon_Cry_1x.gif`}
+            data-despierta={`${UI}Personaje_Demon_WakeUp_1x.gif`} />
+    </button>
+</div>
+
+<script>
+    import '../scripts/persecucion';
+</script>
