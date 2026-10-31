@@ -5,7 +5,9 @@
 //  - #filtros con data-activo (clases del botón activo) y botones .filter-btn[data-filter]
 //      data-filter="Colecciones" muestra los carruseles; "All" todas las obras; cualquier otro, las de esa categoría
 //  - #colecciones (los carruseles) y #galeria-todos (las columnas); cada grupo de tarjetas lleva [data-galeria]
-//  - el lightbox: #lightbox, #lightbox-img, #lightbox-video, #lightbox-close/prev/next, #zoom-in/out/reset
+//  - el lightbox: #lightbox, #lightbox-img, #lightbox-video, #lightbox-close/prev/next, #zoom-in/out/reset y la
+//    ficha (#lightbox-ficha, -etiquetas, -titulo, -descripcion, -logo), que se rellena con la tarjeta pulsada
+import { aparecerDeNuevo } from './aparicion';
 
 // --- FILTROS Y VISTAS ---
 const filtros = document.getElementById('filtros');
@@ -55,9 +57,9 @@ const zoomInBtn = document.getElementById('zoom-in');
 const zoomOutBtn = document.getElementById('zoom-out');
 const zoomResetBtn = document.getElementById('zoom-reset');
 
-// Las obras que recorren las flechas: las del grupo desde el que se abrió (un carrusel, o las columnas
+// Las tarjetas que recorren las flechas: las del grupo desde el que se abrió (un carrusel, o las columnas
 // con su filtro), sin las copias de los carruseles ni las ocultas
-let lista: string[] = [];
+let lista: HTMLElement[] = [];
 let currentIndex = 0;
 let currentZoom = 1; // 1 = 100% (Tamaño original)
 
@@ -143,13 +145,57 @@ if (lightbox && lightboxImg && lightboxVideo) {
         }
     }, { passive: false }); // Permite que funcione el preventDefault() en touchmove
 
+    // --- FICHA DE LA OBRA ---
+
+    const ficha = document.getElementById('lightbox-ficha');
+    const fichaMarco = ficha?.querySelector<HTMLElement>('.pixel-card__frame');
+    const fichaLogo = document.getElementById('lightbox-logo') as HTMLImageElement | null;
+    const texto = (id: string, valor = '') => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = valor;
+    };
+
+    // "Personaje Animacion Marvel Rivals" -> "Personaje · Animación · Marvel Rivals"
+    const etiquetas = (categoria = '') => categoria
+        .replace('Marvel Rivals', 'Marvel\u00a0Rivals')
+        .replace('Animacion', 'Animación')
+        .split(' ')
+        .join(' · ');
+
+    // Copia en la ficha los textos, el marco y el logo de la tarjeta, y repite su animación de aparición
+    const mostrarFicha = (tarjeta: HTMLElement) => {
+        if (!ficha || !fichaMarco || !fichaLogo) return;
+        const { title, description, category } = tarjeta.dataset;
+        texto('lightbox-etiquetas', etiquetas(category));
+        texto('lightbox-titulo', title);
+        texto('lightbox-descripcion', description);
+
+        ficha.style.setProperty('--marco', tarjeta.style.getPropertyValue('--marco'));
+        const introMarco = tarjeta.querySelector<HTMLElement>('.pixel-card__frame')?.dataset.introMarco;
+        if (introMarco) fichaMarco.dataset.introMarco = introMarco;
+        else delete fichaMarco.dataset.introMarco;
+
+        // El logo fijo (data-fijo, ver aparicion.ts): el src de la tarjeta puede ser ya su animación
+        const logo = tarjeta.querySelector<HTMLImageElement>('.pixel-card__logo');
+        fichaLogo.hidden = !logo;
+        if (logo) {
+            fichaLogo.dataset.fijo = logo.dataset.fijo ?? logo.getAttribute('src')!;
+            fichaLogo.src = fichaLogo.dataset.fijo;
+            fichaLogo.alt = logo.alt;
+            if (logo.dataset.intro) fichaLogo.dataset.intro = logo.dataset.intro;
+            else delete fichaLogo.dataset.intro;
+        }
+        aparecerDeNuevo(fichaMarco);
+    };
+
     // --- GALERÍA Y MULTIMEDIA ---
 
     // Carga el archivo y decide si debe usar <img> o <video>
     const showMedia = (index: number) => {
-        const src = lista[index];
+        const src = lista[index]?.dataset.src;
         if (!src) return;
         resetZoom();
+        mostrarFicha(lista[index]);
 
         if (src.endsWith('.webm') || src.endsWith('.mp4')) {
             lightboxImg.classList.add('hidden');
@@ -172,9 +218,9 @@ if (lightbox && lightboxImg && lightboxVideo) {
         if (!tarjeta) return;
 
         const grupo = tarjeta.closest('[data-galeria]') ?? document;
-        lista = [...grupo.querySelectorAll<HTMLElement>('.lightbox-trigger:not([data-copia]):not(.hidden)')]
-            .map((t) => t.dataset.src!);
-        currentIndex = Math.max(lista.indexOf(tarjeta.dataset.src!), 0);
+        lista = [...grupo.querySelectorAll<HTMLElement>('.lightbox-trigger:not([data-copia]):not(.hidden)')];
+        // Si se pulsó una copia de un carrusel, se busca su original
+        currentIndex = Math.max(lista.findIndex((t) => t.dataset.src === tarjeta.dataset.src), 0);
         showMedia(currentIndex);
 
         lightbox.classList.remove('hidden');

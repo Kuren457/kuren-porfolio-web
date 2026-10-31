@@ -3,6 +3,7 @@
 // carrusel con sus obras) y el carrusel de trabajos personales.
 import { obras } from './pixelArt';
 import { obras as obras3D } from './tresD';
+import { timelapseDe } from './timelapses';
 import type { Obra } from './tipos';
 
 export interface Proyecto {
@@ -82,5 +83,7 @@ const repartir = (lista: Obra[]) => {
     return [...lista].sort((a, b) => posicion(a) - posicion(b));
 };
 
-// Trabajos personales: todo lo que no es de un proyecto
-export const personales = repartir(deTema('marvel', 'og', 'tutorial', 'memes', 'valorant'));
+// Trabajos personales: todo lo que no es de un proyecto. Las que tienen timelapse lo reproducen al mantener
+// el ratón encima
+export const personales = repartir(deTema('marvel', 'og', 'tutorial', 'memes', 'valorant'))
+    .map((obra) => ({ ...obra, timelapse: timelapseDe(obra.src) }));

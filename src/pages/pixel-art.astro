@@ -6,6 +6,7 @@ import PixelCard from '../components/PixelCard.astro';
 import Carrusel from '../components/Carrusel.astro';
 import Lightbox from '../components/Lightbox.astro';
 import { obras, colecciones } from '../data/pixelArt';
+import { timelapses } from '../data/timelapses';
 ---
 
 <Layout>
@@ -59,6 +60,17 @@ import { obras, colecciones } from '../data/pixelArt';
         <div id="galeria-todos" class="hidden w-full max-w-[4000px] mx-auto" data-galeria>
             <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6">
                 {obras.map((obra) => <PixelCard {...obra} />)}
+            </div>
+        </div>
+    </section>
+
+    <!-- Timelapses: cada tarjeta enseña la obra terminada y se desvanece al timelapse (src/scripts/timelapses.ts) -->
+    <section id="timelapses" class="pt-6 pb-10 px-5 relative z-10">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-2xl text-white">Timelapses</h2>
+            <p class="text-[#cbd5e1] mt-2 mb-8">Cómo se dibujó cada obra, paso a paso.</p>
+            <div class="flex flex-wrap justify-center items-end gap-6" data-galeria>
+                {timelapses.map((obra) => <PixelCard {...obra} />)}
             </div>
         </div>
     </section>

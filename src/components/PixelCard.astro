@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { imageMetadata } from 'astro/assets/utils';
 
 const UI = '/Pixel-art/UI Elements/';
+const ANCHO_TIMELAPSE = 288; // Ancho máximo en px de las tarjetas de timelapse (se ajusta a una escala entera)
 
 // Cada tema elige el logo de la pestaña (y su animación de aparición) y el color del marco
 // (los archivos de color y las animaciones *_intro.gif se generan con `npm run marcos`)
@@ -32,11 +33,13 @@ export interface Props {
     logoAlt?: string;
     ancho?: number;             // Solo vídeos: ancho y alto en píxeles (en las imágenes se leen solos)
     alto?: number;
+    timelapse?: string;         // GIF a 1x de cómo se dibujó src (timelapses.ts). Sección de timelapses: se enseña la obra
+                                // y se desvanece a él; en un carrusel: crece y se reproduce al mantener el ratón encima
     variante?: 'galeria' | 'carrusel'; // galeria: columnas de "Todos"; carrusel: altura fija y ancho natural
     copia?: boolean;            // Segunda tanda de un carrusel, solo para que el bucle no tenga corte
 }
 
-const { src, alt = '', category, title, description, tema, variante = 'galeria', copia = false } = Astro.props;
+const { src, alt = '', category, title, description, tema, timelapse, variante = 'galeria', copia = false } = Astro.props;
 const temaActual: { logo?: string; intro?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
 const logo = Astro.props.logo ?? (temaActual?.logo && UI + temaActual.logo);
 // Un logo sustituido a mano no tiene animación de aparición
@@ -57,22 +60,38 @@ const { width, height } = esVideo
 // Los renders 3D se escalan suavizados; el pixel art, sin suavizar
 const estiloMedia = temaActual?.render ? undefined : 'image-rendering: pixelated;';
 const claseMedia = 'pixel-card__media w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500';
-const claseVariante = variante === 'carrusel' ? 'pixel-card--carrusel' : 'gallery-item break-inside-avoid';
+const timelapseAlPasar = !!timelapse && variante === 'carrusel';
+const claseVariante = variante === 'carrusel' ? `pixel-card--carrusel${timelapseAlPasar ? ' pixel-card--timelapse-al-pasar' : ''}`
+    : timelapse ? 'pixel-card--timelapse' : 'gallery-item break-inside-avoid';
+
+// Sección de timelapses: a una escala entera de su tamaño a 1x para que los píxeles salgan iguales
+const anchoTimelapse = timelapse && !timelapseAlPasar
+    && (await imageMetadata(await readFile(join(process.cwd(), 'public', timelapse)), timelapse)).width;
+const anchoMostrado = anchoTimelapse && anchoTimelapse * Math.floor(ANCHO_TIMELAPSE / anchoTimelapse);
+// Al pasar el ratón ya crece toda la tarjeta: la imagen no se amplía dentro
+const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
 ---
 
-<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
+<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-title={title} data-description={description} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
     <!-- data-aparicion: aparece con un pop al entrar en pantalla y arranca las animaciones del marco y el logo (src/scripts/aparicion.ts) -->
     <div class="pixel-card__frame" data-aparicion data-intro-marco={marcoIntro}>
 
         <!-- Contenido central -->
         <div class="relative overflow-hidden bg-[#0a0508]">
-            {esVideo
+            {timelapse ? (
+                <div class="timelapse" data-timelapse={timelapse} data-al-pasar={timelapseAlPasar || undefined}
+                    style={anchoMostrado ? `width: ${anchoMostrado}px;` : undefined}>
+                    <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia.replace('group-hover:scale-105', claseZoom)} />
+                    <img alt="" style={estiloMedia} class={`timelapse__proceso ${claseZoom}`} />
+                    <div class="timelapse__progreso"></div>
+                </div>
+            ) : esVideo
                 ? <video data-video={src} width={width} height={height} loop muted playsinline preload="none" style={estiloMedia} class={claseMedia}></video>
                 : <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia} />}
-            <div class="absolute inset-0 bg-[#0a0508]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                <h3 class="text-xl font-bold text-white mb-1">{title}</h3>
-                <p class="text-[#cbd5e1] text-sm">{description}</p>
-            </div>
+            <!-- Al pasar el ratón, solo el nombre (la descripción sale en la ficha del visor, Lightbox.astro) -->
+            {!timelapseAlPasar && <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508]/90 via-[#0a0508]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
+                <h3 class="text-lg font-bold text-white leading-tight">{title}</h3>
+            </div>}
         </div>
 
         <!-- Logo en el hueco de la pestaña -->
@@ -83,4 +102,5 @@ const claseVariante = variante === 'carrusel' ? 'pixel-card--carrusel' : 'galler
 <script>
     import '../scripts/aparicion';
     import '../scripts/videos';
+    import '../scripts/timelapses';
 </script>

@@ -228,6 +228,13 @@ body::after {
     visibility: hidden;
 }
 
+/* Ficha de la obra en el visor (Lightbox.astro): ancho del texto, con sitio para la pestaña del logo */
+.lightbox-ficha {
+    flex: none;
+    width: min(32rem, 100%);
+    min-width: min(16rem, 100%);
+}
+
 /* --- CARRUSELES --- */
 /* Filas en bucle (Carrusel.astro). El movimiento, el arrastre y la rueda los lleva src/scripts/carruseles.ts,
    que desplaza la pista con transform. */
@@ -298,6 +305,60 @@ body::after {
 
 .carrusel--mini .pixel-card {
     --px: 1px;
+}
+
+/* --- TIMELAPSES (galería de pixel art) --- */
+/* La obra terminada debajo y el timelapse encima, con fondo opaco para que no se vea la obra a través del
+   lienzo vacío: los fundidos entre los dos son solo la opacidad del timelapse (src/scripts/timelapses.ts) */
+.timelapse {
+    position: relative;
+    max-width: 100%;
+}
+
+.timelapse__proceso {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0508;
+    opacity: 0;
+    transition: opacity 1000ms ease, transform 500ms; /* La del transform, la de la obra al pasar el ratón */
+}
+
+.timelapse--reproduciendo .timelapse__proceso {
+    opacity: 1;
+}
+
+/* Barra de progreso del timelapse, del grosor de un píxel del marco */
+.timelapse__progreso {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(2 * var(--px));
+    background: #fa5c5c;
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: opacity 1000ms ease;
+}
+
+.timelapse--reproduciendo .timelapse__progreso {
+    opacity: 1;
+}
+
+@keyframes timelapse-progreso {
+    to { transform: scaleX(1); }
+}
+
+/* En un carrusel, las tarjetas con timelapse crecen más al pasar el ratón (y no se oscurecen): la ventana del
+   carrusel deja más sitio arriba y abajo para que no se corten */
+.carrusel:has(.pixel-card--timelapse-al-pasar) .carrusel__ventana {
+    padding-block: 40px;
+}
+
+.pixel-card--timelapse-al-pasar:hover {
+    transform: scale(1.25);
 }
 
 /* --- PROYECTOS (página principal) --- */

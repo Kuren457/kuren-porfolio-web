@@ -58,6 +58,15 @@ const aparecer = async (tarjeta: HTMLElement, modo: 'completo' | 'suave', rondaA
     tarjeta.classList.add('aparecido');
 };
 
+// Repite la aparición de algo que ya está en pantalla y no lleva data-aparicion (la ficha del visor, cada
+// vez que se abre o se cambia de obra). Sin modo de animaciones, solo lo deja en su estado fijo
+export const aparecerDeNuevo = (tarjeta: HTMLElement) => {
+    restaurar(tarjeta);
+    void tarjeta.offsetWidth; // Para que el pop vuelva a empezar aunque la clase se quite y se ponga seguidas
+    const modo = leerModo();
+    if (modo) aparecer(tarjeta, modo, ronda);
+};
+
 // Prepara todas las tarjetas según el modo actual. Se puede volver a llamar (al cambiar de modo):
 // las tarjetas vuelven a su estado inicial y las que están en pantalla aparecen de nuevo
 export const iniciarAparicion = () => {
