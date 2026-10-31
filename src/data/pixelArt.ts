@@ -583,16 +583,6 @@ export const obras: Obra[] = [
 
     // Memes
 
-    // Meme Samurai
-    {
-        src: '/Pixel-art/Samurai.gif',
-        alt: 'Samurai',
-        category: 'Personaje Animacion Memes',
-        title: 'Animación de Personaje',
-        description: 'Ppersonaje',
-        tema: 'memes',
-    },
-
     // Meme Hollow Knight HK
     {
         src: '/Pixel-art/HKDanceWBackGround.gif',
@@ -611,6 +601,78 @@ export const obras: Obra[] = [
         title: 'Primeros pasos en la animación',
         description: 'Personaje',
         tema: 'memes',
+    },
+
+    // Meme Juno
+    {
+        src: '/Pixel-art/JunoCute.gif',
+        alt: 'Juno',
+        category: 'Personaje Animacion Memes',
+        title: 'Animación de broma',
+        description: 'Personaje',
+        tema: 'memes',
+    },
+
+    // Meme Kitty Explosion
+    {
+        src: '/Pixel-art/KittyExplosion.gif',
+        alt: 'KittyExplosion',
+        category: 'Personaje Animacion Memes',
+        title: 'Animación de broma',
+        description: 'Personaje',
+        tema: 'memes',
+    },
+
+    // Meme Kitty Nod
+    {
+        src: '/Pixel-art/KittyNod.gif',
+        alt: 'KittyNod',
+        category: 'Personaje Animacion Memes',
+        title: 'Animación de broma',
+        description: 'Personaje',
+        tema: 'memes',
+    },
+
+    // Meme Winton
+    {
+        src: '/Pixel-art/Winton.png',
+        alt: 'Winton',
+        category: 'Personaje Memes',
+        title: 'Personaje de broma',
+        description: 'Personaje',
+        tema: 'memes',
+    },
+
+    // Personales
+
+    // Samurai
+    {
+        src: '/Pixel-art/Samurai.gif',
+        alt: 'Samurai',
+        category: 'Personaje Animacion',
+        title: 'Animación de Personaje',
+        description: 'Personaje',
+        tema: 'og',
+    },
+
+    // Kimchi
+    {
+        src: '/Pixel-art/Kimchi.png',
+        alt: 'Kimchi',
+        category: 'Personaje',
+        title: 'Kimchi',
+        description: 'Personaje',
+        tema: 'og',
+    },
+
+    // Whale
+    {
+        src: '/Pixel-art/WhalePinterestInspo.png',
+        alt: 'Ballena',
+        category: 'Escenario',
+        title: 'Ballena',
+        description: 'Escenario (inspirado en una imagen de Pinterest)',
+        tema: 'og',
     },
 
     // Tutorials
@@ -654,5 +716,6 @@ export const colecciones: Coleccion[] = [
     { titulo: 'BloodRunner',   incluye: (obra) => obra.tema === 'bloodrunner' },
     { titulo: 'Jams',          incluye: (obra) => obra.tema === 'ourojam' || obra.tema === 'gambling' },
     { titulo: 'Memes',         incluye: (obra) => obra.tema === 'memes' },
-    { titulo: 'Otros',         incluye: (obra) => obra.tema === 'valorant' || obra.tema === 'tutorial' || obra.tema === 'og' },
+    { titulo: 'Personales',    incluye: (obra) => obra.tema === 'og' },
+    { titulo: 'Otros',         incluye: (obra) => obra.tema === 'valorant' || obra.tema === 'tutorial' },
 ];
