@@ -49,7 +49,7 @@ export const enPagina = (el: HTMLElement): Caja => {
 export const chocan = (a: Caja, b: Caja) =>
     a.x < b.x + b.ancho + AIRE && b.x < a.x + a.ancho + AIRE && a.y < b.y + b.alto + AIRE && b.y < a.y + a.alto + AIRE;
 
-// Medidas del sprite en pantalla: --px es 2 px por píxel, o 1 en móvil (ver .mascota en global.css)
+// Medidas del sprite en pantalla: --px son los px por píxel del sprite (ver .mascota en global.css)
 const medidas = (mascota: HTMLElement) => {
     const estilo = getComputedStyle(mascota);
     const px = parseFloat(estilo.getPropertyValue('--px'));

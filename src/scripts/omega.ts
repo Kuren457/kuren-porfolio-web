@@ -56,7 +56,7 @@ if (grupo) {
     carril.append(coche);
     document.body.append(carril, omega, brazo);
 
-    // Píxeles de pantalla por píxel del sprite (2, o 1 en móvil: --px en global.css) y medidas en pantalla
+    // Píxeles de pantalla por píxel del sprite (--px en global.css) y medidas en pantalla
     const px = () => parseFloat(getComputedStyle(omega).getPropertyValue('--px'));
     const medida = (el: HTMLElement, nombre: string) => parseFloat(el.style.getPropertyValue(nombre)) * px();
     const poner = (el: HTMLElement, x: number, y: number) => {

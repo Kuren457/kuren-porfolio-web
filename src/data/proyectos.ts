@@ -21,6 +21,7 @@ export interface Proyecto {
     fondo?: string;         // Máscara del fondo oscuro con la forma del hueco del marco (sin ella, un cuadrado)
     persecucion?: boolean;  // El demonio persigue a la galleta alrededor de la tarjeta (Persecucion.astro)
     omega?: boolean;        // Omega llega en coche a la tarjeta y espera su brazo (Omega.astro)
+    serpiente?: boolean;    // Al pulsar el anillo del marco, el dragón se juega como una serpiente (Ouro.astro)
     obras: Obra[];
 }
 
@@ -52,6 +53,7 @@ export const proyectos: Proyecto[] = [
         logoPixelado: true,
         logoAncho: 128, // 64 px a 1x, a 2 px por píxel: llena el hueco del dragón
         marco: UI + 'Dar_vueltas_dragon_1x.gif',
+        serpiente: true,
         obras: deTema('ourojam'),
     },
     {

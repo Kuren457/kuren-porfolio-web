@@ -1,0 +1,32 @@
+---
+// src/components/Ouro.astro
+// OuroJam: al pulsar el anillo del dragón (el marco de la tarjeta, no el centro, que sigue llevando a itch.io),
+// el dragón sale del marco y se juega a la serpiente con él por la pantalla hasta la mermelada
+// (src/scripts/ouro.ts). Va dentro de .proyecto__lugar, junto a la tarjeta.
+// Las piezas están dibujadas avanzando hacia la derecha (16x16 a 1x) y el script las gira según la dirección.
+const UI = '/Pixel-art/UI Elements/';
+---
+
+<!-- Bocadillo encima de la tarjeta al pasar el ratón por el anillo (en pantallas sin ratón, siempre) -->
+<div class="ouro-aviso" aria-hidden="true">
+    <span class="bocadillo" hidden style="--bocadillo-x: 0; --bocadillo-y: 0; --icono-ancho: 16; --icono-alto: 16;">
+        <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+        <img class="bocadillo__icono" src={`${UI}Ouro_Cabeza_Idle.gif`} alt="" />
+    </span>
+</div>
+
+<!-- El juego: a pantalla completa por encima de la página -->
+<div class="ouro" hidden
+    data-cabeza={`${UI}Ouro_Cabeza_Idle.gif`}
+    data-cuerpo={`${UI}Ouro_Cuerpo_Idle.gif`}
+    data-curva-horaria={`${UI}Ouro_Cuerpo_curvado.gif`}
+    data-curva-antihoraria={`${UI}Ouro_Cuerpo_curvado_2.gif`}
+    data-cola={`${UI}Ouro_Cola.gif`}>
+    <img class="ouro__mermelada" src={`${UI}Ouro_Mermelada.png`} alt="Mermelada" hidden />
+    <p class="ouro__ayuda" hidden></p>
+    <button type="button" class="ouro__salir">Salir</button>
+</div>
+
+<script>
+    import '../scripts/ouro';
+</script>

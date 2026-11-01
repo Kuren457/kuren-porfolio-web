@@ -416,6 +416,11 @@ body::after {
     .proyecto__lugar:has(.persecucion) {
         margin-block: 48px;
     }
+
+    /* Omega (62 px de alto) de pie en el borde: que no pise lo que haya encima */
+    .proyecto__lugar:has(.omega-grupo) {
+        margin-top: 32px;
+    }
 }
 
 /* Marco propio (p. ej. el dragón de OuroJam): por encima de todo, y el fondo oscuro solo en su hueco */
@@ -490,7 +495,7 @@ body::after {
 
 /* --- MASCOTAS (página principal) --- */
 /* Sprites interactivos sobre las tarjetas (Mascotas.astro, src/scripts/mascotas.ts). La posición la pone el
-   script; aquí, el tamaño (medidas del sprite a 2 px por píxel) y cómo aparecen. */
+   script; aquí, el tamaño (medidas del sprite a 2 px por píxel, también en móvil) y cómo aparecen. */
 .mascota {
     --px: 2px;
     position: absolute;
@@ -503,14 +508,6 @@ body::after {
     cursor: pointer;
     image-rendering: pixelated;
     visibility: hidden; /* Hasta que su tarjeta ha aparecido */
-}
-
-/* En móvil, a la mitad de tamaño: así caben en los huecos libres (la pantalla tiene densidad de sobra para que
-   se sigan viendo nítidas) */
-@media (max-width: 639px) {
-    .mascota {
-        --px: 1px;
-    }
 }
 
 .mascota--visible {
@@ -540,7 +537,7 @@ body::after {
 
 /* --- OMEGA (BloodRunner, página principal) --- */
 /* El coche, Omega y su brazo (Omega.astro, src/scripts/omega.ts): sprites como los de las mascotas, a 2 px por
-   píxel (1 en móvil), colocados por el script con coordenadas de la página */
+   píxel, colocados por el script con coordenadas de la página */
 .omega-coche,
 .omega,
 .omega-brazo {
@@ -553,14 +550,6 @@ body::after {
     background: none;
     border: 0;
     image-rendering: pixelated;
-}
-
-@media (max-width: 639px) {
-    .omega-coche,
-    .omega,
-    .omega-brazo {
-        --px: 1px;
-    }
 }
 
 .omega-coche {
@@ -619,6 +608,86 @@ body::after {
 
 .intro-activa .omega--pop {
     transform-origin: bottom center;
+    animation: aparicion-pop 450ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+/* --- SERPIENTE DE OUROJAM --- */
+/* El juego (Ouro.astro, src/scripts/ouro.ts): a pantalla completa por encima de la página, con las piezas de
+   16x16 a 3 px por píxel como el marco del dragón (2 en móvil). La posición de cada pieza la pone el script */
+.ouro {
+    --px: 3px;
+    position: fixed;
+    inset: 0;
+    z-index: 45; /* Por debajo de la barra de navegación (50) */
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+.ouro__pieza,
+.ouro__mermelada {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(16 * var(--px));
+    height: calc(16 * var(--px));
+    max-width: none;
+}
+
+/* Al morir parpadea antes de desaparecer */
+.ouro--muriendo .ouro__pieza {
+    animation: ouro-parpadeo 300ms steps(1, end) 3;
+}
+
+@keyframes ouro-parpadeo {
+    50% { opacity: 0; }
+}
+
+/* Cómo moverse, encima de la cabeza hasta el primer movimiento */
+.ouro__ayuda {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    padding: 6px 10px;
+    background: rgba(10, 5, 8, 0.9);
+    border: 2px solid #ffaa00;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.ouro__salir {
+    position: absolute;
+    top: 88px;
+    right: 16px;
+    padding: 6px 12px;
+    background: #0a0508;
+    border: 2px solid #ffaa00;
+    color: #ffaa00;
+    font-size: 14px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* Bocadillo con la cabeza del dragón encima de la tarjeta (a 2 px por píxel) */
+.ouro-aviso {
+    --px: 2px;
+    position: absolute;
+    z-index: 21;
+    left: calc(50% - 16 * var(--px));
+    top: calc(-32 * var(--px));
+    width: calc(32 * var(--px));
+    height: calc(32 * var(--px));
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+@media (max-width: 639px) {
+    .ouro {
+        --px: 2px;
+    }
+}
+
+/* El dragón vuelve a su marco */
+.intro-activa .proyecto__marco--vuelve {
     animation: aparicion-pop 450ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
 }
 
