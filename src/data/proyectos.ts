@@ -14,11 +14,17 @@ export interface Proyecto {
     logo: string;
     logoPixelado?: boolean; // El logo es pixel art pequeño y se amplía sin suavizar
     logoAncho?: number;     // Ancho del logo en px (en pixel art, un múltiplo de su tamaño a 1x para que se vea nítido)
-    marco?: string;         // GIF propio que envuelve la tarjeta en vez del marco vegetal (64x64 a 1x)
+    marco?: string;         // Marco propio que envuelve la tarjeta en vez del vegetal (64x64 a 1x; puede ser un GIF)
+    marcoIntro?: string;    // GIF que dibuja el marco al aparecer la tarjeta (solo con todas las animaciones)
+    decoracion?: string;    // Decoraciones fijas encima del marco...
+    decoracionIntro?: string; // ...y el GIF que las dibuja al aparecer (también en el modo suave)
+    fondo?: string;         // Máscara del fondo oscuro con la forma del hueco del marco (sin ella, un cuadrado)
     persecucion?: boolean;  // El demonio persigue a la galleta alrededor de la tarjeta (Persecucion.astro)
     omega?: boolean;        // Omega llega en coche a la tarjeta y espera su brazo (Omega.astro)
     obras: Obra[];
 }
+
+const UI = '/Pixel-art/UI Elements/';
 
 const deTema = (...temas: string[]) => obras.filter((obra) => obra.tema && temas.includes(obra.tema));
 
@@ -32,6 +38,8 @@ export const proyectos: Proyecto[] = [
         herramientas: 'Godot & Aseprite',
         enlace: 'https://abelirre.itch.io/bloodrunner',
         logo: '/Logos/BloodRunnerLogo.png',
+        marco: UI + 'MarcoBR.png',
+        fondo: UI + 'MarcoBR_fondo.png',
         omega: true,
         obras: deTema('bloodrunner'),
     },
@@ -40,10 +48,10 @@ export const proyectos: Proyecto[] = [
         descripcion: 'Diseño de personaje principal, animaciones, secuencias animadas del juego, escenario, tiles y props',
         herramientas: 'Godot & Aseprite',
         enlace: 'https://kurenm.itch.io/ourojam',
-        logo: '/Pixel-art/UI Elements/Wukong.png',
+        logo: UI + 'Wukong.png',
         logoPixelado: true,
         logoAncho: 128, // 64 px a 1x, a 2 px por píxel: llena el hueco del dragón
-        marco: '/Pixel-art/UI Elements/Dar_vueltas_dragon_1x.gif',
+        marco: UI + 'Dar_vueltas_dragon_1x.gif',
         obras: deTema('ourojam'),
     },
     {
@@ -51,7 +59,7 @@ export const proyectos: Proyecto[] = [
         descripcion: 'Diseño de personaje principal y enemigos, animaciones, secuencias animadas del juego, escenario, tiles y props.',
         herramientas: 'Godot & Aseprite',
         enlace: 'https://kurenm.itch.io/hells-gamble',
-        logo: '/Pixel-art/UI Elements/LogoGambling.png',
+        logo: UI + 'LogoGambling.png',
         logoPixelado: true,
         persecucion: true,
         obras: deTema('gambling'),
@@ -62,6 +70,12 @@ export const proyectos: Proyecto[] = [
         herramientas: 'Unreal Engine & Blender',
         enlace: 'https://kurenm.itch.io/neorb',
         logo: '/Logos/NeorbLogo.png',
+        // Sin JS se ve el marco completo; con animaciones, el marco solo y encima las decoraciones
+        marco: UI + 'MarcoNeorb_Solo.png',
+        marcoIntro: UI + 'MarcoNeorb_Anim_1x.gif',
+        decoracion: UI + 'MarcoNeorb_Decoraciones.png',
+        decoracionIntro: UI + 'MarcoNeorb_Decorations_Anim_1x.gif',
+        fondo: UI + 'MarcoNeorb_fondo.png',
         obras: [
             ...de3D('/3D/FrogCrystal.webm', '/3D/Horse.webm'),
             // Fragmentos de gameplay (solo aquí, no en la galería 3D)

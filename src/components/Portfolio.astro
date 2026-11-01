@@ -2,7 +2,8 @@
 // src/components/Portfolio.astro
 // Proyectos de la página principal: una fila por proyecto con su tarjeta (enlace a itch.io), nombre,
 // descripción y un mini carrusel con sus obras. Los datos están en src/data/proyectos.ts.
-// La tarjeta lleva un marco vegetal al azar o, si el proyecto tiene uno propio (marco), ese GIF por encima;
+// La tarjeta lleva un marco vegetal al azar o, si el proyecto tiene uno propio (marco), ese por encima, con sus
+// decoraciones y las animaciones con las que se dibujan al aparecer (src/scripts/aparicion.ts);
 // con persecucion, además, el demonio y la galleta corren a su alrededor; con omega, Omega llega en coche y se
 // queda en su borde (por eso las mascotas no se ponen en esa tarjeta).
 import Carrusel from './Carrusel.astro';
@@ -30,12 +31,14 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
                             class:list={['proyecto__tarjeta group flex items-center justify-center',
                                 proyecto.marco ? 'proyecto__tarjeta--marco' : `${marcoAleatorio()} bg-[#0a0508]`]}
                             aria-label={`${proyecto.nombre} en itch.io`}>
-                            {proyecto.marco && <div class="proyecto__fondo"></div>}
+                            {proyecto.marco && <div class:list={['proyecto__fondo', { 'proyecto__fondo--mascara': proyecto.fondo }]}
+                                style={proyecto.fondo && `--fondo: url('${proyecto.fondo}');`}></div>}
                             <img src={proyecto.logo} alt=""
                                 style={[proyecto.logoPixelado && 'image-rendering: pixelated;', proyecto.logoAncho && `width: ${proyecto.logoAncho}px;`].filter(Boolean).join(' ') || undefined}
                                 class="proyecto__logo w-3/5 h-auto drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
                             <span class="proyecto__aviso absolute bottom-4 inset-x-0 text-center text-xs text-[#cbd5e1] opacity-0 group-hover:opacity-100 transition-opacity">Ver en itch.io ↗</span>
-                            {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" />}
+                            {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" data-intro-completo={proyecto.marcoIntro} />}
+                            {proyecto.decoracion && <img class="proyecto__marco" src={proyecto.decoracion} alt="" data-intro={proyecto.decoracionIntro} />}
                         </a>
                         {proyecto.persecucion && <Persecucion />}
                         {proyecto.omega && <Omega />}

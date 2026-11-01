@@ -1,13 +1,14 @@
 // Aparición de las tarjetas: cuando un elemento [data-aparicion] entra en pantalla, aparece con un "pop"
-// (clase .aparecido, ver global.css) y en ese momento arrancan, una sola vez, las animaciones de su marco
-// (data-intro-marco, sustituye al --marco fijo) y de su logo (img[data-intro], sustituye al src fijo).
+// (clase .aparecido, ver global.css) y en ese momento arrancan, una sola vez y todas a la vez, las animaciones
+// de su marco (data-intro-marco, sustituye al --marco fijo) y de sus imágenes: logos y decoraciones
+// (img[data-intro]) y marcos que son una imagen (img[data-intro-completo]); cada una sustituye a su src fijo.
 //
 // Cada tarjeta usa su propia copia del GIF (ver gifs.ts): sin esto, las tarjetas que aparecen más tarde
 // verían el GIF ya terminado.
 //
 // El modo lo marca una clase en <html> (la pone el layout y la cambia BotonAnimaciones):
 //  - .intro-activa: todo lo anterior
-//  - .intro-suave: la tarjeta y el marco se ven fijos desde el principio y solo se anima el logo
+//  - .intro-suave: la tarjeta y el marco se ven fijos desde el principio y solo se animan los img[data-intro]
 import { copiaPropia, descargar } from './gifs';
 
 const RETARDO_ENTRE_TARJETAS = 80; // ms entre tarjetas que entran en pantalla a la vez
@@ -21,14 +22,18 @@ const leerModo = () => {
     return clases.contains('intro-activa') ? 'completo' : clases.contains('intro-suave') ? 'suave' : null;
 };
 
-// Deja la tarjeta como estaba antes de aparecer (marco y logo fijos), para poder repetir la aparición
+// Las imágenes de la tarjeta que se animan en cada modo, y la animación de cada una
+const imagenes = (tarjeta: HTMLElement, modo: 'completo' | 'suave' | 'todas') => [...tarjeta.querySelectorAll<HTMLImageElement>(
+    modo === 'suave' ? 'img[data-intro]' : 'img[data-intro], img[data-intro-completo]')];
+const introDe = (imagen: HTMLImageElement) => imagen.dataset.intro ?? imagen.dataset.introCompleto;
+
+// Deja la tarjeta como estaba antes de aparecer (marco e imágenes fijos), para poder repetir la aparición
 const restaurar = (tarjeta: HTMLElement) => {
-    const logo = tarjeta.querySelector<HTMLImageElement>('img[data-intro]');
-    if (logo) {
-        logo.dataset.fijo ??= logo.getAttribute('src')!;
-        logo.src = logo.dataset.fijo;
-        logo.classList.remove('intro-lista');
-    }
+    imagenes(tarjeta, 'todas').forEach((imagen) => {
+        imagen.dataset.fijo ??= imagen.getAttribute('src')!;
+        imagen.src = imagen.dataset.fijo;
+        imagen.classList.remove('intro-lista');
+    });
     tarjeta.style.removeProperty('--marco');
     tarjeta.classList.remove('aparecido');
     copias.get(tarjeta)?.forEach((url) => URL.revokeObjectURL(url));
@@ -37,21 +42,22 @@ const restaurar = (tarjeta: HTMLElement) => {
 
 const aparecer = async (tarjeta: HTMLElement, modo: 'completo' | 'suave', rondaActual: number) => {
     const suave = modo === 'suave';
-    const logo = tarjeta.querySelector<HTMLImageElement>('img[data-intro]');
-    const [marco, logoIntro] = await Promise.all([
+    const animadas = imagenes(tarjeta, modo);
+    const [marco, ...intros] = await Promise.all([
         suave ? null : copiaPropia(tarjeta.dataset.introMarco),
-        copiaPropia(logo?.dataset.intro),
+        ...animadas.map((imagen) => copiaPropia(introDe(imagen))),
     ]);
     if (rondaActual !== ronda) return; // Se cambió de modo mientras tanto
-    copias.set(tarjeta, [marco, logoIntro].filter((url): url is string => !!url));
+    copias.set(tarjeta, [marco, ...intros].filter((url): url is string => !!url));
 
-    // Esperar a que el GIF del logo esté listo para que arranque a la vez que el pop
-    if (logo && logoIntro) {
-        logo.src = logoIntro;
-        await logo.decode().catch(() => {});
-        if (rondaActual !== ronda) return;
-    }
-    logo?.classList.add('intro-lista'); // En modo suave, el logo estaba oculto hasta ahora (ver global.css)
+    // Esperar a que todos los GIF estén listos para que arranquen a la vez, y a la vez que el pop
+    animadas.forEach((imagen, i) => {
+        if (intros[i]) imagen.src = intros[i];
+    });
+    await Promise.all(animadas.map((imagen) => imagen.decode().catch(() => {})));
+    if (rondaActual !== ronda) return;
+    // En modo suave, los img[data-intro] estaban ocultos hasta ahora (ver global.css)
+    animadas.forEach((imagen) => imagen.classList.add('intro-lista'));
     if (suave) return;
 
     if (marco) tarjeta.style.setProperty('--marco', `url('${marco}')`);
@@ -80,8 +86,7 @@ export const iniciarAparicion = () => {
     // Precargar los GIF (son de 1-3 KB) para que estén listos cuando cada tarjeta entre en pantalla
     tarjetas.forEach((tarjeta) => {
         if (modo === 'completo' && tarjeta.dataset.introMarco) descargar(tarjeta.dataset.introMarco);
-        const intro = tarjeta.querySelector<HTMLImageElement>('img[data-intro]')?.dataset.intro;
-        if (intro) descargar(intro);
+        imagenes(tarjeta, modo).forEach((imagen) => descargar(introDe(imagen)!));
     });
 
     observador = new IntersectionObserver((entradas, obs) => {

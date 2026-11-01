@@ -1,6 +1,7 @@
 // Carruseles (Carrusel.astro): la pista avanza sola en bucle y se puede mover a mano arrastrando (ratón o dedo),
 // con la rueda horizontal / el gesto lateral del touchpad, o con Mayús + rueda. La rueda normal sigue bajando la
-// página. Se para mientras el ratón está encima o se arrastra; al soltar un arrastre rápido sigue por inercia.
+// página. Se para mientras el ratón está encima, mientras se pulsa o se arrastra y mientras alguna tarjeta está
+// fija (.pixel-card--fija, p. ej. reproduciendo su timelapse); al soltar un arrastre rápido sigue por inercia.
 // En el modo de animaciones suaves no avanza sola, pero se puede mover igual.
 //
 // El bucle: la pista tiene las tarjetas dos veces seguidas y la posición se mantiene entre 0 y el ancho de una
@@ -156,7 +157,7 @@ const animar = (ahora: number) => {
             e.posicion += e.inercia * dt;
             e.inercia *= Math.exp(-FRENADO * dt);
             if (Math.abs(e.inercia) < 10) e.inercia = 0;
-        } else if (avanzaSola() && !e.encima) {
+        } else if (avanzaSola() && !e.encima && !e.arrastre && !e.pista.querySelector('.pixel-card--fija')) {
             e.posicion += e.sentido * VELOCIDAD * dt;
         } else {
             continue;

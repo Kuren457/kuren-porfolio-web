@@ -12,7 +12,7 @@
 //
 // Comportamientos:
 //  - todas: al pasar el ratón sale el bocadillo con el corazón (.bocadillo); al hacer click se esconde hasta
-//    que el ratón vuelva a entrar
+//    que el ratón vuelva a entrar. En pantallas sin ratón está siempre a la vista (parpadeando, ver global.css)
 //  - data-mascota="hk": cada click alterna entre su sprite y data-baile
 //  - data-mascota="mimos": cada click reproduce una vez la mano; con data-explota="N", al click N reproduce
 //    data-explosion, desaparece 5 s y vuelve
@@ -217,10 +217,13 @@ const mimos = (mascota: HTMLElement) => {
     });
 };
 
-// Bocadillo al pasar el ratón (solo con ratón: en pantallas táctiles no hay "pasar por encima")
 const bocadillo = (mascota: HTMLElement) => {
     const globo = mascota.querySelector<HTMLElement>('.bocadillo');
     if (!globo) return;
+    if (matchMedia('(hover: none)').matches) {
+        globo.hidden = false;
+        return;
+    }
     mascota.addEventListener('pointerenter', (e) => {
         if (e.pointerType === 'mouse') globo.hidden = false;
     });

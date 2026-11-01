@@ -6,7 +6,8 @@
 //     mascotas.ts), y se puede arrastrar (con ratón o con el dedo; cerca del borde de la ventana, la página se desplaza).
 //  3. Al soltarlo encima de Omega desaparece: Omega se lo acopla, se activa y se transforma (el remolino va por
 //     encima y Omega deja de verse cuando lo cubre entero). A los ESPERA_CICLO ms, vuelta a empezar.
-// Al pasar el ratón por Omega o por el brazo sale un bocadillo con lo que hay que hacer.
+// Al pasar el ratón por Omega o por el brazo sale un bocadillo con lo que hay que hacer; en pantallas sin ratón
+// están siempre a la vista (parpadeando, ver global.css) mientras Omega espera.
 // Sin el modo de animaciones completo (.intro-activa) no hay coche: Omega aparece directamente.
 import { duracionGif, descargar, esperar, ponerGif } from './gifs';
 import { chocan, enPagina, sitioLibre, type Caja } from './mascotas';
@@ -25,6 +26,8 @@ const HUNDIDO = 2;          // px que se hunden los pies en el borde de la tarje
 const AJUSTE: Record<string, [number, number]> = { acoplar: [-2, -2], activacion: [0, -1] };
 const BORDE_SCROLL = 60;    // px del borde de la ventana desde los que la página se desplaza al arrastrar
 const PASO_SCROLL = 12;     // px que se desplaza por fotograma
+
+const sinRaton = matchMedia('(hover: none)').matches;
 
 const grupo = document.querySelector<HTMLElement>('.omega-grupo');
 if (grupo) {
@@ -105,6 +108,13 @@ if (grupo) {
     const esperarBrazo = () => {
         estado = 'esperando';
         sacarBrazo();
+        bocadillosSinRaton();
+    };
+
+    const bocadillosSinRaton = () => {
+        if (!sinRaton || estado !== 'esperando') return;
+        bocadilloOmega.hidden = false;
+        bocadilloBrazo.hidden = false;
     };
 
     // Salto desde la puerta del coche hasta el suelo, en parábola y de píxel en píxel del sprite
@@ -219,6 +229,7 @@ if (grupo) {
         brazo.classList.remove('omega-brazo--arrastrando');
         bocadilloOmega.hidden = true;
         if (encimaDeOmega()) transformar();
+        else bocadillosSinRaton();
     };
     brazo.addEventListener('pointerup', soltar);
     brazo.addEventListener('pointercancel', soltar);
@@ -226,11 +237,11 @@ if (grupo) {
     // --- BOCADILLOS ---
 
     const alPasar = (el: HTMLElement, bocadillo: HTMLElement) => {
-        el.addEventListener('pointerenter', () => {
-            if (!arrastre && estado === 'esperando') bocadillo.hidden = false;
+        el.addEventListener('pointerenter', (e) => {
+            if (e.pointerType === 'mouse' && !arrastre && estado === 'esperando') bocadillo.hidden = false;
         });
-        el.addEventListener('pointerleave', () => {
-            if (!arrastre) bocadillo.hidden = true;
+        el.addEventListener('pointerleave', (e) => {
+            if (e.pointerType === 'mouse' && !arrastre) bocadillo.hidden = true;
         });
     };
     alPasar(omega, bocadilloOmega);

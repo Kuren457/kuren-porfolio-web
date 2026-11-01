@@ -275,9 +275,12 @@ body::after {
     transition: transform 250ms ease-out;
 }
 
-.pixel-card--carrusel:hover {
-    z-index: 10;
-    transform: scale(1.08);
+/* Solo con ratón: en pantallas táctiles el :hover se queda puesto después de tocar */
+@media (hover: hover) {
+    .pixel-card--carrusel:hover {
+        z-index: 10;
+        transform: scale(1.08);
+    }
 }
 
 .pixel-card--carrusel .pixel-card__media {
@@ -357,8 +360,23 @@ body::after {
     padding-block: 40px;
 }
 
-.pixel-card--timelapse-al-pasar:hover {
+.pixel-card--timelapse-al-pasar.pixel-card--fija {
+    z-index: 10;
     transform: scale(1.25);
+}
+
+/* Solo con ratón: en pantallas táctiles el :hover se queda puesto después de tocar */
+@media (hover: hover) {
+    .pixel-card--timelapse-al-pasar:hover {
+        z-index: 10;
+        transform: scale(1.25);
+    }
+}
+
+/* Con el dedo se mantienen pulsadas (timelapses.ts): sin seleccionar ni el menú de la imagen */
+.pixel-card--timelapse-al-pasar {
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
 /* --- PROYECTOS (página principal) --- */
@@ -400,7 +418,7 @@ body::after {
     }
 }
 
-/* Marco propio (p. ej. el dragón de OuroJam): el GIF por encima de todo, y el fondo oscuro solo en su hueco */
+/* Marco propio (p. ej. el dragón de OuroJam): por encima de todo, y el fondo oscuro solo en su hueco */
 .proyecto__tarjeta--marco {
     position: relative;
 }
@@ -421,9 +439,15 @@ body::after {
     background: #0a0508;
 }
 
+/* Con la forma exacta del hueco (máscara generada con `npm run marcos`, ya a 3x) */
+.proyecto__fondo--mascara {
+    inset: 0;
+    -webkit-mask: var(--fondo) 0 0 / 100% 100% no-repeat;
+    mask: var(--fondo) 0 0 / 100% 100% no-repeat;
+}
+
 .proyecto__tarjeta--marco .proyecto__logo {
     position: relative;
-    width: 45%; /* Cabe en el hueco del marco */
 }
 
 .proyecto__tarjeta--marco .proyecto__aviso {
@@ -618,6 +642,18 @@ body::after {
     top: calc((15 - var(--icono-alto) / 2) * var(--px));
     width: calc(var(--icono-ancho) * var(--px));
     height: calc(var(--icono-alto) * var(--px));
+}
+
+/* Sin ratón están siempre a la vista: parpadean despacio para no tapar todo el rato lo que haya debajo */
+@media (hover: none) {
+    .bocadillo {
+        animation: bocadillo-salto 1600ms steps(1, end) infinite, bocadillo-parpadeo 4s ease-in-out infinite;
+    }
+}
+
+@keyframes bocadillo-parpadeo {
+    0%, 30%, 100% { opacity: 1; }
+    50%, 80%      { opacity: 0; }
 }
 
 @keyframes bocadillo-salto {
