@@ -48,8 +48,13 @@ if (grupo) {
     const { transformacion } = efecto.dataset;
     [escena, acoplar, activacion, transformacion].forEach((url) => descargar(url!)); // Que estén listos a tiempo
 
-    // Como las mascotas: en el <body> y colocados con coordenadas de la página
-    document.body.append(coche, omega, brazo);
+    // Como las mascotas: en el <body> y colocados con coordenadas de la página. El coche va dentro de una franja
+    // del ancho de la ventana que recorta lo que sobresale: si no, al entrar por la derecha ensancharía la página
+    // y en el móvil el navegador se alejaría para que cupiera entera
+    const carril = document.createElement('div');
+    carril.className = 'omega-carril';
+    carril.append(coche);
+    document.body.append(carril, omega, brazo);
 
     // Píxeles de pantalla por píxel del sprite (2, o 1 en móvil: --px en global.css) y medidas en pantalla
     const px = () => parseFloat(getComputedStyle(omega).getPropertyValue('--px'));
@@ -140,7 +145,8 @@ if (grupo) {
             const { x, suelo } = centro();
             const parada = x - PUERTA * px();
             const ancho = medida(coche, '--ancho');
-            coche.style.top = `${suelo - medida(coche, '--alto')}px`;
+            carril.style.top = `${suelo - medida(coche, '--alto')}px`;
+            carril.style.height = `${medida(coche, '--alto')}px`;
             imgCoche.src = cocheMoviendose;
             coche.style.left = `${scrollX + innerWidth}px`;
             coche.hidden = false;

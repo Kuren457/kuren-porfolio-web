@@ -564,6 +564,17 @@ body::after {
 }
 
 .omega-coche {
+    top: 0;
+    pointer-events: none;
+}
+
+/* La franja por la que pasa el coche: del ancho de la ventana y recortando lo que sobresale, para que el coche
+   no ensanche la página al entrar y salir (omega.ts) */
+.omega-carril {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
     z-index: 30; /* Omega baja por delante */
     pointer-events: none;
 }
