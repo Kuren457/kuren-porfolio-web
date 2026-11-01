@@ -16,6 +16,7 @@ export interface Proyecto {
     logoAncho?: number;     // Ancho del logo en px (en pixel art, un múltiplo de su tamaño a 1x para que se vea nítido)
     marco?: string;         // GIF propio que envuelve la tarjeta en vez del marco vegetal (64x64 a 1x)
     persecucion?: boolean;  // El demonio persigue a la galleta alrededor de la tarjeta (Persecucion.astro)
+    omega?: boolean;        // Omega llega en coche a la tarjeta y espera su brazo (Omega.astro)
     obras: Obra[];
 }
 
@@ -31,6 +32,7 @@ export const proyectos: Proyecto[] = [
         herramientas: 'Godot & Aseprite',
         enlace: 'https://abelirre.itch.io/bloodrunner',
         logo: '/Logos/BloodRunnerLogo.png',
+        omega: true,
         obras: deTema('bloodrunner'),
     },
     {

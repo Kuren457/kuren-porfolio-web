@@ -1,0 +1,45 @@
+---
+// src/components/Omega.astro
+// BloodRunner: Omega llega en coche a la tarjeta del proyecto y se queda esperando su brazo, que aparece en
+// otro sitio de la página y se puede arrastrar hasta él. Con el brazo se lo acopla, se activa y desaparece
+// transformándose; a los 5 segundos vuelve a empezar (src/scripts/omega.ts).
+// Va dentro de .proyecto__lugar, junto a la tarjeta; el script lo pasa todo al <body>.
+// Medidas como en Mascotas.astro: sprite a 1x (--ancho, --alto) y filas vacías bajo los pies (--pies).
+// Los bocadillos van encima de la cabeza (--bocadillo-x, --bocadillo-y, en píxeles del sprite) con el icono
+// dentro (--icono-ancho, --icono-alto). Los *_1x se generan con `npm run marcos`.
+const UI = '/Pixel-art/UI Elements/';
+---
+
+<div class="omega-grupo" hidden>
+    <!-- Coche: llega de la derecha, deja a Omega y se va por la izquierda -->
+    <div class="omega-coche" hidden style="--ancho: 272; --alto: 104;">
+        <img src={`${UI}Omega_Coche_Moviendose.gif`} alt="" data-escena={`${UI}Omega_Escena_Coche_Salir_1x.gif`} />
+    </div>
+
+    <!-- Omega: al pasar el ratón pide su brazo -->
+    <div class="omega" hidden role="img" aria-label="Omega, esperando su brazo"
+        style="--ancho: 48; --alto: 48; --pies: 9; --bocadillo-x: 11; --bocadillo-y: -24;">
+        <img class="omega__sprite" src={`${UI}Omega_Idle_Sin_Brazo.gif`} alt=""
+            data-acoplar={`${UI}Omega_Acoplar_1x.gif`}
+            data-activacion={`${UI}Omega_Activation_1x.gif`} />
+        <img class="omega__efecto" alt="" hidden data-transformacion={`${UI}Omega_Transform_base_1x.gif`} />
+        <span class="bocadillo" hidden style="--icono-ancho: 12; --icono-alto: 14;">
+            <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+            <img class="bocadillo__icono" src={`${UI}Omega_Brazo.png`} alt="" />
+        </span>
+    </div>
+
+    <!-- El brazo: se arrastra hasta Omega. Tumbado: el dibujo (12x14, de pie) va girado en su caja de 14x12 -->
+    <button type="button" class="omega-brazo" hidden aria-label="Brazo de Omega: arrástralo hasta Omega"
+        style="--ancho: 14; --alto: 12; --pies: 7; --bocadillo-x: -9; --bocadillo-y: -33;">
+        <img class="omega-brazo__sprite" src={`${UI}Omega_Brazo.png`} alt="" draggable="false" />
+        <span class="bocadillo" hidden style="--icono-ancho: 16; --icono-alto: 12;">
+            <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+            <img class="bocadillo__icono" src={`${UI}LogoOmega.png`} alt="" />
+        </span>
+    </button>
+</div>
+
+<script>
+    import '../scripts/omega';
+</script>

@@ -3,9 +3,11 @@
 // Proyectos de la página principal: una fila por proyecto con su tarjeta (enlace a itch.io), nombre,
 // descripción y un mini carrusel con sus obras. Los datos están en src/data/proyectos.ts.
 // La tarjeta lleva un marco vegetal al azar o, si el proyecto tiene uno propio (marco), ese GIF por encima;
-// con persecucion, además, el demonio y la galleta corren a su alrededor.
+// con persecucion, además, el demonio y la galleta corren a su alrededor; con omega, Omega llega en coche y se
+// queda en su borde (por eso las mascotas no se ponen en esa tarjeta).
 import Carrusel from './Carrusel.astro';
 import Persecucion from './Persecucion.astro';
+import Omega from './Omega.astro';
 import { proyectos } from '../data/proyectos';
 import { marcoAleatorio } from '../utils/marcoAleatorio';
 ---
@@ -24,7 +26,7 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
                 <article class="proyecto">
                     <div class="proyecto__lugar">
                         <!-- Tarjeta con el logo: enlace a itch.io -->
-                        <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" data-aparicion data-sitio-mascota
+                        <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" data-aparicion data-sitio-mascota={proyecto.omega ? undefined : ''}
                             class:list={['proyecto__tarjeta group flex items-center justify-center',
                                 proyecto.marco ? 'proyecto__tarjeta--marco' : `${marcoAleatorio()} bg-[#0a0508]`]}
                             aria-label={`${proyecto.nombre} en itch.io`}>
@@ -36,6 +38,7 @@ import { marcoAleatorio } from '../utils/marcoAleatorio';
                             {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" />}
                         </a>
                         {proyecto.persecucion && <Persecucion />}
+                        {proyecto.omega && <Omega />}
                     </div>
 
                     <!-- Nombre y descripción -->

@@ -5,7 +5,8 @@
 // sobre su borde inferior.
 //
 // Medidas en píxeles del sprite a 1x (--ancho, --alto), filas vacías bajo los pies (--pies, para apoyarlos
-// justo en el borde) y posición de la mano de los mimos respecto al sprite (--mano-x, --mano-y).
+// justo en el borde), posición de la mano de los mimos respecto al sprite (--mano-x, --mano-y) y del bocadillo
+// con el corazón que sale al pasar el ratón, encima de la cabeza (--bocadillo-x, --bocadillo-y).
 // Los sprites *_1x se generan con `npm run marcos`.
 const UI = '/Pixel-art/UI Elements/';
 ---
@@ -13,27 +14,39 @@ const UI = '/Pixel-art/UI Elements/';
 <div id="mascotas" hidden>
     <!-- HK: cada click alterna entre el idle y el breakdance -->
     <button type="button" class="mascota" data-mascota="hk" aria-label="HK: haz click para que baile"
-        style="--ancho: 48; --alto: 48; --pies: 7;">
+        style="--ancho: 48; --alto: 48; --pies: 7; --bocadillo-x: 8; --bocadillo-y: -29;">
         <img class="mascota__sprite" src={`${UI}HKDanceIdle_1x.gif`} alt=""
             data-baile={`${UI}HKDanceBreakdance_1x.gif`} />
+        <span class="bocadillo" hidden style="--icono-ancho: 32; --icono-alto: 32;">
+            <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+            <img class="bocadillo__icono" src={`${UI}Heart.png`} alt="" />
+        </span>
     </button>
 
     <!-- Gato: cada click, mimo (mano) y maullido; a los 25 clicks explota y vuelve a los 5 segundos -->
     <button type="button" class="mascota" data-mascota="mimos" aria-label="Gato: dale mimos"
         data-sonido="/audio/kittymeow.wav"
         data-explota="25" data-sonido-explosion="/audio/explosion.wav"
-        style="--ancho: 32; --alto: 32; --pies: 7; --mano-x: 0; --mano-y: -7;">
+        style="--ancho: 32; --alto: 32; --pies: 7; --mano-x: 0; --mano-y: -7; --bocadillo-x: 3; --bocadillo-y: -29;">
         <img class="mascota__sprite" src={`${UI}KittyExplosionIdle_1x.png`} alt=""
             data-explosion={`${UI}KittyExplosionExplosion_1x.gif`} />
         <img class="mascota__mano" alt="" hidden data-mano={`${UI}HandAnim_1x.gif`} />
+        <span class="bocadillo" hidden style="--icono-ancho: 32; --icono-alto: 32;">
+            <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+            <img class="bocadillo__icono" src={`${UI}Heart.png`} alt="" />
+        </span>
     </button>
 
     <!-- Juno: cada click, mimo (mano) -->
     <button type="button" class="mascota" data-mascota="mimos" aria-label="Juno: dale mimos"
         data-sonido-mano="/audio/pat.wav"
-        style="--ancho: 48; --alto: 48; --pies: 7; --mano-x: 4; --mano-y: -5;">
+        style="--ancho: 48; --alto: 48; --pies: 7; --mano-x: 4; --mano-y: -5; --bocadillo-x: 8; --bocadillo-y: -30;">
         <img class="mascota__sprite" src={`${UI}Juno_1x.png`} alt="" />
         <img class="mascota__mano" alt="" hidden data-mano={`${UI}HandAnim_1x.gif`} />
+        <span class="bocadillo" hidden style="--icono-ancho: 32; --icono-alto: 32;">
+            <img class="bocadillo__ventana" src={`${UI}InteractWindow.png`} alt="" />
+            <img class="bocadillo__icono" src={`${UI}Heart.png`} alt="" />
+        </span>
     </button>
 </div>
 

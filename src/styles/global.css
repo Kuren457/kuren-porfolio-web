@@ -514,6 +514,118 @@ body::after {
     pointer-events: none;
 }
 
+/* --- OMEGA (BloodRunner, página principal) --- */
+/* El coche, Omega y su brazo (Omega.astro, src/scripts/omega.ts): sprites como los de las mascotas, a 2 px por
+   píxel (1 en móvil), colocados por el script con coordenadas de la página */
+.omega-coche,
+.omega,
+.omega-brazo {
+    --px: 2px;
+    position: absolute;
+    z-index: 31;
+    width: calc(var(--ancho) * var(--px));
+    height: calc(var(--alto) * var(--px));
+    padding: 0;
+    background: none;
+    border: 0;
+    image-rendering: pixelated;
+}
+
+@media (max-width: 639px) {
+    .omega-coche,
+    .omega,
+    .omega-brazo {
+        --px: 1px;
+    }
+}
+
+.omega-coche {
+    z-index: 30; /* Omega baja por delante */
+    pointer-events: none;
+}
+
+.omega-coche img,
+.omega__sprite,
+.omega__efecto {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+}
+
+/* El remolino de la transformación: su punto más bajo (la última fila del lienzo) sobre la fila de los pies */
+.omega__efecto {
+    position: absolute;
+    left: 0;
+    top: calc(-1 * var(--pies) * var(--px));
+}
+
+/* El brazo está dibujado de pie (12x14): girado 90° a la izquierda queda tumbado en su caja de 14x12
+   (mismo centro, así que el giro no deja medios píxeles) */
+.omega-brazo__sprite {
+    position: absolute;
+    left: var(--px);
+    top: calc(-1 * var(--px));
+    width: calc(12 * var(--px));
+    height: calc(14 * var(--px));
+    max-width: none;
+    transform: rotate(-90deg);
+}
+
+.omega-brazo {
+    z-index: 32;
+    cursor: grab;
+    touch-action: none; /* Arrastrar con el dedo no desplaza la página */
+}
+
+.omega-brazo--arrastrando {
+    z-index: 45; /* Por encima de todo menos de la barra de navegación (50) */
+    cursor: grabbing;
+}
+
+.intro-activa .omega--pop {
+    transform-origin: bottom center;
+    animation: aparicion-pop 450ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+/* --- BOCADILLOS --- */
+/* Ventana de interacción sobre la cabeza de Omega, su brazo y las mascotas, con un icono dentro; sale al pasar
+   el ratón y da saltitos de 1 píxel. Va dentro del sprite: posición respecto a él (--bocadillo-x, --bocadillo-y)
+   y medidas del icono (--icono-ancho, --icono-alto) en píxeles del sprite */
+.bocadillo {
+    position: absolute;
+    left: calc(var(--bocadillo-x) * var(--px));
+    top: calc(var(--bocadillo-y) * var(--px));
+    width: calc(32 * var(--px));
+    height: calc(32 * var(--px));
+    pointer-events: none;
+    animation: bocadillo-salto 1600ms steps(1, end) infinite;
+}
+
+.bocadillo img {
+    position: absolute;
+    max-width: none;
+}
+
+.bocadillo__ventana {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Centrado en la parte blanca de la ventana (centro en el píxel 16, 15) */
+.bocadillo__icono {
+    left: calc((16 - var(--icono-ancho) / 2) * var(--px));
+    top: calc((15 - var(--icono-alto) / 2) * var(--px));
+    width: calc(var(--icono-ancho) * var(--px));
+    height: calc(var(--icono-alto) * var(--px));
+}
+
+@keyframes bocadillo-salto {
+    0%, 100% { transform: translateY(0); }
+    25%, 75% { transform: translateY(calc(-1 * var(--px))); }
+    50%      { transform: translateY(calc(-2 * var(--px))); }
+}
+
 /* --- ANIMACIONES EXTRA --- */
 @keyframes float {
     0%, 100% { transform: translateY(0); }

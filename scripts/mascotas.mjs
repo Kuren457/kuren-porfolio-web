@@ -23,6 +23,11 @@ const SPRITES = {
     'Personaje_Demon_Sad.gif':     [6, false],
     'Personaje_Demon_Cry.gif':     [10, true],
     'Personaje_Demon_WakeUp.gif':  [10, false],
+    // BloodRunner: Omega (ya están a 1x; solo se les quita el bucle)
+    'Omega_Escena_Coche_Salir.gif': [1, false],
+    'Omega_Acoplar.gif':            [1, false],
+    'Omega_Activation.gif':         [1, false],
+    'Omega_Transform_base.gif':     [1, false],
 };
 
 for (const [archivo, [escala, bucle]] of Object.entries(SPRITES)) {
@@ -31,7 +36,8 @@ for (const [archivo, [escala, bucle]] of Object.entries(SPRITES)) {
     const salida = DIR + archivo.replace(/\.(gif|png)$/, '_1x.$1');
     const imagen = sharp(DIR + archivo, { animated: animado })
         .resize(width / escala, (pageHeight ?? height) / escala, { kernel: 'nearest' });  // En animaciones, por fotograma
-    // loop: 0 = bucle infinito; 1 = se reproduce una vez
-    await (animado ? imagen.gif({ loop: bucle ? 0 : 1, delay }) : imagen.png()).toFile(salida);
+    // loop: 0 = bucle infinito; 1 = se reproduce una vez. dither, reuse e interPaletteMaxError: colores exactos
+    // (cada fotograma con su paleta, ver timelapses.mjs)
+    await (animado ? imagen.gif({ loop: bucle ? 0 : 1, delay, dither: 0, reuse: false, interPaletteMaxError: 0 }) : imagen.png()).toFile(salida);
     console.log('Generado', salida);
 }

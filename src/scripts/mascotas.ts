@@ -11,6 +11,8 @@
 // la mascota espera a que lo haga.
 //
 // Comportamientos:
+//  - todas: al pasar el ratón sale el bocadillo con el corazón (.bocadillo); al hacer click se esconde hasta
+//    que el ratón vuelva a entrar
 //  - data-mascota="hk": cada click alterna entre su sprite y data-baile
 //  - data-mascota="mimos": cada click reproduce una vez la mano; con data-explota="N", al click N reproduce
 //    data-explosion, desaparece 5 s y vuelve
@@ -25,17 +27,17 @@ const PASO = 8;              // px entre las posiciones que se prueban a lo larg
 const AIRE = 6;              // px de separación mínima con cada obstáculo
 const TIEMPO_FUERA = 5000;   // ms que desaparece el gato tras explotar
 
-// Lo que una mascota no puede tapar
-const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block, .persecucion';
+// Lo que una mascota no puede tapar (también Omega y su brazo, ver omega.ts)
+const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block, .persecucion, .omega, .omega-brazo';
 
 
 // --- COLOCACIÓN ---
 
-interface Caja { x: number; y: number; ancho: number; alto: number }
+export interface Caja { x: number; y: number; ancho: number; alto: number }
 interface Sitio { tarjeta: HTMLElement; arriba: boolean; x: number } // x: desde el borde izquierdo de la tarjeta
 
 // Posición en la página sin contar transformaciones (el pop de las tarjetas, el movimiento de los carruseles)
-const enPagina = (el: HTMLElement): Caja => {
+export const enPagina = (el: HTMLElement): Caja => {
     let x = 0, y = 0;
     for (let e: HTMLElement | null = el; e; e = e.offsetParent as HTMLElement | null) {
         x += e.offsetLeft;
@@ -44,7 +46,7 @@ const enPagina = (el: HTMLElement): Caja => {
     return { x, y, ancho: el.offsetWidth, alto: el.offsetHeight };
 };
 
-const chocan = (a: Caja, b: Caja) =>
+export const chocan = (a: Caja, b: Caja) =>
     a.x < b.x + b.ancho + AIRE && b.x < a.x + a.ancho + AIRE && a.y < b.y + b.alto + AIRE && b.y < a.y + a.alto + AIRE;
 
 // Medidas del sprite en pantalla: --px es 2 px por píxel, o 1 en móvil (ver .mascota en global.css)
@@ -79,7 +81,7 @@ const sitiosPosibles = (mascota: HTMLElement, tarjetas: HTMLElement[]) => {
 const obstaculos = () => [...document.querySelectorAll<HTMLElement>(OBSTACULOS)]
     // Fuera: lo que no está en la página (oculto o fijo en pantalla), las propias mascotas, los marcos animados
     // (se puede estar de pie encima) y lo que va dentro de un carrusel o de una persecución (ya cuentan enteros)
-    .filter((el) => el.offsetParent && !el.closest('header, .mascota, #boton-animaciones, #lightbox') && !el.matches('.proyecto__marco')
+    .filter((el) => el.offsetParent && !el.closest('header, .mascota, .omega, .omega-brazo, #boton-animaciones, #lightbox') && !el.matches('.proyecto__marco')
         && (el.matches('.carrusel__ventana') || !el.closest('.carrusel__ventana'))
         && (el.matches('.persecucion') || !el.closest('.persecucion')))
     .map(enPagina);
@@ -135,6 +137,17 @@ const repartir = () => {
         sitioActual.set(mascota, sitio);
         if (!anterior) mostrarCuandoAparezca(mascota, sitio.tarjeta);
     }
+};
+
+// Un sitio libre al azar, como los de las mascotas, para otro elemento con sus mismas medidas (--ancho, --alto,
+// --pies, --px): sin tapar nada ni a las mascotas y fuera de la tarjeta evitar. Devuelve su caja en la página
+export const sitioLibre = (elemento: HTMLElement, evitar?: HTMLElement): Caja | null => {
+    const tarjetas = [...document.querySelectorAll<HTMLElement>('[data-sitio-mascota]')]
+        .filter((t) => t.offsetParent && t !== evitar);
+    const ocupado = [...obstaculos(), ...[...sitioActual].map(([mascota, sitio]) => cajaEn(mascota, sitio))];
+    const libres = sitiosPosibles(elemento, tarjetas).filter((s) => !ocupado.some((o) => chocan(cajaEn(elemento, s), o)));
+    const sitio = libres[Math.floor(Math.random() * libres.length)];
+    return sitio ? cajaEn(elemento, sitio) : null;
 };
 
 // Las mascotas pasan al <body> y se colocan cuando la fuente ya está cargada (cambia el tamaño de los textos);
@@ -204,7 +217,19 @@ const mimos = (mascota: HTMLElement) => {
     });
 };
 
+// Bocadillo al pasar el ratón (solo con ratón: en pantallas táctiles no hay "pasar por encima")
+const bocadillo = (mascota: HTMLElement) => {
+    const globo = mascota.querySelector<HTMLElement>('.bocadillo');
+    if (!globo) return;
+    mascota.addEventListener('pointerenter', (e) => {
+        if (e.pointerType === 'mouse') globo.hidden = false;
+    });
+    mascota.addEventListener('pointerleave', () => (globo.hidden = true));
+    mascota.addEventListener('click', () => (globo.hidden = true));
+};
+
 mascotas.forEach((mascota) => {
+    bocadillo(mascota);
     if (mascota.dataset.mascota === 'hk') hk(mascota);
     if (mascota.dataset.mascota === 'mimos') mimos(mascota);
 });
