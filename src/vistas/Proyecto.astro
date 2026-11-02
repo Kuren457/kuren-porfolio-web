@@ -1,0 +1,109 @@
+---
+// src/vistas/Proyecto.astro
+// Ficha de un proyecto (una página por cada uno de src/data/proyectos.ts, en src/pages/proyectos/ y en inglés en
+// src/pages/en/projects/): arriba, a la izquierda, una vitrina con el arte del juego y a la derecha el nombre,
+// el logo (enlace al juego) y en tarjetas el resumen, el rol, el equipo y el plazo, y lo que hice; debajo, sus secciones
+// propias (hojas de sprites, turntables...) y los clips de gameplay. Solo salen las secciones que tienen obras.
+import Layout from '../layouts/layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Contacto from '../components/Contacto.astro';
+import PixelCard from '../components/PixelCard.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Vitrina from '../components/Vitrina.astro';
+import TarjetaProyecto from '../components/TarjetaProyecto.astro';
+import { enIdioma, type Proyecto } from '../data/proyectos';
+import { marcoAleatorio } from '../utils/marcoAleatorio';
+import { idiomaDe, rutas } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+import { traducir } from '../i18n/obras';
+
+interface Props {
+    proyecto: Proyecto;
+}
+
+const idioma = idiomaDe(Astro);
+const t = textos(idioma).proyectos;
+const proyecto = enIdioma(Astro.props.proyecto, idioma);
+const esGameplay = (obra: Proyecto['obras'][number]) => obra.category === 'Gameplay';
+const arte = proyecto.obras.filter((obra) => !esGameplay(obra));
+const secciones = [
+    ...(proyecto.secciones ?? []).map((seccion) => ({ ...seccion, titulo: traducir(seccion.titulo, idioma), descripcion: seccion.descripcion && traducir(seccion.descripcion, idioma) })),
+    { titulo: t.gameplay, obras: proyecto.obras.filter(esGameplay) },
+].filter((seccion) => seccion.obras.length);
+// Las secciones de solo vídeos (el gameplay), en columnas más anchas para que se vean bien
+const soloVideos = (obras: Proyecto['obras']) => obras.every((obra) => /.(webm|mp4)$/i.test(obra.src));
+// En los proyectos 3D, el visor amplía suavizando (los renders no son pixel art)
+const es3D = proyecto.obras.every((obra) => obra.tema === 'blender');
+
+// Las tarjetas de información, con el borde en el color del proyecto y sin florituras (no tapan el texto)
+const marco = () => `${marcoAleatorio({ conTexto: true })} marco-${proyecto.color}`;
+
+const datos = [
+    { nombre: t.rol, valor: proyecto.rol },
+    { nombre: t.equipo, valor: proyecto.equipo },
+    { nombre: t.plazo, valor: proyecto.plazo },
+].filter((dato) => dato.valor);
+---
+
+<Layout titulo={`${proyecto.nombre} | Kuren`}>
+    <Navbar />
+
+    <!-- Cabecera -->
+    <section class="pt-32 pb-12 px-5 relative z-10">
+        <div class="container mx-auto max-w-6xl">
+            <a href={`${rutas(idioma).inicio}#portfolio`} class="text-sm text-[#cbd5e1] hover:text-white">{t.todos}</a>
+
+            <div class="ficha__cabecera mt-8">
+                <!-- El arte del juego -->
+                <Vitrina obras={arte} etiqueta={`${t.arte}: ${proyecto.nombre}`} />
+
+                <div>
+                    <!-- Nombre y, al lado, el logo con su marco, que lleva al juego -->
+                    <div class="flex items-center gap-5 flex-wrap">
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-white">{proyecto.nombre}</h1>
+                        <div class="proyecto__lugar proyecto__lugar--pequeno" title={t.jugar}>
+                            <TarjetaProyecto proyecto={proyecto} enlace={proyecto.enlace} aviso={t.jugar} externo pequena />
+                        </div>
+                    </div>
+
+                    <!-- Los datos, en tarjetas: el resumen, el rol, el equipo y el plazo, y lo que hice -->
+                    <div data-aparicion class={`ficha__tarjeta ${marco()}`}>
+                        <span class="inline-block px-3 py-1 text-xs text-[#ffaa00] bg-[#ffaa00]/10 rounded-full border border-[#ffaa00]/20">{proyecto.herramientas}</span>
+                        <p class="text-[#cbd5e1] mt-3">{proyecto.descripcion}</p>
+                    </div>
+                    <dl class="ficha__datos">
+                        {datos.map((dato) => (
+                            <div data-aparicion class={`ficha__tarjeta ${marco()}`}>
+                                <dt>{dato.nombre}</dt>
+                                <dd>{dato.valor}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                    <div data-aparicion class={`ficha__tarjeta ${marco()}`}>
+                        <h2 class="text-xl text-white mb-3">{t.queHice}</h2>
+                        <ul class="ficha__tareas">
+                            {proyecto.tareas.map((tarea) => <li>{tarea}</li>)}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Obras, por secciones -->
+    {secciones.map((seccion) => (
+        <section class="pb-12 px-5 relative z-10">
+            <div class="container mx-auto max-w-6xl">
+                <h2 class="text-2xl md:text-3xl text-white mb-2">{seccion.titulo}</h2>
+                {seccion.descripcion && <p class="text-[#cbd5e1] mb-6">{seccion.descripcion}</p>}
+                <div class:list={['columns-1 gap-6 space-y-6 mt-6', soloVideos(seccion.obras) ? 'md:columns-[480px]' : 'sm:columns-[250px] md:columns-[300px]']} data-galeria>
+                    {seccion.obras.map((obra) => <PixelCard {...obra} />)}
+                </div>
+            </div>
+        </section>
+    ))}
+
+    <Contacto />
+
+    <Lightbox acento="#fa5c5c" acentoSuave="rgba(250,92,92,0.15)" pixelado={!es3D} />
+</Layout>

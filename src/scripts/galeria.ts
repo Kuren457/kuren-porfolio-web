@@ -155,18 +155,12 @@ if (lightbox && lightboxImg && lightboxVideo) {
         if (el) el.textContent = valor;
     };
 
-    // "Personaje Animacion Marvel Rivals" -> "Personaje · Animación · Marvel Rivals"
-    const etiquetas = (categoria = '') => categoria
-        .replace('Marvel Rivals', 'Marvel\u00a0Rivals')
-        .replace('Animacion', 'Animación')
-        .split(' ')
-        .join(' · ');
-
-    // Copia en la ficha los textos, el marco y el logo de la tarjeta, y repite su animación de aparición
+    // Copia en la ficha los textos, el marco y el logo de la tarjeta, y repite su animación de aparición. Las
+    // etiquetas de la categoría vienen de la tarjeta, ya en el idioma de la página (PixelCard.astro)
     const mostrarFicha = (tarjeta: HTMLElement) => {
         if (!ficha || !fichaMarco || !fichaLogo) return;
-        const { title, description, category } = tarjeta.dataset;
-        texto('lightbox-etiquetas', etiquetas(category));
+        const { title, description, etiquetas } = tarjeta.dataset;
+        texto('lightbox-etiquetas', etiquetas);
         texto('lightbox-titulo', title);
         texto('lightbox-descripcion', description);
 

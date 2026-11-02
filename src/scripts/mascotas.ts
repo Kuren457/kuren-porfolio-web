@@ -28,7 +28,7 @@ const AIRE = 6;              // px de separación mínima con cada obstáculo
 const TIEMPO_FUERA = 5000;   // ms que desaparece el gato tras explotar
 
 // Lo que una mascota no puede tapar (también Omega y su brazo, ver omega.ts)
-const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block, .persecucion, .omega, .omega-brazo';
+const OBSTACULOS = 'h1, h2, h3, p, img, video, .carrusel__ventana, .marco-boton, span.inline-block, .persecucion, .omega, .omega-brazo, .proyecto__texto';
 
 
 // --- COLOCACIÓN ---

@@ -1,68 +1,67 @@
 ---
 // src/components/Portfolio.astro
-// Proyectos de la página principal: una fila por proyecto con su tarjeta (enlace a itch.io), nombre,
-// descripción y un mini carrusel con sus obras. Los datos están en src/data/proyectos.ts.
-// La tarjeta lleva un marco vegetal al azar o, si el proyecto tiene uno propio (marco), ese por encima, con sus
-// decoraciones y las animaciones con las que se dibujan al aparecer (src/scripts/aparicion.ts);
-// con persecucion, además, el demonio y la galleta corren a su alrededor; con omega, Omega llega en coche y se
-// queda en su borde, y con serpiente el dragón del marco se puede jugar (por eso las mascotas no se ponen en
-// esas tarjetas).
+// Proyectos de la página principal: una fila por proyecto con su tarjeta (lleva a su ficha, /proyectos/<slug>),
+// una vista previa (rol, equipo, plazo y resumen) y un mini carrusel con sus obras. Los datos están en
+// src/data/proyectos.ts.
+// Alrededor de la tarjeta, con persecucion, el demonio y la galleta corren a su alrededor; con omega, Omega llega
+// en coche y se queda en su borde, y con serpiente el dragón del marco se puede jugar (por eso las mascotas no se
+// ponen en esas tarjetas).
 import Carrusel from './Carrusel.astro';
 import Persecucion from './Persecucion.astro';
 import Omega from './Omega.astro';
 import Ouro from './Ouro.astro';
-import { proyectos } from '../data/proyectos';
-import { marcoAleatorio } from '../utils/marcoAleatorio';
+import TarjetaProyecto from './TarjetaProyecto.astro';
+import { enIdioma, proyectos } from '../data/proyectos';
+import { idiomaDe, rutas } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const idioma = idiomaDe(Astro);
+const t = textos(idioma).proyectos;
 ---
 <section id="portfolio" class="py-16 px-5 relative z-10">
     <div class="container mx-auto max-w-6xl">
         <!-- Título de Sección -->
         <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center">
             <span class="bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-transparent bg-clip-text">
-                Proyectos
+                {t.titulo}
             </span>
         </h2>
 
         <!-- Separación de 64 px: el sitio por el que corre la persecución -->
         <div class="space-y-16">
-            {proyectos.map((proyecto, i) => (
-                <article class="proyecto">
-                    <div class="proyecto__lugar">
-                        <!-- Tarjeta con el logo: enlace a itch.io -->
-                        <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" data-aparicion data-sitio-mascota={proyecto.omega || proyecto.serpiente ? undefined : ''}
-                            class:list={['proyecto__tarjeta group flex items-center justify-center',
-                                proyecto.marco ? 'proyecto__tarjeta--marco' : `${marcoAleatorio()} bg-[#0a0508]`]}
-                            aria-label={`${proyecto.nombre} en itch.io`}>
-                            {proyecto.marco && <div class:list={['proyecto__fondo', { 'proyecto__fondo--mascara': proyecto.fondo }]}
-                                style={proyecto.fondo && `--fondo: url('${proyecto.fondo}');`}></div>}
-                            <img src={proyecto.logo} alt=""
-                                style={[proyecto.logoPixelado && 'image-rendering: pixelated;', proyecto.logoAncho && `width: ${proyecto.logoAncho}px;`].filter(Boolean).join(' ') || undefined}
-                                class="proyecto__logo w-3/5 h-auto drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
-                            <span class="proyecto__aviso absolute bottom-4 inset-x-0 text-center text-xs text-[#cbd5e1] opacity-0 group-hover:opacity-100 transition-opacity">Ver en itch.io ↗</span>
-                            {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" data-intro-completo={proyecto.marcoIntro} />}
-                            {proyecto.decoracion && <img class="proyecto__marco" src={proyecto.decoracion} alt="" data-intro={proyecto.decoracionIntro} />}
-                        </a>
-                        {proyecto.persecucion && <Persecucion />}
-                        {proyecto.omega && <Omega />}
-                        {proyecto.serpiente && <Ouro />}
-                    </div>
+            {proyectos.map((original, i) => {
+                const proyecto = enIdioma(original, idioma);
+                const ficha = rutas(idioma).proyecto(proyecto.slug);
+                return (
+                    <article class="proyecto">
+                        <div class="proyecto__lugar">
+                            <TarjetaProyecto proyecto={proyecto} enlace={ficha} aviso={t.verProyecto} mascotas />
+                            {proyecto.persecucion && <Persecucion />}
+                            {proyecto.omega && <Omega />}
+                            {proyecto.serpiente && <Ouro />}
+                        </div>
 
-                    <!-- Nombre y descripción -->
-                    <div class="proyecto__texto">
-                        <h3 class="text-2xl text-white mb-2">{proyecto.nombre}</h3>
-                        <span class="inline-block px-3 py-1 mb-3 text-xs text-[#ffaa00] bg-[#ffaa00]/10 rounded-full border border-[#ffaa00]/20">{proyecto.herramientas}</span>
-                        <p class="text-[#cbd5e1] text-sm">{proyecto.descripcion}</p>
-                    </div>
+                        <!-- Vista previa: lo que hice, con quién y en cuánto tiempo -->
+                        <div class="proyecto__texto">
+                            <h3 class="text-2xl text-white mb-2"><a href={ficha} class="hover:text-[#ffaa00] transition-colors">{proyecto.nombre}</a></h3>
+                            <span class="inline-block px-3 py-1 mb-3 text-xs text-[#ffaa00] bg-[#ffaa00]/10 rounded-full border border-[#ffaa00]/20">{proyecto.herramientas}</span>
+                            <dl class="proyecto__datos">
+                                <dt>{t.rol}</dt><dd>{proyecto.rol}</dd>
+                                {proyecto.equipo && <><dt>{t.equipo}</dt><dd>{proyecto.equipo}</dd></>}
+                                {proyecto.plazo && <><dt>{t.plazo}</dt><dd>{proyecto.plazo}</dd></>}
+                            </dl>
+                            <p class="text-[#cbd5e1] text-sm">{proyecto.descripcion}</p>
+                            <div class="flex flex-wrap gap-x-5 gap-y-1 mt-3 text-sm">
+                                <a href={ficha} class="text-[#ffaa00] font-bold hover:underline">{t.verProyecto} →</a>
+                                <a href={proyecto.enlace} target="_blank" rel="noopener noreferrer" class="text-[#cbd5e1] hover:text-white">{t.jugar}</a>
+                            </div>
+                        </div>
 
-                    <!-- Mini carrusel con sus obras -->
-                    <Carrusel etiqueta={`Obras de ${proyecto.nombre}`} obras={proyecto.obras} inverso={i % 2 === 1} mini />
-                </article>
-            ))}
+                        <!-- Mini carrusel con sus obras -->
+                        <Carrusel etiqueta={t.obrasDe(proyecto.nombre)} obras={proyecto.obras} inverso={i % 2 === 1} mini />
+                    </article>
+                );
+            })}
         </div>
     </div>
 </section>
-
-<!-- Las tarjetas con data-aparicion aparecen con un pop al entrar en pantalla -->
-<script>
-    import '../scripts/aparicion';
-</script>

@@ -1,0 +1,37 @@
+---
+// src/components/Vitrina.astro
+// Escaparate de obras (cabecera de la ficha de un proyecto): una obra grande en el centro, que se queda unos
+// segundos y deja paso a la siguiente, con la anterior y la siguiente en pequeño a los lados. Pulsar la del centro
+// la abre en el visor; pulsar una de los lados la trae al centro. Debajo, un punto por obra para saltar a ella.
+// El movimiento lo lleva src/scripts/vitrina.ts; las posiciones, .vitrina__obra en global.css.
+import PixelCard from './PixelCard.astro';
+import type { Obra } from '../data/tipos';
+
+interface Props {
+    obras: Obra[];
+    etiqueta: string; // Para los lectores de pantalla
+}
+
+const { obras, etiqueta } = Astro.props;
+---
+
+{obras.length > 0 && (
+    <section class="vitrina" aria-label={etiqueta} aria-roledescription="carousel">
+        <div class="vitrina__escenario" data-galeria>
+            {obras.map((obra, i) => (
+                <div class="vitrina__obra" data-indice={i}>
+                    <PixelCard {...obra} variante="carrusel" />
+                </div>
+            ))}
+        </div>
+        {obras.length > 1 && (
+            <div class="vitrina__puntos">
+                {obras.map((obra, i) => <button type="button" class="vitrina__punto" data-indice={i} aria-label={obra.title} />)}
+            </div>
+        )}
+    </section>
+)}
+
+<script>
+    import '../scripts/vitrina';
+</script>

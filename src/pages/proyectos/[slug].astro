@@ -1,0 +1,8 @@
+---
+// Ficha de cada proyecto en español (src/vistas/Proyecto.astro)
+import Proyecto from '../../vistas/Proyecto.astro';
+import { proyectos } from '../../data/proyectos';
+
+export const getStaticPaths = () => proyectos.map((proyecto) => ({ params: { slug: proyecto.slug }, props: { proyecto } }));
+---
+<Proyecto proyecto={Astro.props.proyecto} />

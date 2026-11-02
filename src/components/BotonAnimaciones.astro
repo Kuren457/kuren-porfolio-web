@@ -2,9 +2,13 @@
 // src/components/BotonAnimaciones.astro
 // Botón flotante para elegir la aparición de las tarjetas: completa (pop + marco + logo) o suave (solo el logo).
 // Por defecto se sigue el ajuste "reducir movimiento" del sistema (ver layout.astro); la elección se recuerda.
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const t = textos(idiomaDe(Astro)).animaciones;
 ---
-<button id="boton-animaciones" type="button" aria-pressed="false" class="boton-animaciones marco-boton marco-vegetal px-4 py-2 text-xs bg-[#0a0508]/90 text-[#cbd5e1] opacity-80 hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer">
-    Animaciones: <span data-estado>completas</span>
+<button id="boton-animaciones" type="button" aria-pressed="false" data-completas={t.completas} data-suaves={t.suaves} class="boton-animaciones marco-boton marco-vegetal px-4 py-2 text-xs bg-[#0a0508]/90 text-[#cbd5e1] opacity-80 hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer">
+    {t.etiqueta} <span data-estado>{t.completas}</span>
 </button>
 
 <script>
@@ -16,7 +20,7 @@
 
     const pintar = () => {
         const completas = clases.contains('intro-activa');
-        estado.textContent = completas ? 'completas' : 'suaves';
+        estado.textContent = (completas ? boton.dataset.completas : boton.dataset.suaves) ?? '';
         boton.setAttribute('aria-pressed', String(completas));
     };
 

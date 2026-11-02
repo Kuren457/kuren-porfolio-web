@@ -3,428 +3,6 @@
 import type { Coleccion, Obra } from './tipos';
 
 export const obras: Obra[] = [
-    // MR
-
-    // MR AdamP
-    {
-        src: '/Pixel-art/AdamP.png',
-        alt: 'AdamPMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Adam Warlock',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Adam
-    {
-        src: '/Pixel-art/AdamNL.png',
-        alt: 'AdamMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Adam Warlock',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Angela
-    {
-        src: '/Pixel-art/Angela.png',
-        alt: 'AngelaMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Angela',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Black Cat
-    {
-        src: '/Pixel-art/BlackCat.png',
-        alt: 'BlackCatMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Black Cat',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Black Panther
-    {
-        src: '/Pixel-art/BlackPanther.png',
-        alt: 'BlackPantherMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Black Panther',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Black Widow
-    {
-        src: '/Pixel-art/BlackWidow.png',
-        alt: 'BlackWidowrMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Black Widow',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Blade
-    {
-        src: '/Pixel-art/Blade.png',
-        alt: 'BladeMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Blade',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Bruce/Hulk
-    {
-        src: '/Pixel-art/Bruce.png',
-        alt: 'BruceMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Hulk',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Cap
-    {
-        src: '/Pixel-art/Cap.png',
-        alt: 'CapMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Captain America',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR CnD
-    {
-        src: '/Pixel-art/CloakNDagger.png',
-        alt: 'CloakNDaggerMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Cloak & Dagger',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Cyclops
-    {
-        src: '/Pixel-art/Cyclops.png',
-        alt: 'CyclopsMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Cyclops',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Daredevil
-    {
-        src: '/Pixel-art/Daredevil.png',
-        alt: 'DaredevilMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Daredevil',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Deadpool
-    {
-        src: '/Pixel-art/Deadpool.png',
-        alt: 'DeadpoolMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Deadpool',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Dino
-    {
-        src: '/Pixel-art/Dino.png',
-        alt: 'DinoMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Devil Dinosaur',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Dr Strange
-    {
-        src: '/Pixel-art/Strange.png',
-        alt: 'StrangeMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Doctor Strange',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Strange (gif)
-    {
-        src: '/Pixel-art/Strange.gif',
-        alt: 'Strange',
-        category: 'Personaje Animacion Marvel Rivals',
-        title: 'Doctor Strange',
-        description: 'Personaje',
-        tema: 'marvel',
-    },
-
-    // MR Elsa
-    {
-        src: '/Pixel-art/Elsa.png',
-        alt: 'ElsaMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Elsa Bloodstone',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Emma Grande
-    {
-        src: '/Pixel-art/Emma.png',
-        alt: 'EmmaMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Emma Frost',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Emma Pequeña
-    {
-        src: '/Pixel-art/Emma_Frost.png',
-        alt: 'EmmaFMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Emma Frost',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Gambit
-    {
-        src: '/Pixel-art/Gambit.png',
-        alt: 'GambitMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Gambit',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Gorr
-    {
-        src: '/Pixel-art/Gorr.png',
-        alt: 'GorrMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Gorr',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Groot
-    {
-        src: '/Pixel-art/Groot.png',
-        alt: 'GrootMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Groot',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Hawkeye
-    {
-        src: '/Pixel-art/Hawkeye.png',
-        alt: 'HawkeyeMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Hawkeye',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Hela
-    {
-        src: '/Pixel-art/Hela.png',
-        alt: 'HelaMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Hela',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR HumanTorch
-    {
-        src: '/Pixel-art/HumanTorch.png',
-        alt: 'HumanTorchMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Human Torch',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Invis
-    {
-        src: '/Pixel-art/Invis.png',
-        alt: 'InvisMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Invisible Woman',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR IronFist
-    {
-        src: '/Pixel-art/IronFist.png',
-        alt: 'IronFistMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Iron Fist',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR IronMan
-    {
-        src: '/Pixel-art/IronMan.png',
-        alt: 'IronManMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Iron Man',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Jeff Portrait
-    {
-        src: '/Pixel-art/JeffP.png',
-        alt: 'JeffPMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Jeff the Land Shark',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Jeff
-    {
-        src: '/Pixel-art/Jeff.png',
-        alt: 'Jeff',
-        category: 'Personaje Marvel Rivals',
-        title: 'Jeff the Land Shark',
-        description: 'Personaje',
-        tema: 'marvel',
-    },
-
-    // MR Jubilee
-    {
-        src: '/Pixel-art/Jubilee.png',
-        alt: 'JubileeMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Jubilee',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Loki
-    {
-        src: '/Pixel-art/Loki.png',
-        alt: 'LokiMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Loki',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR LunaSnow
-    {
-        src: '/Pixel-art/LunaSnow.png',
-        alt: 'LunaSnowMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Luna Snow',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Luna
-    {
-        src: '/Pixel-art/Luna.png',
-        alt: 'Luna',
-        category: 'Personaje Marvel Rivals',
-        title: 'Luna Snow',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR MagikP
-    {
-        src: '/Pixel-art/MagikP.png',
-        alt: 'MagikMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Magik',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Magik
-    {
-        src: '/Pixel-art/Magik.png',
-        alt: 'Transform',
-        category: 'Personaje Marvel Rivals',
-        title: 'Magik',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Magneto Portrait
-    {
-        src: '/Pixel-art/MagnetoP.png',
-        alt: 'MagMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Magneto',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Magneto
-    {
-        src: '/Pixel-art/Magneto.png',
-        alt: 'Mag',
-        category: 'Personaje Marvel Rivals',
-        title: 'Magneto',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Mantis
-    {
-        src: '/Pixel-art/Mantis.png',
-        alt: 'MantisMR',
-        category: 'Personaje Marvel Rivals',
-        title: 'Mantis',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Psylocke Portrait Animated
-    {
-        src: '/Pixel-art/Psy.gif',
-        alt: 'PsyAnim',
-        category: 'Personaje Marvel Rivals',
-        title: 'Psylocke',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Psylocke
-    {
-        src: '/Pixel-art/Psylocke.png',
-        alt: 'Psy',
-        category: 'Personaje Marvel Rivals',
-        title: 'Psylocke',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
-    // MR Winter
-    {
-        src: '/Pixel-art/Winter.png',
-        alt: 'Winter',
-        category: 'Personaje Marvel Rivals',
-        title: 'Winter Soldier',
-        description: 'Personaje (Silueta calcada del hero portrait)',
-        tema: 'marvel',
-    },
-
     // BloodRunner
 
     // BloodRunner Attack
@@ -708,14 +286,436 @@ export const obras: Obra[] = [
         description: 'Escenario',
         tema: 'og',
     },
+
+    // Marvel Rivals: al final, que es fan art. Primero las que salen en la portada (proyectos.ts)
+
+    // MR Strange (gif)
+    {
+        src: '/Pixel-art/Strange.gif',
+        alt: 'Strange',
+        category: 'Personaje Animacion Marvel Rivals',
+        title: 'Doctor Strange',
+        description: 'Personaje',
+        tema: 'marvel',
+    },
+
+    // MR Psylocke Portrait Animated
+    {
+        src: '/Pixel-art/Psy.gif',
+        alt: 'PsyAnim',
+        category: 'Personaje Marvel Rivals',
+        title: 'Psylocke',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Mantis
+    {
+        src: '/Pixel-art/Mantis.png',
+        alt: 'MantisMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Mantis',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Magneto Portrait
+    {
+        src: '/Pixel-art/MagnetoP.png',
+        alt: 'MagMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Magneto',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR MagikP
+    {
+        src: '/Pixel-art/MagikP.png',
+        alt: 'MagikMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Magik',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR LunaSnow
+    {
+        src: '/Pixel-art/LunaSnow.png',
+        alt: 'LunaSnowMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Luna Snow',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Jubilee
+    {
+        src: '/Pixel-art/Jubilee.png',
+        alt: 'JubileeMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Jubilee',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Jeff Portrait
+    {
+        src: '/Pixel-art/JeffP.png',
+        alt: 'JeffPMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Jeff the Land Shark',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR AdamP
+    {
+        src: '/Pixel-art/AdamP.png',
+        alt: 'AdamPMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Adam Warlock',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Adam
+    {
+        src: '/Pixel-art/AdamNL.png',
+        alt: 'AdamMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Adam Warlock',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Angela
+    {
+        src: '/Pixel-art/Angela.png',
+        alt: 'AngelaMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Angela',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Black Cat
+    {
+        src: '/Pixel-art/BlackCat.png',
+        alt: 'BlackCatMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Black Cat',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Black Panther
+    {
+        src: '/Pixel-art/BlackPanther.png',
+        alt: 'BlackPantherMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Black Panther',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Black Widow
+    {
+        src: '/Pixel-art/BlackWidow.png',
+        alt: 'BlackWidowrMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Black Widow',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Blade
+    {
+        src: '/Pixel-art/Blade.png',
+        alt: 'BladeMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Blade',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Bruce/Hulk
+    {
+        src: '/Pixel-art/Bruce.png',
+        alt: 'BruceMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Hulk',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Cap
+    {
+        src: '/Pixel-art/Cap.png',
+        alt: 'CapMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Captain America',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR CnD
+    {
+        src: '/Pixel-art/CloakNDagger.png',
+        alt: 'CloakNDaggerMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Cloak & Dagger',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Cyclops
+    {
+        src: '/Pixel-art/Cyclops.png',
+        alt: 'CyclopsMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Cyclops',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Daredevil
+    {
+        src: '/Pixel-art/Daredevil.png',
+        alt: 'DaredevilMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Daredevil',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Deadpool
+    {
+        src: '/Pixel-art/Deadpool.png',
+        alt: 'DeadpoolMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Deadpool',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Dino
+    {
+        src: '/Pixel-art/Dino.png',
+        alt: 'DinoMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Devil Dinosaur',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Dr Strange
+    {
+        src: '/Pixel-art/Strange.png',
+        alt: 'StrangeMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Doctor Strange',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Elsa
+    {
+        src: '/Pixel-art/Elsa.png',
+        alt: 'ElsaMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Elsa Bloodstone',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Emma Grande
+    {
+        src: '/Pixel-art/Emma.png',
+        alt: 'EmmaMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Emma Frost',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Emma Pequeña
+    {
+        src: '/Pixel-art/Emma_Frost.png',
+        alt: 'EmmaFMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Emma Frost',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Gambit
+    {
+        src: '/Pixel-art/Gambit.png',
+        alt: 'GambitMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Gambit',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Gorr
+    {
+        src: '/Pixel-art/Gorr.png',
+        alt: 'GorrMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Gorr',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Groot
+    {
+        src: '/Pixel-art/Groot.png',
+        alt: 'GrootMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Groot',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Hawkeye
+    {
+        src: '/Pixel-art/Hawkeye.png',
+        alt: 'HawkeyeMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Hawkeye',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Hela
+    {
+        src: '/Pixel-art/Hela.png',
+        alt: 'HelaMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Hela',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR HumanTorch
+    {
+        src: '/Pixel-art/HumanTorch.png',
+        alt: 'HumanTorchMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Human Torch',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Invis
+    {
+        src: '/Pixel-art/Invis.png',
+        alt: 'InvisMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Invisible Woman',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR IronFist
+    {
+        src: '/Pixel-art/IronFist.png',
+        alt: 'IronFistMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Iron Fist',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR IronMan
+    {
+        src: '/Pixel-art/IronMan.png',
+        alt: 'IronManMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Iron Man',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Jeff
+    {
+        src: '/Pixel-art/Jeff.png',
+        alt: 'Jeff',
+        category: 'Personaje Marvel Rivals',
+        title: 'Jeff the Land Shark',
+        description: 'Personaje',
+        tema: 'marvel',
+    },
+
+    // MR Loki
+    {
+        src: '/Pixel-art/Loki.png',
+        alt: 'LokiMR',
+        category: 'Personaje Marvel Rivals',
+        title: 'Loki',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Luna
+    {
+        src: '/Pixel-art/Luna.png',
+        alt: 'Luna',
+        category: 'Personaje Marvel Rivals',
+        title: 'Luna Snow',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Magik
+    {
+        src: '/Pixel-art/Magik.png',
+        alt: 'Transform',
+        category: 'Personaje Marvel Rivals',
+        title: 'Magik',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Magneto
+    {
+        src: '/Pixel-art/Magneto.png',
+        alt: 'Mag',
+        category: 'Personaje Marvel Rivals',
+        title: 'Magneto',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Psylocke
+    {
+        src: '/Pixel-art/Psylocke.png',
+        alt: 'Psy',
+        category: 'Personaje Marvel Rivals',
+        title: 'Psylocke',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
+
+    // MR Winter
+    {
+        src: '/Pixel-art/Winter.png',
+        alt: 'Winter',
+        category: 'Personaje Marvel Rivals',
+        title: 'Winter Soldier',
+        description: 'Personaje (Silueta calcada del hero portrait)',
+        tema: 'marvel',
+    },
 ];
 
 // Carruseles de la vista "Colecciones", en este orden
 export const colecciones: Coleccion[] = [
-    { titulo: 'Marvel Rivals', incluye: (obra) => obra.tema === 'marvel' },
     { titulo: 'BloodRunner',   incluye: (obra) => obra.tema === 'bloodrunner' },
     { titulo: 'Jams',          incluye: (obra) => obra.tema === 'ourojam' || obra.tema === 'gambling' },
-    { titulo: 'Memes',         incluye: (obra) => obra.tema === 'memes' },
     { titulo: 'Personales',    incluye: (obra) => obra.tema === 'og' },
+    { titulo: 'Memes',         incluye: (obra) => obra.tema === 'memes' },
     { titulo: 'Otros',         incluye: (obra) => obra.tema === 'valorant' || obra.tema === 'tutorial' },
+    { titulo: 'Marvel Rivals', incluye: (obra) => obra.tema === 'marvel' },
 ];

@@ -1,48 +1,47 @@
 ---
 // src/components/SobreMi.astro
 import { marcoAleatorio } from '../utils/marcoAleatorio';
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const t = textos(idiomaDe(Astro)).sobreMi;
 ---
 <section id="sobre-mi" class="py-24 px-5 relative z-10">
     <div class="container mx-auto max-w-5xl">
         <!-- Título de Sección -->
         <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center">
             <span class="bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-transparent bg-clip-text">
-                Sobre Mí
+                {t.titulo}
             </span>
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <!-- Columna de Texto -->
-            <div data-aparicion data-sitio-mascota class={`${marcoAleatorio()} space-y-6 text-[#cbd5e1] text-lg leading-relaxed bg-[#1a050a]/40 p-8 backdrop-blur-md shadow-[0_0_30px_rgba(255,170,0,0.05)]`}>
-                <p>
-                    Estudio desarrollo de videojuegos y trabajo en dos frentes: <strong>pixel art</strong> (personajes, animaciones y escenarios en Aseprite) y <strong>3D</strong> con la pipeline clásica de modelado, rig y animación en Blender.
-                </p>
-                <p>
-                    En Unreal Engine me encargo del <strong>arte técnico de materiales</strong>: shaders estilizados, como el cristal o el cómic, y VFX.
-                </p>
+            <div data-aparicion data-sitio-mascota class={`${marcoAleatorio({ conTexto: true })} space-y-6 text-[#cbd5e1] text-lg leading-relaxed bg-[#1a050a]/40 p-8 backdrop-blur-md shadow-[0_0_30px_rgba(255,170,0,0.05)]`}>
+                {t.parrafos.map((parrafo) => <p set:html={parrafo} />)}
             </div>
 
             <!-- Columna de Herramientas -->
             <div class="grid grid-cols-2 gap-4">
                 <!-- Tarjeta Unreal Engine -->
-                <div data-aparicion data-sitio-mascota class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                <div data-aparicion data-sitio-mascota class={`${marcoAleatorio({ conTexto: true })} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
                     <img src="/Pixel-art/UI Elements/LogoUE.png" data-intro="/Pixel-art/UI Elements/LogoUE_intro.gif" alt="Logo Unreal Engine" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Unreal Engine</h3>
-                    <p class="text-sm text-[#94a3b8]">Blueprints, Materiales, Level Sequences</p>
+                    <p class="text-sm text-[#94a3b8]">{t.unreal}</p>
                 </div>
 
                 <!-- Tarjeta Blender -->
-                <div data-aparicion data-sitio-mascota class={`${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                <div data-aparicion data-sitio-mascota class={`${marcoAleatorio({ conTexto: true })} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
                     <img src="/Pixel-art/UI Elements/LogoBlender.png" data-intro="/Pixel-art/UI Elements/LogoBlender_intro.gif" alt="Logo Blender" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Blender</h3>
-                    <p class="text-sm text-[#94a3b8]">Modelado 3D, Rigging, Animación</p>
+                    <p class="text-sm text-[#94a3b8]">{t.blender}</p>
                 </div>
 
                 <!-- Tarjeta Aseprite (ocupa las 2 columnas para cerrar la rejilla) -->
-                <div data-aparicion data-sitio-mascota class={`col-span-2 ${marcoAleatorio()} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
+                <div data-aparicion data-sitio-mascota class={`col-span-2 ${marcoAleatorio({ conTexto: true })} bg-[#0a0508]/80 p-6 flex flex-col items-center text-center transition-shadow hover:shadow-[0_0_20px_rgba(255,170,0,0.15)] cursor-default`}>
                     <img src="/Pixel-art/UI Elements/LogoAseprite.png" data-intro="/Pixel-art/UI Elements/LogoAseprite_intro.gif" alt="Logo Aseprite" style="image-rendering: pixelated;" class="w-16 h-16 mb-4" />
                     <h3 class="text-white font-bold mb-2">Aseprite</h3>
-                    <p class="text-sm text-[#94a3b8]">Pixel Art, UI, Sprite Sheets</p>
+                    <p class="text-sm text-[#94a3b8]">{t.aseprite}</p>
                 </div>
             </div>
         </div>

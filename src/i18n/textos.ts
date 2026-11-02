@@ -1,0 +1,220 @@
+// src/i18n/textos.ts
+// Textos de la interfaz en los dos idiomas, por componente. Los de las obras están en obras.ts y los de los
+// proyectos, junto a cada proyecto en src/data/proyectos.ts.
+import type { Idioma } from './idioma';
+
+const es = {
+    sitio: {
+        titulo: 'Kuren | Portfolio',
+        descripcion: 'Portfolio de Miguel Ángel Vera Ximénez: pixel art, animación y 3D para videojuegos.',
+        cv: '/CV_Miguel_Angel_Vera_Ximenez.pdf',
+    },
+    navegacion: {
+        general: 'General',
+        pixelArt: 'Pixel Art',
+        tresD: 'Diseño 3D',
+        contacto: 'Contacto',
+        inicio: 'Inicio',
+        sobreMi: 'Sobre Mí',
+        proyectos: 'Proyectos',
+        otroIdioma: 'EN',
+        otroIdiomaNombre: 'English version',
+    },
+    hero: {
+        subtitulo: 'Digital Artist & Game Developer',
+        presentacion: 'Hago arte para videojuegos, en pixel art y en 3D, y he trabajado en BloodRunner, OuroJam, Hells Gamble y Neorb.',
+        conoceme: 'Conóceme',
+        proyectos: 'Mi Portfolio',
+        pixelArt: 'Pixel Art',
+        tresD: 'Diseño 3D',
+        cv: 'Descargar CV ↓',
+    },
+    proyectos: {
+        titulo: 'Proyectos',
+        rol: 'Rol',
+        equipo: 'Equipo',
+        plazo: 'Plazo',
+        verProyecto: 'Ver proyecto',
+        jugar: 'Jugar en itch.io ↗',
+        obrasDe: (nombre: string) => `Obras de ${nombre}`,
+        todos: '← Todos los proyectos',
+        queHice: 'Qué hice',
+        arte: 'Arte del juego',
+        gameplay: 'Gameplay',
+    },
+    personales: {
+        titulo: 'Trabajos personales',
+    },
+    sobreMi: {
+        titulo: 'Sobre Mí',
+        parrafos: [
+            'Estudio desarrollo de videojuegos y trabajo en dos frentes: <strong>pixel art</strong> (personajes, animaciones y escenarios en Aseprite) y <strong>3D</strong> con la pipeline clásica de modelado, rig y animación en Blender.',
+            'En Unreal Engine me encargo del <strong>arte técnico de materiales</strong>: shaders estilizados, como el cristal o el cómic, y VFX.',
+        ],
+        unreal: 'Blueprints, Materiales, Level Sequences',
+        blender: 'Modelado 3D, Rigging, Animación',
+        aseprite: 'Pixel Art, UI, Sprite Sheets',
+    },
+    contacto: {
+        titulo: '¿Quieres contactar conmigo?',
+        texto: 'Siempre estoy abierto a colaborar en nuevos proyectos, participar en jams o simplemente charlar sobre desarrollo de videojuegos y arte digital.',
+        mensaje: 'Enviar un Mensaje',
+        cv: 'Descargar CV ↓',
+        hechoCon: 'Desarrollado con Astro & TailwindCSS',
+    },
+    galeria: {
+        colecciones: 'Colecciones',
+        todos: 'Todos',
+        personajes: 'Personajes',
+        animacion: 'Animación',
+        escenarios: 'Escenarios',
+        modelado: 'Modelado',
+        materiales: 'Materiales',
+    },
+    pixelArt: {
+        titulo: 'Pixel Art',
+        texto: 'Diseño de personajes, escenarios y animaciones creadas en Aseprite.',
+        timelapses: 'Timelapses',
+        timelapsesTexto: 'Cómo se dibujó cada obra, paso a paso.',
+    },
+    tresD: {
+        titulo: 'Diseño 3D',
+        texto: 'Modelado, rigging, texturizado y optimización de assets. Flujos de trabajo orientados a la implementación técnica en motores de videojuegos.',
+    },
+    visor: {
+        imagen: 'Obra ampliada',
+    },
+    animaciones: {
+        etiqueta: 'Animaciones:',
+        completas: 'completas',
+        suaves: 'suaves',
+    },
+    mascotas: {
+        hk: 'HK: haz click para que baile',
+        gato: 'Gato: dale mimos',
+        juno: 'Juno: dale mimos',
+    },
+    omega: {
+        omega: 'Omega, esperando su brazo',
+        brazo: 'Brazo de Omega: arrástralo hasta Omega',
+    },
+    persecucion: {
+        galleta: 'Galleta: haz click',
+        demonio: 'Demonio: haz click',
+    },
+    serpiente: {
+        mermelada: 'Mermelada',
+        ayudaDedo: 'Desliza el dedo para moverte',
+        ayudaTeclado: 'Flechas o WASD para moverte · Esc para salir',
+        salir: 'Salir',
+    },
+};
+
+const en: typeof es = {
+    sitio: {
+        titulo: 'Kuren | Portfolio',
+        descripcion: 'Portfolio of Miguel Ángel Vera Ximénez: pixel art, animation and 3D for video games.',
+        cv: '/CV_Miguel_Angel_Vera_Ximenez_EN.pdf',
+    },
+    navegacion: {
+        general: 'Home',
+        pixelArt: 'Pixel Art',
+        tresD: '3D Art',
+        contacto: 'Contact',
+        inicio: 'Home',
+        sobreMi: 'About me',
+        proyectos: 'Projects',
+        otroIdioma: 'ES',
+        otroIdiomaNombre: 'Versión en español',
+    },
+    hero: {
+        subtitulo: 'Digital Artist & Game Developer',
+        presentacion: 'I make art for video games, in pixel art and 3D, and I have worked on BloodRunner, OuroJam, Hells Gamble and Neorb.',
+        conoceme: 'About me',
+        proyectos: 'My portfolio',
+        pixelArt: 'Pixel Art',
+        tresD: '3D Art',
+        cv: 'Download CV ↓',
+    },
+    proyectos: {
+        titulo: 'Projects',
+        rol: 'Role',
+        equipo: 'Team',
+        plazo: 'Timeline',
+        verProyecto: 'View project',
+        jugar: 'Play on itch.io ↗',
+        obrasDe: (nombre: string) => `${nombre} artwork`,
+        todos: '← All projects',
+        queHice: 'What I did',
+        arte: 'Game art',
+        gameplay: 'Gameplay',
+    },
+    personales: {
+        titulo: 'Personal work',
+    },
+    sobreMi: {
+        titulo: 'About me',
+        parrafos: [
+            'I study game development and work on two fronts: <strong>pixel art</strong> (characters, animations and environments in Aseprite) and <strong>3D</strong>, following the classic modeling, rigging and animation pipeline in Blender.',
+            'In Unreal Engine I handle <strong>material technical art</strong>: stylized shaders, like crystal or comic, and VFX.',
+        ],
+        unreal: 'Blueprints, Materials, Level Sequences',
+        blender: '3D Modeling, Rigging, Animation',
+        aseprite: 'Pixel Art, UI, Sprite Sheets',
+    },
+    contacto: {
+        titulo: 'Want to get in touch?',
+        texto: "I'm always open to collaborating on new projects, joining jams or just chatting about game development and digital art.",
+        mensaje: 'Send a message',
+        cv: 'Download CV ↓',
+        hechoCon: 'Built with Astro & TailwindCSS',
+    },
+    galeria: {
+        colecciones: 'Collections',
+        todos: 'All',
+        personajes: 'Characters',
+        animacion: 'Animation',
+        escenarios: 'Environments',
+        modelado: 'Modeling',
+        materiales: 'Materials',
+    },
+    pixelArt: {
+        titulo: 'Pixel Art',
+        texto: 'Characters, environments and animations made in Aseprite.',
+        timelapses: 'Timelapses',
+        timelapsesTexto: 'How each piece was drawn, step by step.',
+    },
+    tresD: {
+        titulo: '3D Art',
+        texto: 'Modeling, rigging, texturing and asset optimization, with workflows built for game engines.',
+    },
+    visor: {
+        imagen: 'Enlarged artwork',
+    },
+    animaciones: {
+        etiqueta: 'Animations:',
+        completas: 'full',
+        suaves: 'reduced',
+    },
+    mascotas: {
+        hk: 'HK: click to make it dance',
+        gato: 'Cat: click to pet',
+        juno: 'Juno: click to pet',
+    },
+    omega: {
+        omega: 'Omega, waiting for the arm',
+        brazo: "Omega's arm: drag it to Omega",
+    },
+    persecucion: {
+        galleta: 'Cookie: click it',
+        demonio: 'Demon: click it',
+    },
+    serpiente: {
+        mermelada: 'Jam',
+        ayudaDedo: 'Swipe to move',
+        ayudaTeclado: 'Arrow keys or WASD to move · Esc to exit',
+        salir: 'Exit',
+    },
+};
+
+export const textos = (idioma: Idioma) => (idioma === 'en' ? en : es);

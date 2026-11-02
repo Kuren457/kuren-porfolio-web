@@ -164,7 +164,7 @@ if (capa) {
         ponerMermelada();
 
         // Ayuda encima de la cabeza hasta el primer movimiento
-        ayuda.textContent = sinRaton ? 'Desliza el dedo para moverte' : 'Flechas o WASD para moverte · Esc para salir';
+        ayuda.textContent = (sinRaton ? capa.dataset.ayudaDedo : capa.dataset.ayudaTeclado) ?? ''; // En el idioma de la página
         const { x, y } = enPantalla(cuerpo[0]);
         ayuda.style.left = `${Math.min(Math.max(x + lado / 2, 120), innerWidth - 120)}px`;
         ayuda.style.top = `${Math.max(y - 8, 90)}px`;

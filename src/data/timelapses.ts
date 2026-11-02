@@ -18,7 +18,22 @@ const timelapse = (title: string, final: string, archivo: string, tema: Obra['te
 });
 
 export const timelapses: Obra[] = [
-    // Marvel Rivals
+    // Personales
+    timelapse('Kimchi',             'Kimchi.png',              'TimelapseKimchi', 'og'),
+    timelapse('Ballena',            'WhalePinterestInspo.png', 'TImelapseWhale',  'og'),
+
+    // Memes (sus finales son animaciones)
+    timelapse('Juno',               'JunoCute.gif',       'TimelapseJunoSilly',      'memes'),
+    timelapse('Kitty Explosion',    'KittyExplosion.gif', 'TimelapseKittyExplosion', 'memes'),
+
+    // Marvel Rivals: al final, que es fan art. Primero los de las obras de la portada (proyectos.ts)
+    timelapse('Psylocke',           'Psy.png',         'TimelapsePsylocke',   'marvel'),
+    timelapse('Mantis',             'Mantis.png',      'TimelapseMantis',     'marvel'),
+    timelapse('Magneto',            'MagnetoP.png',    'TimelapseMagneto',    'marvel'),
+    timelapse('Magik',              'MagikP.png',      'TimelapseMagik',      'marvel'),
+    timelapse('Luna Snow',          'LunaSnow.png',    'TimelapseLuna',       'marvel'),
+    timelapse('Jubilee',            'Jubilee.png',     'TimelapseJubilee',    'marvel'),
+    timelapse('Jeff the Land Shark', 'JeffP.png',      'TimelapseJeff',       'marvel'),
     timelapse('Adam Warlock',       'AdamP.png',       'TimelapseAdam',       'marvel'),
     timelapse('Cyclops',            'Cyclops.png',     'TimelapseCyclops',    'marvel'),
     timelapse('Daredevil',          'Daredevil.png',   'TimelapseDD',         'marvel'),
@@ -36,22 +51,7 @@ export const timelapses: Obra[] = [
     timelapse('Invisible Woman',    'Invis.png',       'TimelapseInvis',      'marvel'),
     timelapse('Iron Fist',          'IronFist.png',    'TimelapseIronFist',   'marvel'),
     timelapse('Iron Man',           'IronMan.png',     'TimelapseIronMan',    'marvel'),
-    timelapse('Jeff the Land Shark', 'JeffP.png',      'TimelapseJeff',       'marvel'),
-    timelapse('Jubilee',            'Jubilee.png',     'TimelapseJubilee',    'marvel'),
     timelapse('Loki',               'Loki.png',        'TimelapseLoki',       'marvel'),
-    timelapse('Luna Snow',          'LunaSnow.png',    'TimelapseLuna',       'marvel'),
-    timelapse('Magik',              'MagikP.png',      'TimelapseMagik',      'marvel'),
-    timelapse('Magneto',            'MagnetoP.png',    'TimelapseMagneto',    'marvel'),
-    timelapse('Mantis',             'Mantis.png',      'TimelapseMantis',     'marvel'),
-    timelapse('Psylocke',           'Psy.png',         'TimelapsePsylocke',   'marvel'),
-
-    // Memes (sus finales son animaciones)
-    timelapse('Juno',               'JunoCute.gif',       'TimelapseJunoSilly',      'memes'),
-    timelapse('Kitty Explosion',    'KittyExplosion.gif', 'TimelapseKittyExplosion', 'memes'),
-
-    // Personales
-    timelapse('Kimchi',             'Kimchi.png',              'TimelapseKimchi', 'og'),
-    timelapse('Ballena',            'WhalePinterestInspo.png', 'TImelapseWhale',  'og'),
 ];
 
 // Obras de la galería que son otra versión (p. ej. animada) de la final de un timelapse

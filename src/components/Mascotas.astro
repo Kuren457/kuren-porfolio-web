@@ -8,12 +8,16 @@
 // justo en el borde), posición de la mano de los mimos respecto al sprite (--mano-x, --mano-y) y del bocadillo
 // con el corazón que sale al pasar el ratón, encima de la cabeza (--bocadillo-x, --bocadillo-y).
 // Los sprites *_1x se generan con `npm run marcos`.
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
 const UI = '/Pixel-art/UI Elements/';
+const t = textos(idiomaDe(Astro)).mascotas;
 ---
 
 <div id="mascotas" hidden>
     <!-- HK: cada click alterna entre el idle y el breakdance -->
-    <button type="button" class="mascota" data-mascota="hk" aria-label="HK: haz click para que baile"
+    <button type="button" class="mascota" data-mascota="hk" aria-label={t.hk}
         style="--ancho: 48; --alto: 48; --pies: 7; --bocadillo-x: 8; --bocadillo-y: -29;">
         <img class="mascota__sprite" src={`${UI}HKDanceIdle_1x.gif`} alt=""
             data-baile={`${UI}HKDanceBreakdance_1x.gif`} />
@@ -24,7 +28,7 @@ const UI = '/Pixel-art/UI Elements/';
     </button>
 
     <!-- Gato: cada click, mimo (mano) y maullido; a los 25 clicks explota y vuelve a los 5 segundos -->
-    <button type="button" class="mascota" data-mascota="mimos" aria-label="Gato: dale mimos"
+    <button type="button" class="mascota" data-mascota="mimos" aria-label={t.gato}
         data-sonido="/audio/kittymeow.wav"
         data-explota="25" data-sonido-explosion="/audio/explosion.wav"
         style="--ancho: 32; --alto: 32; --pies: 7; --mano-x: 0; --mano-y: -7; --bocadillo-x: 3; --bocadillo-y: -29;">
@@ -38,7 +42,7 @@ const UI = '/Pixel-art/UI Elements/';
     </button>
 
     <!-- Juno: cada click, mimo (mano) -->
-    <button type="button" class="mascota" data-mascota="mimos" aria-label="Juno: dale mimos"
+    <button type="button" class="mascota" data-mascota="mimos" aria-label={t.juno}
         data-sonido-mano="/audio/pat.wav"
         style="--ancho: 48; --alto: 48; --pies: 7; --mano-x: 4; --mano-y: -5; --bocadillo-x: 8; --bocadillo-y: -30;">
         <img class="mascota__sprite" src={`${UI}Juno_1x.png`} alt="" />

@@ -4,7 +4,11 @@
 // el dragón sale del marco y se juega a la serpiente con él por la pantalla hasta la mermelada
 // (src/scripts/ouro.ts). Va dentro de .proyecto__lugar, junto a la tarjeta.
 // Las piezas están dibujadas avanzando hacia la derecha (16x16 a 1x) y el script las gira según la dirección.
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
 const UI = '/Pixel-art/UI Elements/';
+const t = textos(idiomaDe(Astro)).serpiente;
 ---
 
 <!-- Bocadillo encima de la tarjeta al pasar el ratón por el anillo (en pantallas sin ratón, siempre) -->
@@ -21,10 +25,12 @@ const UI = '/Pixel-art/UI Elements/';
     data-cuerpo={`${UI}Ouro_Cuerpo_Idle.gif`}
     data-curva-horaria={`${UI}Ouro_Cuerpo_curvado.gif`}
     data-curva-antihoraria={`${UI}Ouro_Cuerpo_curvado_2.gif`}
-    data-cola={`${UI}Ouro_Cola.gif`}>
-    <img class="ouro__mermelada" src={`${UI}Ouro_Mermelada.png`} alt="Mermelada" hidden />
+    data-cola={`${UI}Ouro_Cola.gif`}
+    data-ayuda-dedo={t.ayudaDedo}
+    data-ayuda-teclado={t.ayudaTeclado}>
+    <img class="ouro__mermelada" src={`${UI}Ouro_Mermelada.png`} alt={t.mermelada} hidden />
     <p class="ouro__ayuda" hidden></p>
-    <button type="button" class="ouro__salir">Salir</button>
+    <button type="button" class="ouro__salir">{t.salir}</button>
 </div>
 
 <script>

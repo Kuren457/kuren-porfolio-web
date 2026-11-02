@@ -12,6 +12,22 @@
     --enredadera-size: calc(14 * var(--px)) calc(33 * var(--px));
 }
 
+.marco-vegetal.marco-rojo::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base_rojo.png');
+}
+
+.marco-vegetal.marco-naranja::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base_naranja.png');
+}
+
+.marco-vegetal.marco-dorado::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base_dorado.png');
+}
+
+.marco-vegetal.marco-cian::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base_cian.png');
+}
+
 .marco-vegetal::after {
     border-image-source: url('/Pixel-art/UI Elements/Marco2Vegetal_base.png');
 }
@@ -26,6 +42,22 @@
     background-image: url('/Pixel-art/UI Elements/Marco2Vegetal_tr.png'), url('/Pixel-art/UI Elements/Marco2Vegetal_bl.png'), var(--enredadera, none);
     background-position: right var(--marco-margen) top 0, left var(--marco-margen) bottom 0, var(--enredadera-pos, 0 0);
     background-size: calc(13 * var(--px)) calc(14 * var(--px)), calc(40 * var(--px)) calc(16 * var(--px)), var(--enredadera-size, auto);
+}
+
+.marco-ajolote.marco-rojo::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_base_rojo.png');
+}
+
+.marco-ajolote.marco-naranja::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_base_naranja.png');
+}
+
+.marco-ajolote.marco-dorado::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_base_dorado.png');
+}
+
+.marco-ajolote.marco-cian::after {
+    border-image-source: url('/Pixel-art/UI Elements/Marco2VegetalAjolote_base_cian.png');
 }
 
 .marco-ajolote::after {

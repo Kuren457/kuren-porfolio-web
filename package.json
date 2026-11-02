@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "timelapses": "node scripts/timelapses.mjs",
+    "cv": "node scripts/cv.mjs",
     "marcos": "node scripts/recolor-marco.mjs && node scripts/marcos-vegetales.mjs && node scripts/intros-logos.mjs && node scripts/mascotas.mjs"
   },
   "dependencies": {

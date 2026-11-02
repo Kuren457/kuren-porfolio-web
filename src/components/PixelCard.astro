@@ -4,6 +4,8 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { imageMetadata } from 'astro/assets/utils';
+import { idiomaDe } from '../i18n/idioma';
+import { etiquetas, traducir } from '../i18n/obras';
 
 const UI = '/Pixel-art/UI Elements/';
 const ANCHO_TIMELAPSE = 288; // Ancho máximo en px de las tarjetas de timelapse (se ajusta a una escala entera)
@@ -39,7 +41,11 @@ export interface Props {
     copia?: boolean;            // Segunda tanda de un carrusel, solo para que el bucle no tenga corte
 }
 
-const { src, alt = '', category, title, description, tema, timelapse, variante = 'galeria', copia = false } = Astro.props;
+const { src, alt = '', category, tema, timelapse, variante = 'galeria', copia = false } = Astro.props;
+// Los textos de las obras se escriben en español; en la versión en inglés se traducen (src/i18n/obras.ts)
+const idioma = idiomaDe(Astro);
+const title = traducir(Astro.props.title, idioma);
+const description = traducir(Astro.props.description, idioma);
 const temaActual: { logo?: string; intro?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
 const logo = Astro.props.logo ?? (temaActual?.logo && UI + temaActual.logo);
 // Un logo sustituido a mano no tiene animación de aparición
@@ -72,7 +78,7 @@ const anchoMostrado = anchoTimelapse && anchoTimelapse * Math.floor(ANCHO_TIMELA
 const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
 ---
 
-<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-title={title} data-description={description} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
+<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-etiquetas={etiquetas(category, idioma)} data-title={title} data-description={description} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
     <!-- data-aparicion: aparece con un pop al entrar en pantalla y arranca las animaciones del marco y el logo (src/scripts/aparicion.ts) -->
     <div class="pixel-card__frame" data-aparicion data-intro-marco={marcoIntro}>
 

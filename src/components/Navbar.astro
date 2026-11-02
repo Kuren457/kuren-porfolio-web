@@ -1,23 +1,36 @@
 ---
 // src/components/Navbar.astro
+// Barra de navegación, en el idioma de la página, con el enlace a la misma página en el otro idioma
+import { equivalente, idiomaDe, rutas } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const idioma = idiomaDe(Astro);
+const t = textos(idioma).navegacion;
+const r = rutas(idioma);
+const otroIdioma = idioma === 'es' ? 'en' : 'es';
+const enlaceOtroIdioma = equivalente(Astro.url.pathname, otroIdioma);
 ---
 <header class="fixed top-0 w-full z-50 py-4 bg-[#0a0508]/60 backdrop-blur-lg border-b border-white/5">
     <div class="container mx-auto px-5 flex justify-between items-center max-w-6xl">
         <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 font-bold text-lg text-white no-underline hover:scale-105 transition-transform">
-            <!-- Usamos tu avatar aquí también para que quede consistente -->
-            <img src="/png-banners/avatar.png" alt="Logo" class="w-8 h-8 rounded object-cover border border-white/10" />
+        <a href={r.inicio} class="flex items-center gap-3 font-bold text-lg text-white no-underline hover:scale-105 transition-transform">
+            <img src="/png-banners/avatar.png" alt="" class="w-8 h-8 rounded object-cover border border-white/10" />
             <span>Miguel Ángel Vera Ximénez</span>
         </a>
 
         <!-- Enlaces Desktop -->
-        <nav>
+        <nav class="flex items-center gap-8">
             <ul class="hidden md:flex gap-8 list-none m-0 p-0">
-                <li><a href="/" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">General</a></li>
-                <li><a href="/pixel-art" class="text-[#cbd5e1] hover:text-[#fa5c5c] font-medium transition-colors">Pixel Art</a></li>
-                <li><a href="/3d" class="text-[#cbd5e1] hover:text-[#00ff66] font-medium transition-colors">Diseño 3D</a></li>
-                <li><a href="/#contacto" class="text-[#cbd5e1] hover:text-white font-medium transition-colors">Contacto</a></li>
+                <li><a href={r.inicio} class="text-[#cbd5e1] hover:text-white font-medium transition-colors">{t.general}</a></li>
+                <li><a href={r.pixelArt} class="text-[#cbd5e1] hover:text-[#fa5c5c] font-medium transition-colors">{t.pixelArt}</a></li>
+                <li><a href={r.tresD} class="text-[#cbd5e1] hover:text-[#00ff66] font-medium transition-colors">{t.tresD}</a></li>
+                <li><a href={`${r.inicio}#contacto`} class="text-[#cbd5e1] hover:text-white font-medium transition-colors">{t.contacto}</a></li>
             </ul>
+            <!-- La misma página en el otro idioma -->
+            <a href={enlaceOtroIdioma} hreflang={otroIdioma} lang={otroIdioma} title={t.otroIdiomaNombre} aria-label={t.otroIdiomaNombre}
+                class="px-2 py-1 text-sm font-bold text-[#ffaa00] border border-[#ffaa00]/40 rounded hover:bg-[#ffaa00]/10 transition-colors">
+                {t.otroIdioma}
+            </a>
         </nav>
 
         <!-- Botón Menú Móvil -->
@@ -30,12 +43,12 @@
 
     <!-- Menú Móvil (Oculto por defecto) -->
     <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0a0508] border-b border-white/5 py-4 px-5 flex-col gap-4 text-center">
-        <a href="#inicio" class="text-[#cbd5e1] hover:text-white block py-2">Inicio</a>
-        <a href="#sobre-mi" class="text-[#cbd5e1] hover:text-white block py-2">Sobre Mí</a>
-        <a href="#portfolio" class="text-[#cbd5e1] hover:text-white block py-2">Portfolio</a>
-        <a href="/pixel-art" class="text-[#cbd5e1] hover:text-[#fa5c5c] font-medium transition-colors">Pixel Art</a>
-        <a href="/3d" class="text-[#cbd5e1] hover:text-[#00ff66] font-medium transition-colors">Diseño 3D</a>
-        <a href="#contacto" class="text-[#cbd5e1] hover:text-white block py-2">Contacto</a>
+        <a href={r.inicio} class="text-[#cbd5e1] hover:text-white block py-2">{t.inicio}</a>
+        <a href={`${r.inicio}#sobre-mi`} class="text-[#cbd5e1] hover:text-white block py-2">{t.sobreMi}</a>
+        <a href={`${r.inicio}#portfolio`} class="text-[#cbd5e1] hover:text-white block py-2">{t.proyectos}</a>
+        <a href={r.pixelArt} class="text-[#cbd5e1] hover:text-[#fa5c5c] font-medium transition-colors">{t.pixelArt}</a>
+        <a href={r.tresD} class="text-[#cbd5e1] hover:text-[#00ff66] font-medium transition-colors">{t.tresD}</a>
+        <a href={`${r.inicio}#contacto`} class="text-[#cbd5e1] hover:text-white block py-2">{t.contacto}</a>
     </div>
 </header>
 

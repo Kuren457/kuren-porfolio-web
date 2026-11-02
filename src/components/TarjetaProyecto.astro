@@ -1,0 +1,42 @@
+---
+// src/components/TarjetaProyecto.astro
+// Tarjeta cuadrada de un proyecto (192 px, en un .proyecto__lugar): su logo con un marco vegetal al azar o, si el
+// proyecto tiene uno propio (marco), ese por encima, con sus decoraciones y las animaciones con las que se
+// dibujan al aparecer (src/scripts/aparicion.ts). Es un enlace: a la ficha en la portada, al juego en la ficha.
+import type { Proyecto } from '../data/proyectos';
+import { marcoAleatorio } from '../utils/marcoAleatorio';
+
+interface Props {
+    proyecto: Proyecto;
+    enlace: string;
+    aviso: string;          // Texto al pasar el ratón (si no lo tapa un marco propio)
+    externo?: boolean;      // Se abre en otra pestaña
+    mascotas?: boolean;     // Las mascotas pueden ponerse en ella (salvo si el proyecto tiene su propio juego)
+    pequena?: boolean;      // En un .proyecto__lugar--pequeno (128 px en vez de 192)
+}
+
+const { proyecto, enlace, aviso, externo = false, mascotas = false, pequena = false } = Astro.props;
+// En la pequeña, el logo con ancho fijo (pixel art) a la mitad: sigue siendo un múltiplo de su tamaño a 1x
+const logoAncho = proyecto.logoAncho && (pequena ? proyecto.logoAncho / 2 : proyecto.logoAncho);
+const sitioMascota = mascotas && !proyecto.omega && !proyecto.serpiente;
+---
+
+<a href={enlace} target={externo ? '_blank' : undefined} rel={externo ? 'noopener noreferrer' : undefined}
+    data-aparicion data-sitio-mascota={sitioMascota ? '' : undefined}
+    class:list={['proyecto__tarjeta group flex items-center justify-center',
+        proyecto.marco ? 'proyecto__tarjeta--marco' : `${marcoAleatorio({ conTexto: pequena })}${pequena ? ` marco-${proyecto.color}` : ''} bg-[#0a0508]`]}
+    aria-label={`${proyecto.nombre}: ${aviso}`}>
+    {proyecto.marco && <div class:list={['proyecto__fondo', { 'proyecto__fondo--mascara': proyecto.fondo }]}
+        style={proyecto.fondo && `--fondo: url('${proyecto.fondo}');`}></div>}
+    <img src={proyecto.logo} alt=""
+        style={[proyecto.logoPixelado && 'image-rendering: pixelated;', logoAncho && `width: ${logoAncho}px;`].filter(Boolean).join(' ') || undefined}
+        class="proyecto__logo w-3/5 h-auto drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+    <span class="proyecto__aviso absolute bottom-4 inset-x-0 text-center text-xs text-[#cbd5e1] opacity-0 group-hover:opacity-100 transition-opacity">{aviso}</span>
+    {proyecto.marco && <img class="proyecto__marco" src={proyecto.marco} alt="" data-intro-completo={proyecto.marcoIntro} />}
+    {proyecto.decoracion && <img class="proyecto__marco" src={proyecto.decoracion} alt="" data-intro={proyecto.decoracionIntro} />}
+</a>
+
+<!-- Aparece con un pop al entrar en pantalla -->
+<script>
+    import '../scripts/aparicion';
+</script>

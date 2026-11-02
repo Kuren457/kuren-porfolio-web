@@ -1,5 +1,7 @@
 ---
 // src/components/Lightbox.astro
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
 // Visor a pantalla completa (con zoom) de las obras: se abre al pulsar cualquier .lightbox-trigger de la
 // página. Debajo de la obra, su ficha (nombre, etiquetas y descripción) con el marco y el logo de su tema,
 // que se animan cada vez que cambia. La lógica está en src/scripts/galeria.ts.
@@ -10,6 +12,7 @@ interface Props {
 }
 
 const { acento, acentoSuave, pixelado = false } = Astro.props;
+const t = textos(idiomaDe(Astro)).visor;
 ---
 
 <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-[#0a0508]/75 backdrop-blur-sm flex flex-col items-center justify-center gap-4 p-4 opacity-0 transition-opacity duration-300" style={`--acento: ${acento}; --acento-suave: ${acentoSuave};`}>
@@ -32,7 +35,7 @@ const { acento, acentoSuave, pixelado = false } = Astro.props;
     </button>
 
     <!-- Imagen o vídeo maximizados (la transición es corta para que el zoom sea rápido y reactivo) -->
-    <img id="lightbox-img" src="" alt="Arte maximizado" style={pixelado ? 'image-rendering: pixelated;' : undefined} class="hidden min-h-0 max-w-full max-h-[70vh] object-contain drop-shadow-[0_0_50px_var(--acento-suave)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
+    <img id="lightbox-img" src="" alt={t.imagen} style={pixelado ? 'image-rendering: pixelated;' : undefined} class="hidden min-h-0 max-w-full max-h-[70vh] object-contain drop-shadow-[0_0_50px_var(--acento-suave)] scale-95 transition-transform duration-150 z-40 will-change-transform" />
     <video id="lightbox-video" src="" autoplay loop muted playsinline class="hidden min-h-0 max-w-full max-h-[70vh] object-contain drop-shadow-[0_0_50px_var(--acento-suave)] scale-95 transition-transform duration-150 z-40 will-change-transform"></video>
 
     <!-- Ficha de la obra: el marco (--marco) y el logo los copia galeria.ts de la tarjeta pulsada -->

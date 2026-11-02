@@ -3,7 +3,11 @@
 // Carrusel de trabajos personales de la página principal (las obras salen de src/data/proyectos.ts)
 import Carrusel from './Carrusel.astro';
 import { personales } from '../data/proyectos';
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const t = textos(idiomaDe(Astro)).personales;
 ---
 <section id="personales" class="pt-4 pb-8 px-5 relative z-10">
-    <Carrusel titulo="Trabajos personales" obras={personales} />
+    <Carrusel titulo={t.titulo} obras={personales} />
 </section>

@@ -5,6 +5,15 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://kuren-porfolio-web.vercel.app',
+
+  // Español en la raíz y la versión en inglés bajo /en/ (textos en src/i18n/)
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: { prefixDefaultLocale: false },
+  },
+
   vite: {
     plugins: [tailwindcss()]
   },

@@ -170,6 +170,12 @@ body::after {
     --px: 1px;
 }
 
+/* Tarjetas con texto (marcoAleatorio({ conTexto: true })): solo el borde, sin la decoración de las esquinas,
+   para que no tape el texto */
+.marco-con-texto::before {
+    display: none;
+}
+
 .marco-vegetal::before,
 .marco-ajolote::before,
 .marco-vegetal::after,
@@ -233,6 +239,95 @@ body::after {
     flex: none;
     width: min(32rem, 100%);
     min-width: min(16rem, 100%);
+}
+
+/* --- VITRINA (Vitrina.astro, src/scripts/vitrina.ts) --- */
+/* La obra del centro en grande y la anterior y la siguiente en pequeño a los lados; el script pone a cada una su
+   sitio (data-sitio) y, a las de los lados, su posición (left, según el ancho de la del centro); el cambio se anima. Las tarjetas son de carrusel: alto fijo y ancho según la obra (sin
+   pasarse del ancho que les toca: las muy anchas se encajan) */
+.vitrina {
+    --alto-max: 420px;   /* La obra del centro, como mucho así de alta... */
+    --ancho-max: 68cqw;  /* ...y así de ancha (68 % de la vitrina) */
+}
+
+.vitrina__escenario {
+    position: relative;
+    container-type: inline-size; /* Para medir el ancho máximo en cqw */
+    height: calc(var(--alto-max) + 80px); /* La imagen, la pestaña del logo, el marco y aire para el zoom */
+    overflow: hidden;
+}
+
+.vitrina__obra {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max-content; /* Su propio tamaño: si no, el navegador la limita a la mitad de la vitrina (por el left: 50%) */
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.4);
+    transition: left 600ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 600ms, filter 600ms;
+}
+
+/* El tamaño de cada obra sale de su forma (--aspecto, ancho / alto, lo pone vitrina.ts): lo más grande posible
+   sin pasarse ni del alto ni del ancho máximos */
+.vitrina__obra .pixel-card--carrusel .pixel-card__media {
+    width: min(var(--ancho-max), calc(var(--alto-max) * var(--aspecto, 1)));
+    height: auto;
+}
+
+.vitrina__obra[data-sitio='actual'] {
+    z-index: 3;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+}
+
+.vitrina__obra[data-sitio='previa'],
+.vitrina__obra[data-sitio='siguiente'] {
+    z-index: 2;
+    opacity: 0.6;
+    filter: brightness(0.6);
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(0.55);
+}
+
+.vitrina__obra[data-sitio='previa']:hover,
+.vitrina__obra[data-sitio='siguiente']:hover {
+    opacity: 0.85;
+    filter: brightness(0.85);
+}
+
+/* Las escondidas esperan detrás de la del centro */
+.vitrina__obra[data-sitio='escondida'] {
+    z-index: 1;
+}
+
+.vitrina__puntos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.vitrina__punto {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 0;
+    cursor: pointer;
+    transition: background 300ms;
+}
+
+.vitrina__punto[aria-current='true'] {
+    background: #ffaa00;
+}
+
+@media (max-width: 639px) {
+    .vitrina {
+        --alto-max: 300px;
+        --ancho-max: 74cqw;
+    }
 }
 
 /* --- CARRUSELES --- */
@@ -395,6 +490,101 @@ body::after {
     .proyecto {
         grid-template-columns: 280px minmax(0, 1fr) minmax(0, 1.6fr);
     }
+}
+
+/* Vista previa del proyecto: rol, equipo y plazo en dos columnas */
+.proyecto__datos {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+.proyecto__datos dt {
+    color: #94a3b8;
+}
+
+.proyecto__datos dd {
+    color: #fff;
+}
+
+/* --- FICHA DE PROYECTO (src/vistas/Proyecto.astro) --- */
+/* Cabecera: la vitrina con el arte y a su derecha el nombre y los datos (en pantallas estrechas, uno debajo del
+   otro) */
+.ficha__cabecera {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    align-items: center; /* La vitrina, centrada en vertical con la información */
+}
+
+@media (min-width: 1024px) {
+    .ficha__cabecera {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 40px;
+    }
+}
+
+/* Cada bloque de información, en su tarjeta con marco */
+.ficha__tarjeta {
+    margin-top: 16px;
+    padding: 20px;
+    background: rgba(10, 5, 8, 0.8);
+}
+
+/* Rol, equipo y plazo: una tarjeta cada uno, en fila */
+.ficha__datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+}
+
+.ficha__datos dt {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.ficha__datos dd {
+    color: #fff;
+}
+
+/* Lo que hice: en columnas, con un cuadradito de color de viñeta */
+.ficha__tareas {
+    columns: 2 220px;
+    column-gap: 32px;
+    color: #cbd5e1;
+}
+
+.ficha__tareas li {
+    break-inside: avoid;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.ficha__tareas li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: #ffaa00;
+}
+
+/* Versión pequeña (el logo junto al nombre en la ficha): 128 px, los marcos propios a 2 px por píxel */
+.proyecto__lugar.proyecto__lugar--pequeno {
+    width: 128px;
+    height: 128px;
+}
+
+.proyecto__lugar--pequeno .proyecto__fondo:not(.proyecto__fondo--mascara) {
+    inset: 26px; /* 13 px del marco a 2 px por píxel */
+}
+
+.proyecto__lugar--pequeno .proyecto__aviso {
+    display: none;
 }
 
 /* Tarjeta de 192 px: los marcos propios son de 64 px y se ven a 3 px por píxel exactos */

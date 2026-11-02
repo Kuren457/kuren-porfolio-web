@@ -1,0 +1,287 @@
+<!doctype html>
+<!--
+    CV de Miguel Ángel Vera Ximénez. Para regenerar el PDF que se descarga desde la web
+    (public/CV_Miguel_Angel_Vera_Ximenez.pdf): npm run cv
+    Es una sola página A4: si se añade algo, comprobar que no salta a una segunda.
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>CV - Miguel Ángel Vera Ximénez</title>
+    <style>
+        @font-face {
+            font-family: 'Tiny5 Duo';
+            src: url('../../src/assets/fonts/Tiny5Duo.ttf');
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        :root {
+            --tinta: #1d1418;
+            --suave: #5b4e53;
+            --acento: #d6402b;
+            --acento-2: #f29a17;
+            --linea: #e8dfe1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            padding: 15mm 15mm 12mm;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 9.6pt;
+            line-height: 1.42;
+            color: var(--tinta);
+            background: #fff;
+        }
+
+        /* Cabecera: nombre en la fuente pixel de la web, con una franja de color debajo */
+        header {
+            display: flex;
+            gap: 6mm;
+            align-items: center;
+            padding-bottom: 5mm;
+            border-bottom: 1.2mm solid var(--acento);
+            border-image: linear-gradient(90deg, var(--acento), var(--acento-2)) 1;
+        }
+
+        header img {
+            width: 24mm;
+            height: 24mm;
+            image-rendering: pixelated;
+            border-radius: 2mm;
+        }
+
+        h1 {
+            font-family: 'Tiny5 Duo', 'Segoe UI', sans-serif;
+            font-size: 24pt;
+            font-weight: 700;
+            line-height: 1.05;
+        }
+
+        .puestos {
+            margin-top: 1.5mm;
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--acento);
+        }
+
+        .contacto {
+            margin-top: 2mm;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1mm 5mm;
+            font-size: 8.8pt;
+            color: var(--suave);
+        }
+
+        .contacto a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Cuerpo a dos columnas: experiencia a la izquierda, habilidades a la derecha */
+        main {
+            display: grid;
+            grid-template-columns: 1fr 58mm;
+            gap: 8mm;
+            margin-top: 6mm;
+        }
+
+        h2 {
+            font-family: 'Tiny5 Duo', 'Segoe UI', sans-serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--acento);
+            margin: 0 0 2.5mm;
+            letter-spacing: 0.3pt;
+        }
+
+        section + section {
+            margin-top: 6mm;
+        }
+
+        p + p {
+            margin-top: 2mm;
+        }
+
+        .proyecto + .proyecto {
+            margin-top: 4mm;
+            padding-top: 4mm;
+            border-top: 0.3mm solid var(--linea);
+        }
+
+        .proyecto h3 {
+            font-size: 10.5pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 3mm;
+        }
+
+        .proyecto h3 span {
+            font-size: 8.6pt;
+            font-weight: 400;
+            color: var(--suave);
+            white-space: nowrap;
+        }
+
+        .rol {
+            font-weight: 600;
+            color: var(--suave);
+            margin: 0.5mm 0 1.2mm;
+        }
+
+        ul {
+            padding-left: 4mm;
+        }
+
+        li + li {
+            margin-top: 0.6mm;
+        }
+
+        li::marker {
+            color: var(--acento-2);
+        }
+
+        aside h3 {
+            font-size: 9.6pt;
+            margin: 3mm 0 0.8mm;
+        }
+
+        aside h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .fechas {
+            color: var(--suave);
+        }
+
+        aside p + p {
+            margin-top: 0.5mm;
+        }
+
+        .etiquetas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2mm;
+        }
+
+        .etiquetas span {
+            padding: 0.4mm 2mm;
+            border: 0.3mm solid var(--acento-2);
+            border-radius: 1mm;
+            font-size: 8.6pt;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../public/png-banners/avatar.png" alt="" />
+        <div>
+            <h1>Miguel Ángel Vera Ximénez</h1>
+            <p class="puestos">Pixel Artist · Animador 2D/3D · Technical Artist (materiales en Unreal Engine)</p>
+            <div class="contacto">
+                <a href="https://kuren-porfolio-web.vercel.app">kuren-porfolio-web.vercel.app</a>
+                <a href="mailto:kurenmcontact@gmail.com">kurenmcontact@gmail.com</a>
+                <a href="https://www.artstation.com/kurenm">artstation.com/kurenm</a>
+                <a href="https://kurenm.itch.io">kurenm.itch.io</a>
+                <a href="https://www.linkedin.com/in/kuren-dev-art">linkedin.com/in/kuren-dev-art</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div>
+            <section>
+                <h2>Perfil</h2>
+                <p>
+                    Artista de videojuegos centrado en el pixel art: diseño y animación de personajes, secuencias
+                    animadas y UI. También trabajo en 3D (modelado, rig y animación en Blender) y hago materiales y
+                    post-procesado en Unreal Engine. He hecho el arte de cuatro juegos publicados en itch.io: en uno
+                    como lead pixel artist de un equipo de cinco y en los otros tres como único artista.
+                </p>
+            </section>
+
+            <section>
+                <h2>Proyectos</h2>
+
+                <div class="proyecto">
+                    <h3>BloodRunner <span>Equipo de 5 · unos 2 meses · Godot, Aseprite</span></h3>
+                    <p class="rol">Lead pixel artist</p>
+                    <ul>
+                        <li>Dirección artística: coordinar el arte y mantener la coherencia visual del proyecto.</li>
+                        <li>Diseño y animación del personaje principal, el boss y las secuencias animadas.</li>
+                        <li>Props, VFX, UI y sonido (mezclas propias a partir de librerías).</li>
+                    </ul>
+                </div>
+
+                <div class="proyecto">
+                    <h3>Hells Gamble <span>Game jam · equipo de 2 · 1 semana · Godot, Aseprite</span></h3>
+                    <p class="rol">Lead artist (todo el arte)</p>
+                    <ul>
+                        <li>Personaje principal, enemigos y armas: diseño y animación.</li>
+                        <li>Secuencias animadas, tiles, props, fondos, UI y sonido.</li>
+                    </ul>
+                </div>
+
+                <div class="proyecto">
+                    <h3>OuroJam <span>Game jam · equipo de 2 · 3 días · Godot, Aseprite</span></h3>
+                    <p class="rol">Lead artist (todo el arte)</p>
+                    <ul>
+                        <li>Personaje principal y sus animaciones, secuencias animadas.</li>
+                        <li>Tiles, props, fondos, UI y sonido.</li>
+                    </ul>
+                </div>
+
+                <div class="proyecto">
+                    <h3>Neorb <span>Equipo de 2 · 3 meses · Unreal Engine, Blender</span></h3>
+                    <p class="rol">Lead artist 3D (único artista)</p>
+                    <ul>
+                        <li>Concept art, modelado, rig y animación de los enemigos; props y entorno.</li>
+                        <li>Technical art: materiales de post-procesado en Unreal Engine.</li>
+                        <li>UI y sonido.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <aside>
+            <section>
+                <h2>Habilidades</h2>
+                <h3>Pixel art</h3>
+                <p>Diseño de personajes, animación (idle, carrera, ataques, transformaciones), secuencias animadas, tiles, fondos, props, VFX y UI.</p>
+                <h3>3D</h3>
+                <p>Modelado, rigging y animación de personajes. Nodos de geometría para modelos y animaciones procedurales.</p>
+                <h3>Technical art</h3>
+                <p>Materiales y shaders estilizados (cristal, cómic), post-procesado y VFX en Unreal Engine.</p>
+                <h3>Otros</h3>
+                <p>Dirección artística y cohesión visual de un proyecto. Sonido: mezclas propias a partir de librerías.</p>
+            </section>
+
+            <section>
+                <h2>Herramientas</h2>
+                <div class="etiquetas">
+                    <span>Aseprite</span><span>Blender</span><span>Unreal Engine</span><span>Godot</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Formación</h2>
+                <p><strong>Grado en Diseño y Desarrollo de Videojuegos</strong></p>
+                <p>UNIR, Universidad Internacional de La Rioja (online)</p>
+                <p class="fechas">2022 – actualidad · 4.º curso</p>
+            </section>
+        </aside>
+    </main>
+</body>
+</html>

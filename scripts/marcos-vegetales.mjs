@@ -1,9 +1,11 @@
 // Prepara los marcos decorados (Marco2Vegetal, Marco2VegetalAjolote) para usarlos en cualquier tamaño:
 //  - <Marco>_base.png: el borde liso (cuadrante superior izquierdo reflejado), que se estira en 9-slice
 //  - <Marco>_<esquina>.png: la decoración de cada esquina, que se pega encima sin estirar
+//  - <Marco>_base_<color>.png: el borde en los colores de cada proyecto (COLORES), para las tarjetas de su ficha
 //  - EnredaderasBorde_izq.gif / _der.gif: la enredadera animada recortada a 1x, y su versión invertida
 //  - src/styles/marcos-vegetales.css: las clases .marco-vegetal / .marco-ajolote con las medidas de cada sprite,
-//    y .enredadera-izq / .enredadera-der para añadir la enredadera sobre un borde lateral
+//    .enredadera-izq / .enredadera-der para añadir la enredadera sobre un borde lateral y .marco-<color> para
+//    cambiar el color del borde
 // Uso: npm run marcos
 import sharp from 'sharp';
 import { writeFileSync } from 'node:fs';
@@ -17,6 +19,17 @@ const MARCOS = {
     Marco2Vegetal: 'marco-vegetal',
     Marco2VegetalAjolote: 'marco-ajolote',
 };
+
+// Los verdes del borde, de claro a oscuro, y los colores que los sustituyen en cada versión (sacados del logo y
+// del marco de cada proyecto). Retoca aquí los colores y vuelve a ejecutar el script
+const VERDES = ['#186d52', '#155c46', '#124938'];
+const COLORES = {
+    rojo:    ['#ff2429', '#ac1418', '#520820'],  // BloodRunner
+    naranja: ['#ffa520', '#f67d00', '#ac1418'],  // OuroJam
+    dorado:  ['#fff69c', '#fff273', '#ffaa20'],  // Hells Gamble
+    cian:    ['#94ffff', '#00ceff', '#0069ac'],  // Neorb
+};
+const hexARgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 
 const ENREDADERA = 'EnredaderasBorde';
 const TALLO_X = 23;  // Columna (a 1x) del tallo de la enredadera en su lienzo: es la que se alinea con el borde
@@ -115,6 +128,21 @@ for (const [nombre, clase] of Object.entries(MARCOS)) {
     }
 
     await sharp(base, { raw: { width: T, height: T, channels: 4 } }).png().toFile(`${DIR}${nombre}_base.png`);
+
+    // El borde en cada color: cada verde por el color de su misma posición
+    const verdes = VERDES.map(hexARgb);
+    for (const [color, rampa] of Object.entries(COLORES)) {
+        const colores = rampa.map(hexARgb);
+        const pintado = Buffer.from(base);
+        for (let i = 0; i < pintado.length; i += 4) {
+            if (!pintado[i + 3]) continue;
+            const tono = verdes.findIndex(([r, g, b]) => r === base[i] && g === base[i + 1] && b === base[i + 2]);
+            if (tono === -1) throw new Error(`${nombre}: color inesperado en el borde: ${base[i]},${base[i + 1]},${base[i + 2]}`);
+            pintado.set(colores[tono], i);
+        }
+        await sharp(pintado, { raw: { width: T, height: T, channels: 4 } }).png().toFile(`${DIR}${nombre}_base_${color}.png`);
+        css += `\n.${clase}.marco-${color}::after {\n    border-image-source: url('${URL}${nombre}_base_${color}.png');\n}\n`;
+    }
 
     // Cada sprite lleva solo los píxeles de su decoración (no los de otras esquinas que caigan en su rectángulo)
     // y se recorta desde su esquina, para colocarlo pegado a ella sin desplazamientos
