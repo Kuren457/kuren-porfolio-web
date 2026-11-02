@@ -1,6 +1,7 @@
 // Genera los PDF del CV en español e inglés (public/CV_Miguel_Angel_Vera_Ximenez.pdf y ..._EN.pdf) a partir de
 // fuentes/cv/cv.html y cv-en.html, imprimiéndolos con Chrome (sin márgenes ni cabeceras, en A4). Avisa si alguno
-// ocupa más de una página.
+// ocupa más de una página o si lleva fuentes guardadas como dibujos (Type 3, ver la @font-face de cv.html).
+// El PDF va etiquetado (generateTaggedPDF) para que los programas que leen CV sigan el orden de lectura.
 // Uso: npm run cv (necesita Google Chrome instalado; si está en otro sitio: CHROME=<ruta> npm run cv)
 import { spawn } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
@@ -39,8 +40,10 @@ try {
         const alto = (await cmd('Runtime.evaluate', { expression: 'document.body.scrollHeight / document.body.clientHeight', returnByValue: true })).result.value;
         if (alto > 1.001) console.warn(`Aviso: ${origen} ocupa más de una página A4 (${alto.toFixed(2)})`);
 
-        const { data } = await cmd('Page.printToPDF', { paperWidth: 8.27, paperHeight: 11.69, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, printBackground: true, preferCSSPageSize: true });
-        writeFileSync(destino, Buffer.from(data, 'base64'));
+        const { data } = await cmd('Page.printToPDF', { paperWidth: 8.27, paperHeight: 11.69, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, printBackground: true, preferCSSPageSize: true, generateTaggedPDF: true, generateDocumentOutline: true });
+        const pdf = Buffer.from(data, 'base64');
+        if (pdf.includes('/Type3')) console.warn(`Aviso: ${destino} lleva fuentes Type 3 (¿una fuente variable?)`);
+        writeFileSync(destino, pdf);
         console.log('Generado', destino);
     }
     ws.close();

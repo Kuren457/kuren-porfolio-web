@@ -261,7 +261,7 @@ export const proyectos: Proyecto[] = [
         descripcion: 'Único artista del juego: concept, modelado, animación, escenario y materiales de post-procesado en Unreal.',
         rol: 'Lead artist 3D (único artista)',
         equipo: '2 personas',
-        plazo: '3 meses',
+        plazo: 'En desarrollo (desde marzo de 2026)',
         tareas: [
             'Todo el arte del juego',
             'Concept art',
@@ -276,7 +276,7 @@ export const proyectos: Proyecto[] = [
             descripcion: 'Sole artist on the game: concept, modeling, animation, environment and post-process materials in Unreal.',
             rol: 'Lead 3D artist (sole artist)',
             equipo: '2 people',
-            plazo: '3 months',
+            plazo: 'In development (since March 2026)',
             tareas: [
                 "All the game's art",
                 'Concept art',

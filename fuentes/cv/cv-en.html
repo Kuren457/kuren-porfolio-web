@@ -9,9 +9,13 @@
     <meta charset="UTF-8" />
     <title>CV - Miguel Ángel Vera Ximénez</title>
     <style>
+        /* La fuente pixel de la web, pero en una versión fija en negrita (Tiny5Duo-Bold.ttf, sacada de la
+           variable de src/assets/fonts/ con fontTools): de una fuente variable Chrome guarda en el PDF dibujos en
+           vez de letras (fuentes Type 3) y los programas que leen CV no encuentran ni el nombre */
         @font-face {
             font-family: 'Tiny5 Duo';
-            src: url('../../src/assets/fonts/Tiny5Duo.ttf');
+            src: url('Tiny5Duo-Bold.ttf');
+            font-weight: 700;
         }
 
         @page {
@@ -89,12 +93,14 @@
             text-decoration: none;
         }
 
-        /* Cuerpo a dos columnas: experiencia a la izquierda, habilidades a la derecha */
+        /* Una sola columna: con dos, el texto de la de la derecha queda guardado después que el de la izquierda
+           aunque se vea más arriba, y los programas que leen CV lo mezclan */
         main {
-            display: grid;
-            grid-template-columns: 1fr 58mm;
-            gap: 8mm;
             margin-top: 6mm;
+        }
+
+        aside {
+            margin-top: 5mm;
         }
 
         h2 {
@@ -107,7 +113,7 @@
         }
 
         section + section {
-            margin-top: 6mm;
+            margin-top: 5mm;
         }
 
         p + p {
@@ -115,8 +121,8 @@
         }
 
         .proyecto + .proyecto {
-            margin-top: 4mm;
-            padding-top: 4mm;
+            margin-top: 3mm;
+            padding-top: 3mm;
             border-top: 0.3mm solid var(--linea);
         }
 
@@ -128,9 +134,10 @@
             gap: 3mm;
         }
 
+        /* Las fechas, en la línea del nombre (el orden del texto en el PDF es el mismo que se ve) */
         .proyecto h3 span {
             font-size: 8.6pt;
-            font-weight: 400;
+            font-weight: 600;
             color: var(--suave);
             white-space: nowrap;
         }
@@ -138,28 +145,35 @@
         .rol {
             font-weight: 600;
             color: var(--suave);
-            margin: 0.5mm 0 1.2mm;
+            margin: 0.3mm 0 1mm;
         }
 
+        .detalles {
+            font-size: 8.6pt;
+            font-weight: 400;
+        }
+
+        /* Viñetas como texto (las de la lista Chrome las dibuja, y los programas que leen CV no las ven) */
         ul {
+            list-style: none;
+        }
+
+        li {
             padding-left: 4mm;
+            text-indent: -4mm;
+        }
+
+        li::before {
+            content: '•';
+            display: inline-block;
+            width: 4mm;
+            padding-left: 0.5mm;
+            text-indent: 0;
+            color: var(--acento-2);
         }
 
         li + li {
             margin-top: 0.6mm;
-        }
-
-        li::marker {
-            color: var(--acento-2);
-        }
-
-        aside h3 {
-            font-size: 9.6pt;
-            margin: 3mm 0 0.8mm;
-        }
-
-        aside h3:first-of-type {
-            margin-top: 0;
         }
 
         .fechas {
@@ -167,21 +181,9 @@
         }
 
         aside p + p {
-            margin-top: 0.5mm;
+            margin-top: 1mm;
         }
 
-        .etiquetas {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2mm;
-        }
-
-        .etiquetas span {
-            padding: 0.4mm 2mm;
-            border: 0.3mm solid var(--acento-2);
-            border-radius: 1mm;
-            font-size: 8.6pt;
-        }
     </style>
 </head>
 <body>
@@ -191,11 +193,13 @@
             <h1>Miguel Ángel Vera Ximénez</h1>
             <p class="puestos">Pixel Artist · 2D/3D Animator · Technical Artist (Unreal Engine materials)</p>
             <div class="contacto">
-                <a href="https://kuren-porfolio-web.vercel.app">kuren-porfolio-web.vercel.app</a>
                 <a href="mailto:kurenmcontact@gmail.com">kurenmcontact@gmail.com</a>
-                <a href="https://www.artstation.com/kurenm">artstation.com/kurenm</a>
-                <a href="https://kurenm.itch.io">kurenm.itch.io</a>
-                <a href="https://www.linkedin.com/in/kuren-dev-art">linkedin.com/in/kuren-dev-art</a>
+                <a href="tel:+34690367923">+34 690 36 79 23</a>
+                <span>Spain</span>
+                <a href="https://kuren-porfolio-web.vercel.app">https://kuren-porfolio-web.vercel.app</a>
+                <a href="https://www.linkedin.com/in/kuren-dev-art">https://www.linkedin.com/in/kuren-dev-art</a>
+                <a href="https://www.artstation.com/kurenm">https://www.artstation.com/kurenm</a>
+                <a href="https://kurenm.itch.io">https://kurenm.itch.io</a>
             </div>
         </div>
     </header>
@@ -205,10 +209,9 @@
             <section>
                 <h2>Profile</h2>
                 <p>
-                    Game artist focused on pixel art: character design and animation, animated cutscenes and UI. I
-                    also work in 3D (modeling, rigging and animation in Blender) and build materials and
-                    post-processing in Unreal Engine. I have made the art for four games released on itch.io: one as
-                    lead pixel artist in a team of five, and the other three as the sole artist.
+                    Game artist specialized in pixel art: character design and animation, animated cutscenes and UI. Experienced in
+                    3D (modeling, rigging and animation in Blender) and in materials and post-processing in Unreal Engine. Art for
+                    4 games released on itch.io: lead pixel artist in a team of 5 and sole artist on the other 3.
                 </p>
             </section>
 
@@ -216,40 +219,43 @@
                 <h2>Projects</h2>
 
                 <div class="proyecto">
-                    <h3>BloodRunner <span>Team of 5 · about 2 months · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead pixel artist</p>
+                    <h3>BloodRunner <span>Mar 2024 – May 2024</span></h3>
+                    <p class="rol">Lead pixel artist <span class="detalles">· Team of 5 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Art direction: coordinating the art and keeping the project visually consistent.</li>
-                        <li>Design and animation of the main character, the boss and the animated cutscenes.</li>
-                        <li>Props, VFX, UI and sound (my own mixes built from sound libraries).</li>
+                        <li>Led the art for a team of 5 and kept the whole game visually consistent.</li>
+                        <li>Designed and animated the main character: 9 character and 8 VFX animations (attacks, transformation, death).</li>
+                        <li>Animated the 7 limousine cutscene sequences and the final boss.</li>
+                        <li>Created props, VFX and UI, and mixed the sound effects from sound libraries.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>Hells Gamble <span>Game jam · team of 2 · 1 week · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead artist (all the art)</p>
+                    <h3>Hells Gamble <span>Aug 2025</span></h3>
+                    <p class="rol">Lead artist (all the art) <span class="detalles">· 1-week game jam · team of 2 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Main character, enemies and weapons: design and animation.</li>
-                        <li>Animated cutscenes, tiles, props, backgrounds, UI and sound.</li>
+                        <li>Made all the game art in 1 week as the sole artist.</li>
+                        <li>Designed and animated the main character, the weapons and the enemies (150+ animation frames).</li>
+                        <li>Created the animated cutscenes, tiles, props, backgrounds and UI, and mixed the sound.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>OuroJam <span>Game jam · team of 2 · 3 days · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead artist (all the art)</p>
+                    <h3>OuroJam <span>Jul 2025 – Aug 2025</span></h3>
+                    <p class="rol">Lead artist (all the art) <span class="detalles">· 3-day game jam · team of 2 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Main character and its animations, animated cutscenes.</li>
-                        <li>Tiles, props, backgrounds, UI and sound.</li>
+                        <li>Made all the game art in 3 days as the sole artist.</li>
+                        <li>Designed and animated the main character and the intro sequence (42 frames at 512×288).</li>
+                        <li>Created tiles, props, animated backgrounds and UI, and mixed the sound.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>Neorb <span>Team of 2 · 3 months · Unreal Engine, Blender</span></h3>
-                    <p class="rol">Lead 3D artist (sole artist)</p>
+                    <h3>Neorb <span>Mar 2026 – Present</span></h3>
+                    <p class="rol">Lead 3D artist (sole artist) <span class="detalles">· In development · team of 2 · Unreal Engine, Blender</span></p>
                     <ul>
-                        <li>Concept art, modeling, rigging and animation of the enemies; props and environment.</li>
-                        <li>Technical art: post-process materials in Unreal Engine.</li>
-                        <li>UI and sound.</li>
+                        <li>Created the concept art, then modeled, rigged and animated the enemies, props and environment.</li>
+                        <li>Built the post-process materials in Unreal Engine (technical art).</li>
+                        <li>Created the UI and mixed the sound.</li>
                     </ul>
                 </div>
             </section>
@@ -258,28 +264,17 @@
         <aside>
             <section>
                 <h2>Skills</h2>
-                <h3>Pixel art</h3>
-                <p>Character design, animation (idle, run, attacks, transformations), animated cutscenes, tiles, backgrounds, props, VFX and UI.</p>
-                <h3>3D</h3>
-                <p>Character modeling, rigging and animation. Geometry Nodes for procedural models and animation.</p>
-                <h3>Technical art</h3>
-                <p>Stylized materials and shaders (crystal, comic), post-processing and VFX in Unreal Engine.</p>
-                <h3>Other</h3>
-                <p>Art direction and visual consistency across a project. Sound: my own mixes built from sound libraries.</p>
-            </section>
-
-            <section>
-                <h2>Tools</h2>
-                <div class="etiquetas">
-                    <span>Aseprite</span><span>Blender</span><span>Unreal Engine</span><span>Godot</span>
-                </div>
+                <p><strong>Pixel art:</strong> Character design, animation (idle, run, attacks, transformations), animated cutscenes, tiles, backgrounds, props, VFX and UI.</p>
+                <p><strong>3D:</strong> Character modeling, rigging and animation. Geometry Nodes for procedural models and animation.</p>
+                <p><strong>Technical art:</strong> Stylized materials and shaders (crystal, comic), post-processing and VFX in Unreal Engine.</p>
+                <p><strong>Other:</strong> Art direction and visual consistency across a project. Sound mixing from sound libraries.</p>
+                <p><strong>Tools:</strong> Aseprite, Blender, Unreal Engine, Godot.</p>
             </section>
 
             <section>
                 <h2>Education</h2>
-                <p><strong>Bachelor's Degree in Video Game Design and Development</strong></p>
-                <p>UNIR, Universidad Internacional de La Rioja (online)</p>
-                <p class="fechas">2022 – present · 4th year</p>
+                <p><strong>Bachelor's Degree in Video Game Design and Development</strong> · UNIR, Universidad Internacional de La Rioja (online)</p>
+                <p class="fechas">2022 – Present · 4th year</p>
             </section>
         </aside>
     </main>

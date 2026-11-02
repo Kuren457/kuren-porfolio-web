@@ -9,9 +9,13 @@
     <meta charset="UTF-8" />
     <title>CV - Miguel Ángel Vera Ximénez</title>
     <style>
+        /* La fuente pixel de la web, pero en una versión fija en negrita (Tiny5Duo-Bold.ttf, sacada de la
+           variable de src/assets/fonts/ con fontTools): de una fuente variable Chrome guarda en el PDF dibujos en
+           vez de letras (fuentes Type 3) y los programas que leen CV no encuentran ni el nombre */
         @font-face {
             font-family: 'Tiny5 Duo';
-            src: url('../../src/assets/fonts/Tiny5Duo.ttf');
+            src: url('Tiny5Duo-Bold.ttf');
+            font-weight: 700;
         }
 
         @page {
@@ -89,12 +93,14 @@
             text-decoration: none;
         }
 
-        /* Cuerpo a dos columnas: experiencia a la izquierda, habilidades a la derecha */
+        /* Una sola columna: con dos, el texto de la de la derecha queda guardado después que el de la izquierda
+           aunque se vea más arriba, y los programas que leen CV lo mezclan */
         main {
-            display: grid;
-            grid-template-columns: 1fr 58mm;
-            gap: 8mm;
             margin-top: 6mm;
+        }
+
+        aside {
+            margin-top: 5mm;
         }
 
         h2 {
@@ -107,7 +113,7 @@
         }
 
         section + section {
-            margin-top: 6mm;
+            margin-top: 5mm;
         }
 
         p + p {
@@ -115,8 +121,8 @@
         }
 
         .proyecto + .proyecto {
-            margin-top: 4mm;
-            padding-top: 4mm;
+            margin-top: 3mm;
+            padding-top: 3mm;
             border-top: 0.3mm solid var(--linea);
         }
 
@@ -128,9 +134,10 @@
             gap: 3mm;
         }
 
+        /* Las fechas, en la línea del nombre (el orden del texto en el PDF es el mismo que se ve) */
         .proyecto h3 span {
             font-size: 8.6pt;
-            font-weight: 400;
+            font-weight: 600;
             color: var(--suave);
             white-space: nowrap;
         }
@@ -138,28 +145,35 @@
         .rol {
             font-weight: 600;
             color: var(--suave);
-            margin: 0.5mm 0 1.2mm;
+            margin: 0.3mm 0 1mm;
         }
 
+        .detalles {
+            font-size: 8.6pt;
+            font-weight: 400;
+        }
+
+        /* Viñetas como texto (las de la lista Chrome las dibuja, y los programas que leen CV no las ven) */
         ul {
+            list-style: none;
+        }
+
+        li {
             padding-left: 4mm;
+            text-indent: -4mm;
+        }
+
+        li::before {
+            content: '•';
+            display: inline-block;
+            width: 4mm;
+            padding-left: 0.5mm;
+            text-indent: 0;
+            color: var(--acento-2);
         }
 
         li + li {
             margin-top: 0.6mm;
-        }
-
-        li::marker {
-            color: var(--acento-2);
-        }
-
-        aside h3 {
-            font-size: 9.6pt;
-            margin: 3mm 0 0.8mm;
-        }
-
-        aside h3:first-of-type {
-            margin-top: 0;
         }
 
         .fechas {
@@ -167,21 +181,9 @@
         }
 
         aside p + p {
-            margin-top: 0.5mm;
+            margin-top: 1mm;
         }
 
-        .etiquetas {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2mm;
-        }
-
-        .etiquetas span {
-            padding: 0.4mm 2mm;
-            border: 0.3mm solid var(--acento-2);
-            border-radius: 1mm;
-            font-size: 8.6pt;
-        }
     </style>
 </head>
 <body>
@@ -191,11 +193,13 @@
             <h1>Miguel Ángel Vera Ximénez</h1>
             <p class="puestos">Pixel Artist · Animador 2D/3D · Technical Artist (materiales en Unreal Engine)</p>
             <div class="contacto">
-                <a href="https://kuren-porfolio-web.vercel.app">kuren-porfolio-web.vercel.app</a>
                 <a href="mailto:kurenmcontact@gmail.com">kurenmcontact@gmail.com</a>
-                <a href="https://www.artstation.com/kurenm">artstation.com/kurenm</a>
-                <a href="https://kurenm.itch.io">kurenm.itch.io</a>
-                <a href="https://www.linkedin.com/in/kuren-dev-art">linkedin.com/in/kuren-dev-art</a>
+                <a href="tel:+34690367923">+34 690 36 79 23</a>
+                <span>España</span>
+                <a href="https://kuren-porfolio-web.vercel.app">https://kuren-porfolio-web.vercel.app</a>
+                <a href="https://www.linkedin.com/in/kuren-dev-art">https://www.linkedin.com/in/kuren-dev-art</a>
+                <a href="https://www.artstation.com/kurenm">https://www.artstation.com/kurenm</a>
+                <a href="https://kurenm.itch.io">https://kurenm.itch.io</a>
             </div>
         </div>
     </header>
@@ -205,10 +209,9 @@
             <section>
                 <h2>Perfil</h2>
                 <p>
-                    Artista de videojuegos centrado en el pixel art: diseño y animación de personajes, secuencias
-                    animadas y UI. También trabajo en 3D (modelado, rig y animación en Blender) y hago materiales y
-                    post-procesado en Unreal Engine. He hecho el arte de cuatro juegos publicados en itch.io: en uno
-                    como lead pixel artist de un equipo de cinco y en los otros tres como único artista.
+                    Artista de videojuegos especializado en pixel art: diseño y animación de personajes, secuencias animadas y UI.
+                    Experiencia en 3D (modelado, rig y animación en Blender) y en materiales y post-procesado en Unreal Engine.
+                    Arte de 4 juegos publicados en itch.io: lead pixel artist en un equipo de 5 y único artista en los otros 3.
                 </p>
             </section>
 
@@ -216,40 +219,43 @@
                 <h2>Proyectos</h2>
 
                 <div class="proyecto">
-                    <h3>BloodRunner <span>Equipo de 5 · unos 2 meses · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead pixel artist</p>
+                    <h3>BloodRunner <span>Mar 2024 – May 2024</span></h3>
+                    <p class="rol">Lead pixel artist <span class="detalles">· Equipo de 5 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Dirección artística: coordinar el arte y mantener la coherencia visual del proyecto.</li>
-                        <li>Diseño y animación del personaje principal, el boss y las secuencias animadas.</li>
-                        <li>Props, VFX, UI y sonido (mezclas propias a partir de librerías).</li>
+                        <li>Dirigí el arte de un equipo de 5 personas y mantuve la coherencia visual de todo el juego.</li>
+                        <li>Diseñé y animé al protagonista: 9 animaciones de personaje y 8 de VFX (ataques, transformación en sangre, muerte).</li>
+                        <li>Animé las 7 secuencias de la limusina y al jefe final.</li>
+                        <li>Creé props, VFX y UI, y mezclé los efectos de sonido a partir de librerías.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>Hells Gamble <span>Game jam · equipo de 2 · 1 semana · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead artist (todo el arte)</p>
+                    <h3>Hells Gamble <span>Ago 2025</span></h3>
+                    <p class="rol">Lead artist (todo el arte) <span class="detalles">· Game jam de 1 semana · equipo de 2 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Personaje principal, enemigos y armas: diseño y animación.</li>
-                        <li>Secuencias animadas, tiles, props, fondos, UI y sonido.</li>
+                        <li>Hice todo el arte del juego en 1 semana como único artista.</li>
+                        <li>Diseñé y animé al protagonista, las armas y los enemigos (más de 150 fotogramas de animación).</li>
+                        <li>Creé las secuencias animadas, tiles, props, fondos y UI, y mezclé el sonido.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>OuroJam <span>Game jam · equipo de 2 · 3 días · Godot, Aseprite</span></h3>
-                    <p class="rol">Lead artist (todo el arte)</p>
+                    <h3>OuroJam <span>Jul 2025 – Ago 2025</span></h3>
+                    <p class="rol">Lead artist (todo el arte) <span class="detalles">· Game jam de 3 días · equipo de 2 · Godot, Aseprite</span></p>
                     <ul>
-                        <li>Personaje principal y sus animaciones, secuencias animadas.</li>
-                        <li>Tiles, props, fondos, UI y sonido.</li>
+                        <li>Hice todo el arte del juego en 3 días como único artista.</li>
+                        <li>Diseñé y animé al protagonista y la secuencia de inicio (42 fotogramas a 512×288).</li>
+                        <li>Creé tiles, props, fondos animados y UI, y mezclé el sonido.</li>
                     </ul>
                 </div>
 
                 <div class="proyecto">
-                    <h3>Neorb <span>Equipo de 2 · 3 meses · Unreal Engine, Blender</span></h3>
-                    <p class="rol">Lead artist 3D (único artista)</p>
+                    <h3>Neorb <span>Mar 2026 – Actualidad</span></h3>
+                    <p class="rol">Lead artist 3D (único artista) <span class="detalles">· En desarrollo · equipo de 2 · Unreal Engine, Blender</span></p>
                     <ul>
-                        <li>Concept art, modelado, rig y animación de los enemigos; props y entorno.</li>
-                        <li>Technical art: materiales de post-procesado en Unreal Engine.</li>
-                        <li>UI y sonido.</li>
+                        <li>Hice el concept art y modelé, rigueé y animé a los enemigos como único artista, además de props y entorno.</li>
+                        <li>Desarrollé los materiales de post-procesado en Unreal Engine (technical art).</li>
+                        <li>Creé la UI y mezclé el sonido.</li>
                     </ul>
                 </div>
             </section>
@@ -258,28 +264,17 @@
         <aside>
             <section>
                 <h2>Habilidades</h2>
-                <h3>Pixel art</h3>
-                <p>Diseño de personajes, animación (idle, carrera, ataques, transformaciones), secuencias animadas, tiles, fondos, props, VFX y UI.</p>
-                <h3>3D</h3>
-                <p>Modelado, rigging y animación de personajes. Nodos de geometría para modelos y animaciones procedurales.</p>
-                <h3>Technical art</h3>
-                <p>Materiales y shaders estilizados (cristal, cómic), post-procesado y VFX en Unreal Engine.</p>
-                <h3>Otros</h3>
-                <p>Dirección artística y cohesión visual de un proyecto. Sonido: mezclas propias a partir de librerías.</p>
-            </section>
-
-            <section>
-                <h2>Herramientas</h2>
-                <div class="etiquetas">
-                    <span>Aseprite</span><span>Blender</span><span>Unreal Engine</span><span>Godot</span>
-                </div>
+                <p><strong>Pixel art:</strong> Diseño de personajes, animación (idle, carrera, ataques, transformaciones), secuencias animadas, tiles, fondos, props, VFX y UI.</p>
+                <p><strong>3D:</strong> Modelado, rigging y animación de personajes. Nodos de geometría para modelos y animaciones procedurales.</p>
+                <p><strong>Technical art:</strong> Materiales y shaders estilizados (cristal, cómic), post-procesado y VFX en Unreal Engine.</p>
+                <p><strong>Otros:</strong> Dirección artística y cohesión visual de un proyecto. Mezcla de sonido a partir de librerías.</p>
+                <p><strong>Herramientas:</strong> Aseprite, Blender, Unreal Engine, Godot.</p>
             </section>
 
             <section>
                 <h2>Formación</h2>
-                <p><strong>Grado en Diseño y Desarrollo de Videojuegos</strong></p>
-                <p>UNIR, Universidad Internacional de La Rioja (online)</p>
-                <p class="fechas">2022 – actualidad · 4.º curso</p>
+                <p><strong>Grado en Diseño y Desarrollo de Videojuegos</strong> · UNIR, Universidad Internacional de La Rioja (online)</p>
+                <p class="fechas">2022 – Actualidad · 4.º curso</p>
             </section>
         </aside>
     </main>
