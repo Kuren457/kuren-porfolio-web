@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { imageMetadata } from 'astro/assets/utils';
 import { idiomaDe } from '../i18n/idioma';
 import { etiquetas, traducir } from '../i18n/obras';
+import { animacionesDe, type Hoja } from '../utils/hojas';
 
 const UI = '/Pixel-art/UI Elements/';
 const ANCHO_TIMELAPSE = 288; // Ancho máximo en px de las tarjetas de timelapse (se ajusta a una escala entera)
@@ -35,13 +36,14 @@ export interface Props {
     logoAlt?: string;
     ancho?: number;             // Solo vídeos: ancho y alto en píxeles (en las imágenes se leen solos)
     alto?: number;
+    hoja?: Hoja;                // src es una hoja de sprites: la tarjeta reproduce sus animaciones y el visor enseña la hoja
     timelapse?: string;         // GIF a 1x de cómo se dibujó src (timelapses.ts). Sección de timelapses: se enseña la obra
                                 // y se desvanece a él; en un carrusel: crece y se reproduce al mantener el ratón encima
     variante?: 'galeria' | 'carrusel'; // galeria: columnas de "Todos"; carrusel: altura fija y ancho natural
     copia?: boolean;            // Segunda tanda de un carrusel, solo para que el bucle no tenga corte
 }
 
-const { src, alt = '', category, tema, timelapse, variante = 'galeria', copia = false } = Astro.props;
+const { src, alt = '', category, tema, hoja, timelapse, variante = 'galeria', copia = false } = Astro.props;
 // Los textos de las obras se escriben en español; en la versión en inglés se traducen (src/i18n/obras.ts)
 const idioma = idiomaDe(Astro);
 const title = traducir(Astro.props.title, idioma);
@@ -59,12 +61,15 @@ const esVideo = /\.(webm|mp4)$/i.test(src);
 // Ancho y alto reales de la imagen (se leen al generar la página): así el navegador reserva su hueco antes
 // de descargarla y la galería no se recoloca al cargar, que es lo que necesita la aparición al entrar en pantalla
 // (los vídeos no se pueden leer así: sus medidas vienen en los datos)
+// (en las hojas de sprites, lo que se ve es un fotograma)
+const animaciones = hoja && await animacionesDe(src, hoja);
 const { width, height } = esVideo
     ? { width: Astro.props.ancho, height: Astro.props.alto }
+    : animaciones ? { width: animaciones.ancho, height: animaciones.alto }
     : await imageMetadata(await readFile(join(process.cwd(), 'public', src)), src);
 
-// Los renders 3D se escalan suavizados; el pixel art, sin suavizar
-const estiloMedia = temaActual?.render ? undefined : 'image-rendering: pixelated;';
+// Los renders 3D y los vídeos (grabados a 1080p, se ven reducidos) se escalan suavizados; el pixel art, sin suavizar
+const estiloMedia = temaActual?.render || esVideo ? undefined : 'image-rendering: pixelated;';
 const claseMedia = 'pixel-card__media w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500';
 const timelapseAlPasar = !!timelapse && variante === 'carrusel';
 const claseVariante = variante === 'carrusel' ? `pixel-card--carrusel${timelapseAlPasar ? ' pixel-card--timelapse-al-pasar' : ''}`
@@ -91,7 +96,9 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
                     <img alt="" style={estiloMedia} class={`timelapse__proceso ${claseZoom}`} />
                     <div class="timelapse__progreso"></div>
                 </div>
-            ) : esVideo
+            ) : animaciones
+                ? <canvas data-hoja={JSON.stringify(animaciones)} data-src={src} width={width} height={height} role="img" aria-label={alt || title} style={estiloMedia} class={`${claseMedia} pixel-card__hoja`}></canvas>
+            : esVideo
                 ? <video data-video={src} width={width} height={height} loop muted playsinline preload="none" style={estiloMedia} class={claseMedia}></video>
                 : <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia} />}
             <!-- Al pasar el ratón, solo el nombre (la descripción sale en la ficha del visor, Lightbox.astro) -->
@@ -108,5 +115,6 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
 <script>
     import '../scripts/aparicion';
     import '../scripts/videos';
+    import '../scripts/hojas';
     import '../scripts/timelapses';
 </script>

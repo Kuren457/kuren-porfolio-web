@@ -6,6 +6,7 @@ import { obras as obras3D } from './tresD';
 import { timelapseDe } from './timelapses';
 import type { Obra } from './tipos';
 import type { Idioma } from '../i18n/idioma';
+import type { Hoja } from '../utils/hojas';
 
 // Una sección de obras de la ficha de un proyecto (p. ej. hojas de sprites, turntables, wireframes, materiales)
 export interface Seccion {
@@ -54,6 +55,18 @@ const deTema = (...temas: string[]) => obras.filter((obra) => obra.tema && temas
 // Obras de la galería 3D, por su archivo
 const de3D = (...srcs: string[]) => srcs.map((src) => obras3D.find((obra) => obra.src === src)!);
 
+// Clips de gameplay, en public/Pixel-art/Clips/ (recomprimidos y sin sonido; los originales, en fuentes/Clips/).
+// Ancho y alto, los del vídeo
+const clip = (archivo: string, title: string, tema: Obra['tema'], juego: string, ancho = 1920, alto = 1080): Obra =>
+    ({ src: '/Pixel-art/Clips/' + archivo, ancho, alto, category: 'Gameplay', title, description: `Gameplay de ${juego}`, tema });
+
+// Hojas de sprites, en public/Pixel-art/Spritesheets/ (ver Hoja en src/utils/hojas.ts)
+const hoja = (archivo: string, title: string, tema: Obra['tema'], datos: Hoja): Obra =>
+    ({ src: '/Pixel-art/Spritesheets/' + archivo, category: 'Animacion', title, description: 'Hoja de sprites', tema, hoja: datos });
+
+const HOJAS = 'Hojas de sprites';
+const HOJAS_DESCRIPCION = 'Cada tarjeta reproduce las animaciones desde su hoja, tal y como se exportó para el juego. Púlsala para ver la hoja entera.';
+
 export const proyectos: Proyecto[] = [
     {
         slug: 'bloodrunner',
@@ -95,7 +108,28 @@ export const proyectos: Proyecto[] = [
         marco: UI + 'MarcoBR.png',
         fondo: UI + 'MarcoBR_fondo.png',
         omega: true,
-        obras: deTema('bloodrunner'),
+        obras: [
+            ...deTema('bloodrunner'),
+            // Sacados del tráiler (fuentes/Clips/Trailer_BloodRunner.mp4), sin los rótulos
+            clip('Clip_1_BloodRunner.mp4', 'Llegada y combate', 'bloodrunner', 'BloodRunner'),
+            clip('Clip_2_BloodRunner.mp4', 'Transformación en sangre', 'bloodrunner', 'BloodRunner'),
+            clip('Clip_3_BloodRunner.mp4', 'Combate', 'bloodrunner', 'BloodRunner'),
+            clip('Clip_4_BloodRunner.mp4', 'Exploración', 'bloodrunner', 'BloodRunner'),
+            clip('Clip_5_BloodRunner.mp4', 'Secuencias', 'bloodrunner', 'BloodRunner'),
+        ],
+        secciones: [{
+            titulo: HOJAS,
+            descripcion: HOJAS_DESCRIPCION,
+            obras: [
+                // En estas hojas cada fila lleva su nombre escrito después del último fotograma. En la del
+                // protagonista, los ataques cuerpo a cuerpo son de 96 px de ancho
+                hoja('BloodRunner/Personaje_entero-Sheet.png', 'Protagonista', 'bloodrunner', { celda: [48, 48], fotogramas: [7, 8, 6, 9, 7, 12, 10, [5, 96], [5, 96], 5, 5, 5, 6, 5, 14, 8, 2] }),
+                hoja('BloodRunner/Coche_Sheet_Completa.png', 'Escenas del coche', 'bloodrunner', { celda: [272, 104], fotogramas: [12, 12, 12, 12, 12, 15, 7] }),
+                hoja('BloodRunner/Escena_Coche1_Tuto-Sheet.png', 'Escena del coche (tutorial)', 'bloodrunner', { celda: [272, 104] }),
+                hoja('BloodRunner/Boss-Sheet.png', 'Jefe final', 'bloodrunner', { celda: [64, 64], fotogramas: [4, 8] }),
+                hoja('BloodRunner/Bala_Enemigo-Sheet.png', 'Bala enemiga', 'bloodrunner', { celda: [48, 48], fotogramas: [5, 5] }),
+            ],
+        }],
     },
     {
         slug: 'ourojam',
@@ -138,7 +172,27 @@ export const proyectos: Proyecto[] = [
         logoAncho: 128, // 64 px a 1x, a 2 px por píxel: llena el hueco del dragón
         marco: UI + 'Dar_vueltas_dragon_1x.gif',
         serpiente: true,
-        obras: deTema('ourojam'),
+        obras: [
+            ...deTema('ourojam'),
+            clip('Clip_1_OuroJam.mp4', 'Animación de inicio', 'ourojam', 'OuroJam', 1896, 1076),
+            clip('Clip_2_OuroJam.mp4', 'Recuperar las piezas', 'ourojam', 'OuroJam', 1912, 1082),
+            clip('Clip_4_OuroJam.mp4', 'Menú y selección de nivel', 'ourojam', 'OuroJam', 1910, 1078),
+            clip('Clip_3_OuroJam.mp4', 'Final', 'ourojam', 'OuroJam'),
+        ],
+        secciones: [{
+            titulo: HOJAS,
+            descripcion: HOJAS_DESCRIPCION,
+            obras: [
+                // Las celdas 35 y 36 son las máscaras en blanco y negro del corte, no fotogramas
+                hoja('OuroJam/Animacion_principio_Attack-Sheet.png', 'Animación de inicio: ataque', 'ourojam', { celda: [512, 288], seguida: true, saltar: [35, 36] }),
+                hoja('OuroJam/Animacion_principio-Sheet.png', 'Animación de inicio', 'ourojam', { celda: [512, 288] }),
+                hoja('OuroJam/Fondo_chino-Sheet.png', 'Fondo animado', 'ourojam', { celda: [512, 288], fps: 8 }),
+                hoja('OuroJam/Fondo_chino_transicion-Sheet.png', 'Transición del fondo', 'ourojam', { celda: [512, 288] }),
+                hoja('OuroJam/Dar_vueltas_dragon_export-Sheet.png', 'Dragón dando vueltas', 'ourojam', { celda: [192, 192] }),
+                hoja('OuroJam/Comerse_cola_anim_export-Sheet.png', 'Dragón mordiéndose la cola', 'ourojam', { celda: [192, 192] }),
+                { src: '/Pixel-art/Spritesheets/OuroJam/Tiles.png', category: 'Escenario', title: 'Tileset', description: 'Tiles del nivel', tema: 'ourojam' },
+            ],
+        }],
     },
     {
         slug: 'hells-gamble',
@@ -183,7 +237,23 @@ export const proyectos: Proyecto[] = [
         color: 'dorado',
         logoPixelado: true,
         persecucion: true,
-        obras: deTema('gambling'),
+        obras: [
+            ...deTema('gambling'),
+            clip('Clip_1_HellsGamble.mp4', 'Diálogo con el demonio', 'gambling', 'Hells Gamble', 1918, 1074),
+            clip('Clip_3_HellsGamble.mp4', 'Primera oleada', 'gambling', 'Hells Gamble'),
+            clip('Clip_4_HellsGamble.mp4', 'Oleada 7', 'gambling', 'Hells Gamble', 1280, 720),
+            clip('Clip_2_HellsGamble.mp4', 'Tienda y estadísticas', 'gambling', 'Hells Gamble', 1920, 1078),
+        ],
+        secciones: [{
+            titulo: HOJAS,
+            descripcion: HOJAS_DESCRIPCION,
+            obras: [
+                hoja('HellsGamble/Personaje_Demon-Sheet.png', 'Protagonista', 'gambling', { celda: [32, 32], seguida: true }),
+                hoja('HellsGamble/TodosEnemigos-Sheet.png', 'Enemigos', 'gambling', { celda: [128, 96], seguida: true }),
+                hoja('HellsGamble/Armas-Sheet.png', 'Armas', 'gambling', { celda: [48, 48], seguida: true }),
+                hoja('HellsGamble/Robar_Galletas-Sheet.png', 'Robo de galletas', 'gambling', { celda: [160, 90], seguida: true }),
+            ],
+        }],
     },
     {
         slug: 'neorb',

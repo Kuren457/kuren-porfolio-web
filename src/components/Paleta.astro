@@ -1,0 +1,15 @@
+---
+// src/components/Paleta.astro
+// La paleta de todos los proyectos de pixel art (public/Pixel-art/Paleta.png): cada píxel de la imagen, una
+// casilla, en la misma cuadrícula. Se lee al generar la página; al pasar el ratón sale el código del color.
+import sharp from 'sharp';
+import { join } from 'node:path';
+
+const { data, info } = await sharp(join(process.cwd(), 'public/Pixel-art/Paleta.png')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+const hex = (i: number) => '#' + [data[i], data[i + 1], data[i + 2]].map((canal) => canal.toString(16).padStart(2, '0')).join('');
+const colores = Array.from({ length: info.width * info.height }, (_, i) => (data[i * 4 + 3] ? hex(i * 4) : undefined));
+---
+
+<ul class="paleta" style={`--columnas: ${info.width};`}>
+    {colores.map((color) => <li style={color && `background: ${color};`} title={color} aria-label={color}></li>)}
+</ul>

@@ -2,8 +2,9 @@
 // src/vistas/Proyecto.astro
 // Ficha de un proyecto (una página por cada uno de src/data/proyectos.ts, en src/pages/proyectos/ y en inglés en
 // src/pages/en/projects/): arriba, a la izquierda, una vitrina con el arte del juego y a la derecha el nombre,
-// el logo (enlace al juego) y en tarjetas el resumen, el rol, el equipo y el plazo, y lo que hice; debajo, sus secciones
-// propias (hojas de sprites, turntables...) y los clips de gameplay. Solo salen las secciones que tienen obras.
+// el logo (enlace al juego) y en tarjetas el resumen, el rol, el equipo y el plazo, lo que hice y, en los de pixel
+// art, la paleta; debajo, sus secciones propias (hojas de sprites, turntables...) y los clips de gameplay. Solo salen
+// las secciones que tienen obras.
 import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
@@ -11,6 +12,7 @@ import PixelCard from '../components/PixelCard.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Vitrina from '../components/Vitrina.astro';
 import TarjetaProyecto from '../components/TarjetaProyecto.astro';
+import Paleta from '../components/Paleta.astro';
 import { enIdioma, type Proyecto } from '../data/proyectos';
 import { marcoAleatorio } from '../utils/marcoAleatorio';
 import { idiomaDe, rutas } from '../i18n/idioma';
@@ -85,6 +87,14 @@ const datos = [
                             {proyecto.tareas.map((tarea) => <li>{tarea}</li>)}
                         </ul>
                     </div>
+                    <!-- En los de pixel art, la paleta común a todos -->
+                    {!es3D && (
+                        <div data-aparicion class={`ficha__tarjeta ${marco()}`}>
+                            <h2 class="text-xl text-white mb-1">{t.paleta}</h2>
+                            <p class="text-sm text-[#94a3b8] mb-3">{t.paletaDescripcion}</p>
+                            <Paleta />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -549,6 +549,17 @@ body::after {
     color: #fff;
 }
 
+/* La paleta (Paleta.astro): la cuadrícula de la imagen, con casillas cuadradas */
+.paleta {
+    display: grid;
+    grid-template-columns: repeat(var(--columnas), 1fr);
+    gap: 2px;
+}
+
+.paleta li {
+    aspect-ratio: 1;
+}
+
 /* Lo que hice: en columnas, con un cuadradito de color de viñeta */
 .ficha__tareas {
     columns: 2 220px;
@@ -941,4 +952,9 @@ body::after {
 @keyframes gradientFlow {
     0% { background-position: 0% center; }
     100% { background-position: -200% center; }
+}
+/* Hojas de sprites (PixelCard con hoja): un fondo algo más claro que el de la tarjeta, para que se vean bien los
+   sprites oscuros (el jefe de BloodRunner, los enemigos de Hells Gamble) */
+.pixel-card__hoja {
+    background: #241c2c;
 }
