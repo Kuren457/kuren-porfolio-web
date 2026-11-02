@@ -2,7 +2,6 @@
 // Los proyectos (en la portada, una fila cada uno: tarjeta, vista previa y mini carrusel con sus obras; y cada uno
 // con su ficha en /proyectos/<slug>, src/pages/proyectos/[slug].astro) y el carrusel de trabajos personales.
 import { obras } from './pixelArt';
-import { obras as obras3D } from './tresD';
 import { timelapseDe } from './timelapses';
 import type { Obra } from './tipos';
 import type { Idioma } from '../i18n/idioma';
@@ -52,13 +51,15 @@ const UI = '/Pixel-art/UI Elements/';
 
 const deTema = (...temas: string[]) => obras.filter((obra) => obra.tema && temas.includes(obra.tema));
 
-// Obras de la galería 3D, por su archivo
-const de3D = (...srcs: string[]) => srcs.map((src) => obras3D.find((obra) => obra.src === src)!);
-
 // Clips de gameplay, en public/Pixel-art/Clips/ (recomprimidos y sin sonido; los originales, en fuentes/Clips/).
 // Ancho y alto, los del vídeo
 const clip = (archivo: string, title: string, tema: Obra['tema'], juego: string, ancho = 1920, alto = 1080): Obra =>
     ({ src: '/Pixel-art/Clips/' + archivo, ancho, alto, category: 'Gameplay', title, description: `Gameplay de ${juego}`, tema });
+
+// Showcases de los enemigos de Neorb, en public/Pixel-art/Showcase/ (recomprimidos y sin sonido; los originales, en
+// fuentes/Showcase/). Ancho y alto, los del vídeo
+const showcase = (enemigo: string, ancho: number, alto: number): Obra =>
+    ({ src: `/Pixel-art/Showcase/Neorb_${enemigo}_Showcase.mp4`, ancho, alto, category: 'Modelado Animacion', title: enemigo, description: 'Enemigo de Neorb', tema: 'blender' });
 
 // Hojas de sprites, en public/Pixel-art/Spritesheets/ (ver Hoja en src/utils/hojas.ts)
 const hoja = (archivo: string, title: string, tema: Obra['tema'], datos: Hoja): Obra =>
@@ -299,7 +300,10 @@ export const proyectos: Proyecto[] = [
         decoracionIntro: UI + 'MarcoNeorb_Decorations_Anim_1x.gif',
         fondo: UI + 'MarcoNeorb_fondo.png',
         obras: [
-            ...de3D('/3D/FrogCrystal.webm', '/3D/Horse.webm'),
+            showcase('Frogger', 1350, 1080),
+            showcase('Horse', 1350, 1080),
+            showcase('Inception', 1080, 1920),
+            showcase('Worm', 1440, 1080),
             // Fragmentos de gameplay (solo aquí, no en la galería 3D)
             { src: '/3D/Dash.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Dash', description: 'Gameplay de Neorb', tema: 'blender' },
             { src: '/3D/Intro.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Intro', description: 'Gameplay de Neorb', tema: 'blender' },

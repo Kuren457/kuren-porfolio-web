@@ -67,6 +67,7 @@ const FRASES: Record<string, string> = {
     'Transformación Personaje Principal': 'Main character transformation',
     // Descripciones
     'Animación de personaje': 'Character animation',
+    'Enemigo de Neorb': 'Neorb enemy',
     'Escenario': 'Environment',
     'Escenario (inspirado en una imagen de Pinterest)': 'Environment (inspired by a Pinterest image)',
     'Escenario y Animación': 'Environment and animation',
