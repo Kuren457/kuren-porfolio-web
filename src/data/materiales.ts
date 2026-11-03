@@ -93,8 +93,8 @@ export const postProceso: Breakdown = {
             src: M + 'Neorb/01_PostProcess_Graph/M_PostProcess_Graph_02_Controller_StencilPalette.png', tema: 'unreal',
             titulo: { es: 'Controlador y paleta', en: 'Controller and palette' },
             pie: {
-                es: 'Arriba, el controlador: el Custom Depth del propio píxel multiplicado por −4.\nAbajo, el color: el Custom Stencil de cada objeto se divide entre 64 y sirve de coordenada para leer una textura de paleta de 64 entradas, y Brightness ajusta su intensidad. Así cada objeto elige su color solo con su número de stencil, sin tocar el material.',
-                en: "At the top, the controller: the pixel's own Custom Depth multiplied by −4.\nAt the bottom, the color: each object's Custom Stencil is divided by 64 and used as the coordinate to read a 64-entry palette texture, and Brightness sets its intensity. That way each object picks its color just with its stencil number, without touching the material.",
+                es: 'Arriba, el controlador: el Custom Depth del propio píxel multiplicado por −4.\nAbajo, el color: el Custom Stencil de cada objeto se divide entre 64 y sirve de coordenada para leer una textura de paleta de 64 entradas, y Brightness ajusta su intensidad. Así cada objeto elige su color solo con su número de stencil, sin tocar el material, y el color puede cambiar en el juego: los enemigos pasan de verde a amarillo y a rojo según su vida.',
+                en: "At the top, the controller: the pixel's own Custom Depth multiplied by −4.\nAt the bottom, the color: each object's Custom Stencil is divided by 64 and used as the coordinate to read a 64-entry palette texture, and Brightness sets its intensity. That way each object picks its color just with its stencil number, without touching the material, and the color can change in game: enemies go from green to yellow to red as they lose health.",
             },
         },
         {

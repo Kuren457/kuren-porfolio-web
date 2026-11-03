@@ -3,7 +3,7 @@
 // Ficha de un proyecto (una página por cada uno de src/data/proyectos.ts, en src/pages/proyectos/ y en inglés en
 // src/pages/en/projects/): arriba, a la izquierda, una vitrina con el arte del juego y a la derecha el nombre,
 // el logo (enlace al juego) y en tarjetas el resumen, el rol, el equipo y el plazo, lo que hice y, en los de pixel
-// art, la paleta; debajo, los breakdowns de sus materiales, sus secciones propias (hojas de sprites, turntables...)
+// art, la paleta; debajo, el proceso (cómo lo hice), los breakdowns de sus materiales, sus secciones propias (hojas de sprites, turntables...)
 // y los clips de gameplay. Solo salen las secciones que tienen obras.
 import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
@@ -100,6 +100,23 @@ const datos = [
             </div>
         </div>
     </section>
+
+    <!-- Proceso: cómo lo hice, en tarjetas con el marco del color del proyecto -->
+    {proyecto.proceso && (
+        <section class="pb-16 px-5 relative z-10">
+            <div class="container mx-auto max-w-6xl">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">{t.proceso}</h2>
+                <div class="ficha__proceso">
+                    {proyecto.proceso.map((paso) => (
+                        <div data-aparicion class={`ficha__tarjeta ${marco()}`}>
+                            <h3 class="text-lg font-bold text-white mb-2">{paso.titulo}</h3>
+                            <p class="text-[#cbd5e1]">{paso.texto}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
 
     <!-- Breakdowns de sus materiales (src/data/materiales.ts) -->
     {proyecto.breakdowns?.map((breakdown) => (

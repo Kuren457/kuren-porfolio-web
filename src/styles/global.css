@@ -560,6 +560,14 @@ body::after {
     aspect-ratio: 1;
 }
 
+/* Proceso: las tarjetas en columnas (2 o 3, según quepan) */
+.ficha__proceso {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 0 24px;
+    align-items: start;
+}
+
 /* Lo que hice: en columnas, con un cuadradito de color de viñeta */
 .ficha__tareas {
     columns: 2 220px;

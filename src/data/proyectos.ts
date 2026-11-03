@@ -15,6 +15,12 @@ export interface Seccion {
     obras: Obra[];
 }
 
+// Un paso del proceso de un proyecto (cómo lo hice), en la ficha
+export interface Paso {
+    titulo: string;
+    texto: string;
+}
+
 export interface Proyecto {
     slug: string;           // Dirección de su ficha: /proyectos/<slug>
     nombre: string;
@@ -23,6 +29,7 @@ export interface Proyecto {
     equipo?: string;
     plazo?: string;
     tareas: string[];       // Lo que hice, en la ficha
+    proceso?: Paso[];       // Cómo lo hice: decisiones y problemas, en la ficha
     herramientas: string;
     enlace: string;         // El juego en itch.io
     logo: string;
@@ -42,7 +49,7 @@ export interface Proyecto {
     secciones?: Seccion[];  // Más secciones de la ficha, entre el arte y el gameplay
     breakdowns?: Breakdown[]; // Breakdowns de sus materiales (src/data/materiales.ts), antes de las secciones
     // Los textos en inglés (la versión en /en/); los títulos de las secciones se traducen en src/i18n/obras.ts
-    en: Pick<Proyecto, 'descripcion' | 'rol' | 'equipo' | 'plazo' | 'tareas'>;
+    en: Pick<Proyecto, 'descripcion' | 'rol' | 'equipo' | 'plazo' | 'tareas' | 'proceso'>;
 }
 
 // El proyecto con sus textos en el idioma de la página
@@ -88,7 +95,35 @@ export const proyectos: Proyecto[] = [
             'UI',
             'Sonido: mezclas propias a partir de sonidos de Freesound',
         ],
+        proceso: [
+            {
+                titulo: 'Coherencia en un equipo de 5',
+                texto: 'Establecí una paleta general que todo el equipo debía seguir, y cada semana hacíamos una reunión en la que todos presentaban su trabajo para darnos feedback y ayudarnos con lo que hiciera falta.',
+            },
+            {
+                titulo: 'La transformación en sangre',
+                texto: 'La primera idea era que el personaje se derritiera en sangre, pero para que encajara con el gameplay habría que dibujar una versión de cada fotograma de cada animación. La replanteé como una cortina de sangre que rodea al personaje y lo envuelve por completo, inspirada en las manos corruptas de Zelda: Breath of the Wild. Así se reproduce encima de cualquier animación.',
+            },
+            {
+                titulo: 'Lo que salió mal y cómo lo sacamos',
+                texto: 'La inexperiencia del grupo y algo de falta de comunicación hicieron que no llegáramos a todo lo que queríamos, pero con un esfuerzo extra al final y manteniendo la calma sacamos un juego jugable. Algunos sprites no seguían la paleta, así que los recoloreamos para mantener la coherencia y la armonía del juego.',
+            },
+        ],
         en: {
+            proceso: [
+                {
+                    titulo: 'Consistency in a team of 5',
+                    texto: 'I set a general palette the whole team had to follow, and every week we held a meeting where everyone showed their work, so we could give each other feedback and help wherever it was needed.',
+                },
+                {
+                    titulo: 'The blood transformation',
+                    texto: 'The first idea was for the character to melt into blood, but to fit the gameplay that meant drawing a version of every frame of every animation. I redesigned it as a curtain of blood that circles the character and wraps them completely, inspired by the corrupted hands in Zelda: Breath of the Wild. That way it plays on top of any animation.',
+                },
+                {
+                    titulo: 'What went wrong and how we got through it',
+                    texto: "The team's inexperience and some lack of communication meant we didn't get to everything we wanted, but with an extra push at the end and by keeping calm we shipped a playable game. Some sprites didn't follow the palette, so we recolored them to keep the game consistent and harmonious.",
+                },
+            ],
             descripcion: "I led the game's art and animated the protagonist, the boss and the cutscenes.",
             rol: 'Lead pixel artist',
             equipo: '5 people',
@@ -151,7 +186,27 @@ export const proyectos: Proyecto[] = [
             'UI',
             'Sonido: mezclas propias a partir de sonidos de Freesound',
         ],
+        proceso: [
+            {
+                titulo: 'Prioridades en 3 días',
+                texto: 'La jam empezó por la tarde y el primer día se fue en decidir la idea. A partir de ahí fui a lo imprescindible: primero el protagonista y sus animaciones; después el objetivo del juego, el entorno (tiles y fondo), las secuencias que cuentan la historia y, por último, los menús. Las últimas horas las dediqué a montar con sprites y secuencias una página de itch.io llamativa.',
+            },
+            {
+                titulo: 'Un dragón por piezas',
+                texto: 'Primero diseñé el dragón entero para tener clara la idea del personaje. Después lo separé en piezas de 16×16 que encajan entre sí como tiles, y probé todas las combinaciones de movimiento para tener las piezas necesarias en cualquier giro de la serpiente.',
+            },
+        ],
         en: {
+            proceso: [
+                {
+                    titulo: 'Priorities in 3 days',
+                    texto: 'The jam started in the afternoon and the first day went into deciding the idea. From there I focused on the essentials: first the main character and their animations; then the game goal, the environment (tiles and background), the cutscenes that tell the story and, last, the menus. I spent the final hours building an eye-catching itch.io page from sprites and cutscenes.',
+                },
+                {
+                    titulo: 'A dragon made of pieces',
+                    texto: "I first designed the whole dragon to get a clear idea of the character. Then I split it into 16×16 pieces that fit together like tiles, and tested every movement combination so there's a piece for any turn the snake can make.",
+                },
+            ],
             descripcion: "All the game's art in 3 days: character, tiles, backgrounds, UI and cutscenes.",
             rol: 'Lead artist (all the art)',
             equipo: '2 people',
@@ -216,7 +271,27 @@ export const proyectos: Proyecto[] = [
             'UI',
             'Sonido: mezclas propias a partir de sonidos de Freesound',
         ],
+        proceso: [
+            {
+                titulo: 'Del casino al infierno',
+                texto: 'La idea era convertir objetos típicos de un casino en demonios y fantasmas dignos del infierno. Busqué referencias de dados fantásticos, cartas del tarot, fantasmas y fichas para crear conceptos que mezclaran las dos cosas. El demonio principal salió de una referencia de Pinterest y de la idea de un crupier demoníaco.',
+            },
+            {
+                titulo: 'Legibles entre cientos',
+                texto: 'Con cientos de enemigos en pantalla, cada uno tiene una silueta única y su propia combinación de colores, muy distintiva, dentro de la paleta general. Así se distinguen de un vistazo.',
+            },
+        ],
         en: {
+            proceso: [
+                {
+                    titulo: 'From casino to hell',
+                    texto: 'The idea was to turn everyday casino objects into demons and ghosts worthy of hell. I gathered references of fantasy dice, tarot cards, ghosts and chips to create concepts that blended both. The main demon came from a Pinterest reference and the idea of a demonic croupier.',
+                },
+                {
+                    titulo: 'Readable among hundreds',
+                    texto: 'With hundreds of enemies on screen, each one has a unique silhouette and its own very distinctive color combination within the general palette, so they can be told apart at a glance.',
+                },
+            ],
             descripcion: "All the game's art in a week: character, enemies, weapons, tiles, backgrounds and UI.",
             rol: 'Lead artist (all the art)',
             equipo: '2 people',
@@ -275,7 +350,35 @@ export const proyectos: Proyecto[] = [
             'UI',
             'Sonido: mezclas propias a partir de sonidos de Freesound',
         ],
+        proceso: [
+            {
+                titulo: 'Por qué un post-procesado',
+                texto: 'Probé muchas formas de conseguir el wireframe de neón: pintar las UVs a mano, duplicar las mallas con el wireframe encima, vertex colors… Todas costaban mucho tiempo, mucho rendimiento (dos mallas por objeto) o eran difíciles de ampliar. El post-procesado funciona con cualquier malla, hecha por nosotros o descargada, sin pasos extra. Y con el Custom Depth y el Stencil cada malla tiene su propio color, que además puede cambiar en el juego: los enemigos pasan de verde a amarillo y a rojo según su vida, sin necesidad de barra de vida.',
+            },
+            {
+                titulo: 'La guerra de las líneas',
+                texto: 'Las primeras versiones (UVs pintadas y vertex colors) dibujaban una línea en cada triángulo y sobrecargaban la escena. Además había pixel fighting, y las líneas lejanas parpadeaban de forma muy desagradable. Hasta llegar al material actual, el grosor y la presencia de las líneas fueron el mayor reto técnico.',
+            },
+            {
+                titulo: 'Un flujo más simple',
+                texto: 'Con el método antiguo, cada asset tenía que pasar por un script de Blender que pintaba sus vértices según la posición de sus UVs en un atlas de color antes de importarlo a Unreal. Con el post-procesado, enemigos, props y assets siguen el pipeline normal: se exportan en FBX y en Unreal se les aplican los materiales.',
+            },
+        ],
         en: {
+            proceso: [
+                {
+                    titulo: 'Why a post-process',
+                    texto: 'I tried many ways to get the neon wireframe: hand-painting the UVs, duplicating the meshes with a wireframe on top, vertex colors… They all took a lot of time, a lot of performance (two meshes per object) or were hard to extend. The post-process works on any mesh, whether we made it or downloaded it, with no extra steps. And with Custom Depth and Stencil each mesh gets its own color, which can also change in game: enemies go from green to yellow to red as they lose health, with no health bar needed.',
+                },
+                {
+                    titulo: 'The battle of the lines',
+                    texto: 'The first versions (painted UVs and vertex colors) drew a line on every triangle and overloaded the scene. There was also pixel fighting, and distant lines flickered badly. Until we reached the current material, the thickness and presence of the lines were the biggest technical challenge.',
+                },
+                {
+                    titulo: 'A simpler pipeline',
+                    texto: "With the old method, every asset had to go through a Blender script that painted its vertices based on where its UVs sat in a color atlas before it could be imported into Unreal. With the post-process, enemies, props and assets follow the normal pipeline: they're exported as FBX and the materials are applied in Unreal.",
+                },
+            ],
             descripcion: 'Sole artist on the game: concept, modeling, animation, environment and post-process materials in Unreal.',
             rol: 'Lead 3D artist (sole artist)',
             equipo: '2 people',
