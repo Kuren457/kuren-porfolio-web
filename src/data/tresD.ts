@@ -4,6 +4,17 @@
 import type { Coleccion, Obra } from './tipos';
 
 export const obras: Obra[] = [
+    // Material estilo Arcane: el turntable del Goliath (su breakdown, en src/data/materiales.ts)
+    {
+        src: '/3D/Materials/Arcane/Arcane_Goliath_Turntable.mp4',
+        ancho: 1080,
+        alto: 1350,
+        category: 'Materiales',
+        title: 'Material estilo Arcane',
+        description: 'Materiales',
+        tema: 'blender',
+    },
+
     // Tarjeta 1 (WEBM/MP4)
     {
         src: '/3D/ComicMat.webm',

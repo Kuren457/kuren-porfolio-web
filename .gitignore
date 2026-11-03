@@ -23,6 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# vídeos originales (pesados): en public/Pixel-art/Clips/ y Showcase/ van recomprimidos
+# originales pesados (vídeos, renders y lo que no se usa): en public/ van recomprimidos
 fuentes/Clips/
 fuentes/Showcase/
+fuentes/Materiales/

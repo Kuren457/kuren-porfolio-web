@@ -47,6 +47,17 @@ const es = {
     personales: {
         titulo: 'Trabajos personales',
     },
+    arteTecnico: {
+        titulo: '3D y arte técnico',
+        texto: 'Modelado, animación y materiales en Blender y Unreal Engine. Cada material tiene su breakdown, nodo a nodo.',
+        postProceso: 'Unreal Engine · el look entero del juego en un material',
+        comic: 'Blender · trama de puntos, brillos y contorno',
+        arcane: 'Blender · normales pintadas para un look pictórico',
+        crystal: 'Blender · cristal facetado con LineArt',
+        verBreakdown: 'Ver breakdown →',
+        galeria: 'Ver galería 3D',
+        breakdowns: 'Todos los breakdowns',
+    },
     sobreMi: {
         titulo: 'Sobre Mí',
         parrafos: [
@@ -82,6 +93,10 @@ const es = {
     tresD: {
         titulo: 'Diseño 3D',
         texto: 'Modelado, rigging, texturizado y optimización de assets. Flujos de trabajo orientados a la implementación técnica en motores de videojuegos.',
+        verBreakdowns: 'Ver breakdowns de materiales ↓',
+        breakdowns: 'Breakdowns de materiales',
+        breakdownsTexto: 'Cómo están hechos los materiales, nodo a nodo. Pulsa cualquier captura para ampliarla.',
+        postProceso: 'El post-procesado de Neorb, en Unreal Engine, está en su ficha →',
     },
     visor: {
         imagen: 'Obra ampliada',
@@ -156,6 +171,17 @@ const en: typeof es = {
     personales: {
         titulo: 'Personal work',
     },
+    arteTecnico: {
+        titulo: '3D & technical art',
+        texto: 'Modeling, animation and materials in Blender and Unreal Engine. Every material has its breakdown, node by node.',
+        postProceso: "Unreal Engine · the game's whole look in one material",
+        comic: 'Blender · halftone dots, highlights and outline',
+        arcane: 'Blender · painted normals for a painterly look',
+        crystal: 'Blender · faceted crystal with LineArt',
+        verBreakdown: 'See breakdown →',
+        galeria: 'See 3D gallery',
+        breakdowns: 'All breakdowns',
+    },
     sobreMi: {
         titulo: 'About me',
         parrafos: [
@@ -191,6 +217,10 @@ const en: typeof es = {
     tresD: {
         titulo: '3D Art',
         texto: 'Modeling, rigging, texturing and asset optimization, with workflows built for game engines.',
+        verBreakdowns: 'See material breakdowns ↓',
+        breakdowns: 'Material breakdowns',
+        breakdownsTexto: 'How the materials are built, node by node. Click any screenshot to zoom in.',
+        postProceso: "Neorb's post-process, in Unreal Engine, is on its project page →",
     },
     visor: {
         imagen: 'Enlarged artwork',

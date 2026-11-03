@@ -3,8 +3,8 @@
 // Ficha de un proyecto (una página por cada uno de src/data/proyectos.ts, en src/pages/proyectos/ y en inglés en
 // src/pages/en/projects/): arriba, a la izquierda, una vitrina con el arte del juego y a la derecha el nombre,
 // el logo (enlace al juego) y en tarjetas el resumen, el rol, el equipo y el plazo, lo que hice y, en los de pixel
-// art, la paleta; debajo, sus secciones propias (hojas de sprites, turntables...) y los clips de gameplay. Solo salen
-// las secciones que tienen obras.
+// art, la paleta; debajo, los breakdowns de sus materiales, sus secciones propias (hojas de sprites, turntables...)
+// y los clips de gameplay. Solo salen las secciones que tienen obras.
 import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
@@ -13,6 +13,7 @@ import Lightbox from '../components/Lightbox.astro';
 import Vitrina from '../components/Vitrina.astro';
 import TarjetaProyecto from '../components/TarjetaProyecto.astro';
 import Paleta from '../components/Paleta.astro';
+import Breakdown from '../components/Breakdown.astro';
 import { enIdioma, type Proyecto } from '../data/proyectos';
 import { marcoAleatorio } from '../utils/marcoAleatorio';
 import { idiomaDe, rutas } from '../i18n/idioma';
@@ -99,6 +100,15 @@ const datos = [
             </div>
         </div>
     </section>
+
+    <!-- Breakdowns de sus materiales (src/data/materiales.ts) -->
+    {proyecto.breakdowns?.map((breakdown) => (
+        <div class="pb-16 px-5 relative z-10">
+            <div class="container mx-auto max-w-6xl">
+                <Breakdown breakdown={breakdown} />
+            </div>
+        </div>
+    ))}
 
     <!-- Obras, por secciones -->
     {secciones.map((seccion) => (

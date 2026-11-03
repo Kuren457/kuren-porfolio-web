@@ -1,14 +1,16 @@
 ---
 // src/vistas/TresD.astro
-// La galería 3D (en español en /3d y en inglés en /en/3d)
+// La galería 3D (en español en /3d y en inglés en /en/3d) y, debajo, los breakdowns de los materiales
 import Layout from '../layouts/layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Contacto from '../components/Contacto.astro';
 import PixelCard from '../components/PixelCard.astro';
 import Carrusel from '../components/Carrusel.astro';
 import Lightbox from '../components/Lightbox.astro';
+import Breakdown from '../components/Breakdown.astro';
+import { arcane, comic, crystal } from '../data/materiales';
 import { obras, colecciones } from '../data/tresD';
-import { idiomaDe } from '../i18n/idioma';
+import { idiomaDe, rutas } from '../i18n/idioma';
 import { textos } from '../i18n/textos';
 import { traducir } from '../i18n/obras';
 
@@ -30,6 +32,7 @@ const g = textos(idioma).galeria;
         <p class="text-[#cbd5e1] text-lg max-w-2xl mx-auto">
             {t.texto}
         </p>
+        <a href="#breakdowns" class="inline-block mt-6 text-[#00ff66] font-bold hover:underline">{t.verBreakdowns}</a>
     </section>
 
     <!-- Galería 3D -->
@@ -63,6 +66,20 @@ const g = textos(idioma).galeria;
         <div id="galeria-todos" class="hidden w-full max-w-[4000px] mx-auto" data-galeria>
             <div class="columns-1 sm:columns-[250px] md:columns-[300px] gap-6 space-y-6">
                 {obras.map((obra) => <PixelCard {...obra} />)}
+            </div>
+        </div>
+    </section>
+
+    <!-- Breakdowns de materiales (src/data/materiales.ts); el post-procesado de Neorb está en su ficha -->
+    <section id="breakdowns" class="pb-16 px-5 relative z-10">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-center">
+                <span class="bg-gradient-to-r from-[#00ff66] to-[#00ccff] text-transparent bg-clip-text">{t.breakdowns}</span>
+            </h2>
+            <p class="text-[#cbd5e1] text-center max-w-2xl mx-auto">{t.breakdownsTexto}</p>
+            <p class="text-center mt-2"><a href={`${rutas(idioma).proyecto('neorb')}#breakdown-post-proceso`} class="text-[#00ff66] hover:underline">{t.postProceso}</a></p>
+            <div class="breakdowns">
+                {[comic, arcane, crystal].map((breakdown) => <Breakdown breakdown={breakdown} />)}
             </div>
         </div>
     </section>

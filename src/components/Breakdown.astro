@@ -1,0 +1,67 @@
+---
+// src/components/Breakdown.astro
+// Breakdown de un material (src/data/materiales.ts): el título y la intro, el resultado en una fila (renders y
+// vídeos, todos a la misma altura) con su pie, y debajo las capturas de los nodos en columnas, cada una con su pie.
+// Las tarjetas abren el visor (Lightbox.astro, que tiene que estar en la página), que pasa de una a otra dentro del
+// mismo breakdown; las vistas generales abren la captura completa a resolución real.
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { imageMetadata } from 'astro/assets/utils';
+import PixelCard from './PixelCard.astro';
+import Pie from './Pie.astro';
+import type { Breakdown, Figura } from '../data/materiales';
+import { idiomaDe } from '../i18n/idioma';
+
+interface Props {
+    breakdown: Breakdown;
+    nivel?: 2 | 3; // El del título: h3 si va dentro de otra sección con su h2
+}
+
+const ALTO_PORTADA = 420; // Alto en px de la fila del resultado, si cabe en el ancho
+
+const { breakdown, nivel = 2 } = Astro.props;
+const idioma = idiomaDe(Astro);
+const Titulo = `h${nivel}`;
+const titulo = breakdown.titulo[idioma];
+
+const tarjeta = (figura: Figura) => ({
+    src: figura.src,
+    ampliada: figura.ampliada,
+    ancho: figura.ancho,
+    alto: figura.alto,
+    tema: figura.tema,
+    category: 'Materiales',
+    title: figura.titulo[idioma],
+    description: titulo,
+});
+
+// La fila del resultado: cada pieza con un ancho proporcional a su forma para que salgan todas igual de altas
+const formas = await Promise.all(breakdown.portada.map(async (figura) => {
+    if (figura.ancho && figura.alto) return figura.ancho / figura.alto;
+    const { width, height } = await imageMetadata(await readFile(join(process.cwd(), 'public', figura.src)), figura.src);
+    return width / height;
+}));
+const anchoPortada = formas.reduce((suma, forma) => suma + forma * ALTO_PORTADA, 24 * (formas.length - 1));
+const columnasPortada = formas.map((forma) => `${forma}fr`).join(' ');
+---
+
+<section id={`breakdown-${breakdown.id}`} class="breakdown" data-galeria>
+    <Titulo class:list={['font-bold text-white mb-3', nivel === 2 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl']}>{titulo}</Titulo>
+    <p class="text-[#cbd5e1] max-w-3xl">{breakdown.intro[idioma]}</p>
+
+    <!-- El resultado -->
+    <div class="breakdown__portada" style={`--columnas: ${columnasPortada}; max-width: ${Math.round(anchoPortada)}px;`}>
+        {breakdown.portada.map((figura) => <PixelCard {...tarjeta(figura)} />)}
+    </div>
+    {breakdown.portadaPie && <Pie texto={breakdown.portadaPie[idioma]} class="breakdown__pie" />}
+
+    <!-- Los nodos -->
+    <div class="breakdown__figuras">
+        {breakdown.figuras.map((figura) => (
+            <figure class="breakdown__figura">
+                <PixelCard {...tarjeta(figura)} />
+                {figura.pie && <figcaption><Pie texto={figura.pie[idioma]} /></figcaption>}
+            </figure>
+        ))}
+    </div>
+</section>

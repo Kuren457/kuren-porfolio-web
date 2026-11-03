@@ -23,10 +23,12 @@ const TEMAS = {
     ourojam:     { logo: 'LogoOurojam.png',     intro: 'LogoOurojam_intro.gif',  logoAlt: 'Logo Ourojam',       marco: 'azul' },
     gambling:    { logo: 'LogoGambling.png',    intro: 'LogoGambling_intro.gif', logoAlt: 'Logo Gambling',      marco: 'azul' },
     blender:     { logo: 'LogoBlender.png',     intro: 'LogoBlender_intro.gif',  logoAlt: 'Logo Blender',       marco: 'naranja', render: true },
+    unreal:      { logo: 'LogoUE.png',          intro: 'LogoUE_intro.gif',       logoAlt: 'Logo Unreal Engine', marco: 'azul',    render: true },
 };
 
 export interface Props {
     src: string;
+    ampliada?: string;          // Lo que abre el visor en vez de src (p. ej. la captura de unos nodos a resolución real)
     alt?: string;
     category: string;
     title: string;
@@ -43,7 +45,7 @@ export interface Props {
     copia?: boolean;            // Segunda tanda de un carrusel, solo para que el bucle no tenga corte
 }
 
-const { src, alt = '', category, tema, hoja, timelapse, variante = 'galeria', copia = false } = Astro.props;
+const { src, ampliada, alt = '', category, tema, hoja, timelapse, variante = 'galeria', copia = false } = Astro.props;
 // Los textos de las obras se escriben en español; en la versión en inglés se traducen (src/i18n/obras.ts)
 const idioma = idiomaDe(Astro);
 const title = traducir(Astro.props.title, idioma);
@@ -83,7 +85,7 @@ const anchoMostrado = anchoTimelapse && anchoTimelapse * Math.floor(ANCHO_TIMELA
 const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
 ---
 
-<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={src} data-category={category} data-etiquetas={etiquetas(category, idioma)} data-title={title} data-description={description} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
+<div class={`${claseVariante} lightbox-trigger pixel-card group cursor-pointer transition-opacity duration-300`} data-src={ampliada ?? src} data-category={category} data-etiquetas={etiquetas(category, idioma)} data-title={title} data-description={description} data-copia={copia || undefined} aria-hidden={copia ? 'true' : undefined} style={`--marco: url('${marco}');`}>
     <!-- data-aparicion: aparece con un pop al entrar en pantalla y arranca las animaciones del marco y el logo (src/scripts/aparicion.ts) -->
     <div class="pixel-card__frame" data-aparicion data-intro-marco={marcoIntro}>
 

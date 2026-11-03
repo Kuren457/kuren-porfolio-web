@@ -6,6 +6,7 @@ import { timelapseDe } from './timelapses';
 import type { Obra } from './tipos';
 import type { Idioma } from '../i18n/idioma';
 import type { Hoja } from '../utils/hojas';
+import { postProceso, type Breakdown } from './materiales';
 
 // Una sección de obras de la ficha de un proyecto (p. ej. hojas de sprites, turntables, wireframes, materiales)
 export interface Seccion {
@@ -39,6 +40,7 @@ export interface Proyecto {
     obras: Obra[];          // Mini carrusel de la portada y "Arte del juego" de la ficha (las de categoría
                             // Gameplay van aparte, en "Gameplay")
     secciones?: Seccion[];  // Más secciones de la ficha, entre el arte y el gameplay
+    breakdowns?: Breakdown[]; // Breakdowns de sus materiales (src/data/materiales.ts), antes de las secciones
     // Los textos en inglés (la versión en /en/); los títulos de las secciones se traducen en src/i18n/obras.ts
     en: Pick<Proyecto, 'descripcion' | 'rol' | 'equipo' | 'plazo' | 'tareas'>;
 }
@@ -310,6 +312,7 @@ export const proyectos: Proyecto[] = [
             { src: '/3D/StompAndInception.mp4', ancho: 1280, alto: 720, category: 'Gameplay', title: 'Stomp e Inception', description: 'Gameplay de Neorb', tema: 'blender' },
             { src: '/3D/Vines.mp4', ancho: 1920, alto: 1080, category: 'Gameplay', title: 'Vines', description: 'Gameplay de Neorb', tema: 'blender' },
         ],
+        breakdowns: [postProceso],
         // Plantilla para documentar el 3D: cada sección sale en la ficha entre el arte y el gameplay (las imágenes
         // y vídeos, en public/3D/; los vídeos necesitan ancho y alto)
         // secciones: [

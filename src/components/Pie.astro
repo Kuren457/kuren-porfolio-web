@@ -1,0 +1,30 @@
+---
+// src/components/Pie.astro
+// Un pie de foto de src/data/materiales.ts: cada línea es un párrafo; las que empiezan por "- " forman una lista y
+// las que empiezan por "1. ", "2. "... una lista numerada.
+interface Props {
+    texto: string;
+    class?: string;
+}
+
+type Bloque = { tipo: 'p'; texto: string } | { tipo: 'ul' | 'ol'; items: string[] };
+
+const { texto, class: clase } = Astro.props;
+const bloques = texto.split('\n').reduce<Bloque[]>((lista, linea) => {
+    const vineta = linea.match(/^- (.*)/);
+    const numero = linea.match(/^\d+\. (.*)/);
+    if (!vineta && !numero) return [...lista, { tipo: 'p', texto: linea }];
+    const tipo = vineta ? 'ul' : 'ol';
+    const contenido = (vineta ?? numero)![1];
+    const ultimo = lista.at(-1);
+    if (ultimo && ultimo.tipo === tipo) ultimo.items.push(contenido);
+    else lista.push({ tipo, items: [contenido] });
+    return lista;
+}, []);
+---
+
+<div class:list={['pie', clase]}>
+    {bloques.map((bloque) => bloque.tipo === 'p' ? <p>{bloque.texto}</p>
+        : bloque.tipo === 'ul' ? <ul>{bloque.items.map((item) => <li>{item}</li>)}</ul>
+        : <ol>{bloque.items.map((item) => <li>{item}</li>)}</ol>)}
+</div>

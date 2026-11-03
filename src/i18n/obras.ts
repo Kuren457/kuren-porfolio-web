@@ -53,6 +53,7 @@ const FRASES: Record<string, string> = {
     'Habilidad/VFX': 'Ability/VFX',
     'Habitación Isométrica': 'Isometric room',
     'Idle Personaje Principal': 'Main character idle',
+    'Material estilo Arcane': 'Arcane-style material',
     'Material estilo comic': 'Comic-style material',
     'Material estilo cristal': 'Crystal-style material',
     'Material y Nodos de Geometría': 'Material and Geometry Nodes',

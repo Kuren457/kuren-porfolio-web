@@ -958,3 +958,129 @@ body::after {
 .pixel-card__hoja {
     background: #241c2c;
 }
+
+/* Breakdowns de materiales (Breakdown.astro): el resultado en una fila (cada pieza con un ancho proporcional a su
+   forma, --columnas) y las capturas de los nodos en columnas, con su pie debajo */
+.breakdowns {
+    display: grid;
+    gap: 96px;
+    margin-top: 48px;
+}
+
+/* Al llegar por un enlace (#breakdown-...), que el título no quede debajo de la barra de navegación fija */
+#breakdowns,
+.breakdown {
+    scroll-margin-top: 96px;
+}
+
+/* Sobre un panel oscuro: el fondo de la página tiene zonas claras y los pies son largos */
+.breakdown {
+    padding: 32px;
+    background: rgba(10, 5, 8, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+    .breakdown {
+        padding: 20px 16px;
+    }
+}
+
+.breakdown__portada {
+    display: grid;
+    grid-template-columns: var(--columnas);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+/* Que las tarjetas puedan estrecharse por debajo del ancho de su contenido (si no, ensanchan la página en móvil) */
+.breakdown__portada > * {
+    min-width: 0;
+}
+
+@media (max-width: 767px) {
+    .breakdown__portada {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    }
+}
+
+.breakdown__pie {
+    max-width: 48rem;
+    margin-top: 16px;
+}
+
+.breakdown__figuras {
+    columns: 2 420px;
+    column-gap: 40px;
+    margin-top: 48px;
+}
+
+.breakdown__figura {
+    break-inside: avoid;
+    margin-bottom: 40px;
+}
+
+.breakdown__figura figcaption {
+    margin-top: 12px;
+}
+
+/* Pies de foto (Pie.astro) */
+.pie {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.pie > * + * {
+    margin-top: 0.5em;
+}
+
+.pie ul {
+    list-style: square;
+    padding-left: 1.25em;
+}
+
+.pie ol {
+    list-style: decimal;
+    padding-left: 1.5em;
+}
+
+.pie li::marker {
+    color: #00ff66;
+}
+
+/* Arte técnico en la portada (ArteTecnico.astro): una tarjeta por breakdown con su vídeo en una caja de 16:10 (los
+   vídeos verticales o cuadrados, enteros sobre negro) */
+.arte-tecnico__tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.arte-tecnico__tarjeta {
+    display: block;
+    padding: 16px;
+    background: rgba(10, 5, 8, 0.85);
+    transition: transform 200ms;
+}
+
+@media (hover: hover) {
+    .arte-tecnico__tarjeta:hover {
+        transform: scale(1.03);
+    }
+}
+
+.arte-tecnico__video {
+    aspect-ratio: 16 / 10;
+    background: #000;
+    overflow: hidden;
+}
+
+.arte-tecnico__video video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
