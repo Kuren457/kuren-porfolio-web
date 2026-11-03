@@ -93,7 +93,7 @@ export const obras: Obra[] = [
 
     // Tarjeta 8 (PNG/JPG)
     {
-        src: '/3D/Lego.png',
+        src: '/3D/Lego.webp',
         alt: 'Lego',
         category: 'Modelado',
         title: 'Primeros modelos',
@@ -136,7 +136,7 @@ export const obras: Obra[] = [
 
     // Tarjeta 12 (PNG/JPG)
     {
-        src: '/3D/Pyra1.png',
+        src: '/3D/Pyra1.webp',
         alt: 'Pyra',
         category: 'Personaje Modelado',
         title: 'Personaje estilo anime',
@@ -146,7 +146,7 @@ export const obras: Obra[] = [
 
     // Tarjeta 13 (PNG/JPG)
     {
-        src: '/3D/Pyra2.png',
+        src: '/3D/Pyra2.webp',
         alt: 'Pyra',
         category: 'Personaje Modelado',
         title: 'Personaje estilo anime',
@@ -156,7 +156,7 @@ export const obras: Obra[] = [
 
     // Tarjeta 14 (PNG/JPG)
     {
-        src: '/3D/Tanque.png',
+        src: '/3D/Tanque.webp',
         alt: 'Pyra',
         category: 'Modelado',
         title: 'Primeros modelos',

@@ -94,7 +94,7 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
             {timelapse ? (
                 <div class="timelapse" data-timelapse={timelapse} data-al-pasar={timelapseAlPasar || undefined}
                     style={anchoMostrado ? `width: ${anchoMostrado}px;` : undefined}>
-                    <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia.replace('group-hover:scale-105', claseZoom)} />
+                    <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={estiloMedia} class={claseMedia.replace('group-hover:scale-105', claseZoom)} />
                     <img alt="" style={estiloMedia} class={`timelapse__proceso ${claseZoom}`} />
                     <div class="timelapse__progreso"></div>
                 </div>
@@ -102,7 +102,7 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
                 ? <canvas data-hoja={JSON.stringify(animaciones)} data-src={src} width={width} height={height} role="img" aria-label={alt || title} style={estiloMedia} class={`${claseMedia} pixel-card__hoja`}></canvas>
             : esVideo
                 ? <video data-video={src} width={width} height={height} loop muted playsinline preload="none" style={estiloMedia} class={claseMedia}></video>
-                : <img src={src} alt={alt} width={width} height={height} style={estiloMedia} class={claseMedia} />}
+                : <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={estiloMedia} class={claseMedia} />}
             <!-- Al pasar el ratón, solo el nombre (la descripción sale en la ficha del visor, Lightbox.astro) -->
             {!timelapseAlPasar && <div class="absolute inset-0 bg-gradient-to-t from-[#0a0508]/90 via-[#0a0508]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
                 <h3 class="text-lg font-bold text-white leading-tight">{title}</h3>

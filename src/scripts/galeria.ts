@@ -74,6 +74,18 @@ if (lightbox && lightboxImg && lightboxVideo) {
         if (zoomResetBtn) zoomResetBtn.innerText = `${Math.round(currentZoom * 10) / 10}x`;
     };
 
+    // El pixel art está guardado a 1x (scripts/pixel-1x.mjs): en el visor se amplía a la mayor escala entera que quepa,
+    // para que se vea grande y nítido (con una escala fraccionaria los píxeles saldrían de tamaños distintos)
+    const ajustarPixelArt = () => {
+        lightboxImg.style.width = '';
+        const { naturalWidth: ancho, naturalHeight: alto } = lightboxImg;
+        if (lightboxImg.style.imageRendering !== 'pixelated' || !ancho) return;
+        const cabe = Math.min((lightboxImg.parentElement?.clientWidth ?? innerWidth) / ancho, (innerHeight * 0.7) / alto);
+        lightboxImg.style.width = `${ancho * Math.max(1, Math.floor(cabe))}px`;
+    };
+    lightboxImg.addEventListener('load', ajustarPixelArt);
+    addEventListener('resize', ajustarPixelArt);
+
     // Resetea el zoom al estado original al cambiar de foto o cerrar
     const resetZoom = () => {
         currentZoom = 1;
@@ -201,7 +213,9 @@ if (lightbox && lightboxImg && lightboxVideo) {
             lightboxVideo.classList.add('hidden');
             lightboxVideo.pause();
             lightboxVideo.src = '';
+            lightboxImg.style.width = '';
             lightboxImg.src = src;
+            if (lightboxImg.complete) ajustarPixelArt(); // Si ya estaba cargada no salta 'load'
             lightboxImg.classList.remove('hidden');
         }
     };

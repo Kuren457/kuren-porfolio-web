@@ -1,6 +1,8 @@
 ---
 import { Font } from 'astro:assets';
 import BotonAnimaciones from '../components/BotonAnimaciones.astro';
+// Visitas (Vercel Web Analytics: sin cookies). Solo cuenta en la web publicada y con Analytics activado en Vercel
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 import { equivalente, idiomaDe } from '../i18n/idioma';
 import { textos } from '../i18n/textos';
@@ -29,6 +31,7 @@ const alternativas = (['es', 'en'] as const).map((otro) => ({ idioma: otro, url:
 		<title>{titulo}</title>
 		<meta name="description" content={descripcion} />
 		<link rel="canonical" href={url} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		{alternativas.map((a) => <link rel="alternate" hreflang={a.idioma} href={a.url} />)}
 
 		<meta property="og:type" content="website" />
@@ -64,5 +67,6 @@ const alternativas = (['es', 'en'] as const).map((otro) => ({ idioma: otro, url:
 	<body class="antialiased">
 		<slot />
 		<BotonAnimaciones />
+		<Analytics />
 	</body>
 </html>

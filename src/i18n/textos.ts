@@ -20,6 +20,7 @@ const es = {
         proyectos: 'Proyectos',
         otroIdioma: 'EN',
         otroIdiomaNombre: 'English version',
+        menu: 'Abrir menú',
     },
     hero: {
         subtitulo: 'Digital Artist & Game Developer',
@@ -146,6 +147,7 @@ const en: typeof es = {
         proyectos: 'Projects',
         otroIdioma: 'ES',
         otroIdiomaNombre: 'Versión en español',
+        menu: 'Open menu',
     },
     hero: {
         subtitulo: 'Digital Artist & Game Developer',
