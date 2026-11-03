@@ -7,6 +7,7 @@ const es = {
     sitio: {
         titulo: 'Kuren | Portfolio',
         descripcion: 'Portfolio de Miguel Ángel Vera Ximénez: pixel art, animación y 3D para videojuegos.',
+        imagenAlt: 'Miguel Ángel Vera Ximénez: Pixel Artist, Animador 2D/3D y Technical Artist',
         cv: '/CV_Miguel_Angel_Vera_Ximenez.pdf',
     },
     navegacion: {
@@ -131,6 +132,7 @@ const en: typeof es = {
     sitio: {
         titulo: 'Kuren | Portfolio',
         descripcion: 'Portfolio of Miguel Ángel Vera Ximénez: pixel art, animation and 3D for video games.',
+        imagenAlt: 'Miguel Ángel Vera Ximénez: Pixel Artist, 2D/3D Animator and Technical Artist',
         cv: '/CV_Miguel_Angel_Vera_Ximenez_EN.pdf',
     },
     navegacion: {

@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+    Imagen que sale al compartir un enlace de la web (Open Graph: LinkedIn, Discord, WhatsApp...), 1200x630.
+    Para regenerar public/og/og-es.png y og-en.png: npm run og (con ?en sale en inglés).
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        @font-face {
+            font-family: 'Tiny5 Duo';
+            src: url('../../src/assets/fonts/Tiny5Duo.ttf');
+            font-weight: 100 900;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Tiny5 Duo', sans-serif;
+            color: #fff;
+            background: #0a0508 url('../../public/png-banners/header.png') center 70% / cover;
+        }
+
+        /* Oscurece la izquierda para que se lea el texto; a la derecha se ve el render de Neorb */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(10, 5, 8, 0.94) 0%, rgba(10, 5, 8, 0.82) 52%, rgba(10, 5, 8, 0.15) 100%);
+        }
+
+        main {
+            position: absolute;
+            left: 72px;
+            top: 0;
+            bottom: 0;
+            width: 720px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .avatar {
+            width: 112px;
+            height: 112px;
+            image-rendering: pixelated;
+            border-radius: 12px;
+            border: 4px solid #ffaa00;
+        }
+
+        h1 {
+            font-size: 60px;
+            font-weight: 800;
+            line-height: 1.05;
+        }
+
+        .puestos {
+            font-size: 25px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff3333, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .temas {
+            font-size: 20px;
+            color: #cbd5e1;
+        }
+
+        .web {
+            margin-top: 8px;
+            font-size: 22px;
+            color: #00ff66;
+        }
+
+        /* El protagonista de BloodRunner, primer fotograma de su hoja (48x48) a 8 px por píxel */
+        .sprite {
+            position: absolute;
+            right: 70px;
+            bottom: 36px;
+            width: 384px;
+            height: 384px;
+            background: url('../../public/Pixel-art/Spritesheets/BloodRunner/Personaje_entero-Sheet.png') 0 0 / 6144px 6528px no-repeat;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.8));
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <img class="avatar" src="../../public/png-banners/avatar.png" alt="" />
+        <h1>Miguel Ángel<br />Vera Ximénez</h1>
+        <p class="puestos" data-es="Pixel Artist · Animador 2D/3D · Technical Artist" data-en="Pixel Artist · 2D/3D Animator · Technical Artist"></p>
+        <p class="temas" data-es="Pixel art, animación, 3D y materiales en Unreal Engine" data-en="Pixel art, animation, 3D and Unreal Engine materials"></p>
+        <p class="web">kuren-porfolio-web.vercel.app</p>
+    </main>
+    <div class="sprite"></div>
+
+    <script>
+        const idioma = location.search.includes('en') ? 'en' : 'es';
+        document.documentElement.lang = idioma;
+        document.querySelectorAll('[data-es]').forEach((e) => { e.textContent = e.dataset[idioma]; });
+    </script>
+</body>
+</html>
