@@ -314,6 +314,8 @@ export const proyectos: Proyecto[] = [
         logo: UI + 'LogoGambling.png',
         color: 'dorado',
         logoPixelado: true,
+        marco: UI + 'MarcoHells.png',
+        fondo: UI + 'MarcoHells_fondo.png',
         persecucion: true,
         obras: [
             ...deTema('gambling'),

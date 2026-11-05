@@ -42,7 +42,7 @@ const FINALES = {
     'MarcoNeorb_Decorations_Anim.gif': 'MarcoNeorb_Decoraciones.png',
 };
 
-const FONDOS = ['MarcoBR.png', 'MarcoNeorb.png'];
+const FONDOS = ['MarcoBR.png', 'MarcoNeorb.png', 'MarcoHells.png'];
 const ESCALA_FONDO = 3;
 
 for (const [archivo, [escala, bucle]] of Object.entries(SPRITES)) {
