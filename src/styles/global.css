@@ -471,7 +471,27 @@ body::after {
     }
 }
 
+/* Mantenido pulsado, el timelapse va más rápido: una etiqueta con la velocidad, arriba a la derecha */
+.timelapse__rapido {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0a0508;
+    background: #fa5c5c;
+    opacity: 0;
+    transition: opacity 150ms;
+    pointer-events: none;
+}
+
+.timelapse--rapido .timelapse__rapido {
+    opacity: 1;
+}
+
 /* Con el dedo se mantienen pulsadas (timelapses.ts): sin seleccionar ni el menú de la imagen */
+.pixel-card--timelapse,
 .pixel-card--timelapse-al-pasar {
     -webkit-touch-callout: none;
     user-select: none;
@@ -1094,4 +1114,111 @@ body::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+/* Controles de las hojas de sprites (PixelCard, src/scripts/hojas.ts): una barra bajo la animación */
+.hoja__controles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 12px;
+    padding: 6px 4px 2px;
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    background: #0a0508;
+    cursor: default;
+}
+
+.hoja__grupo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.hoja__controles button {
+    display: grid;
+    place-items: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 4px;
+    color: inherit;
+    fill: currentColor;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.hoja__controles button:hover,
+.hoja__controles button:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hoja__controles button[aria-pressed='true'] {
+    color: #ffaa00;
+}
+
+.hoja__controles span {
+    min-width: 3.2em;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.hoja__velocidad {
+    font-weight: 700;
+}
+
+/* El botón de pausa enseña la pausa mientras se reproduce y el triángulo de reproducir cuando está parada */
+[data-reproduciendo='true'] .hoja__icono-reproducir,
+[data-reproduciendo='false'] .hoja__icono-pausa {
+    display: none;
+}
+
+/* Disponibilidad en la portada (Hero.astro): una etiqueta con un punto verde que late */
+.disponible {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #00ff66;
+    background: rgba(10, 5, 8, 0.85);
+    border: 1px solid rgba(0, 255, 102, 0.4);
+    border-radius: 999px;
+}
+
+.disponible::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.6);
+    animation: disponible-latido 2s ease-out infinite;
+}
+
+@keyframes disponible-latido {
+    70% { box-shadow: 0 0 0 8px rgba(0, 255, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .disponible::before {
+        animation: none;
+    }
+}
+
+/* Showreel en la portada (Showreel.astro): el vídeo dentro de un marco, a todo el ancho */
+.showreel {
+    padding: 12px;
+    background: #0a0508;
+}
+
+.showreel video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #0a0508;
 }

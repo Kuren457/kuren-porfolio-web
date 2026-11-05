@@ -1,0 +1,124 @@
+<!doctype html>
+<!--
+    Carteles de entrada (?inicio) y de salida (?final) del showreel, 1920x1080. Los captura scripts/showreel.mjs con
+    Chrome. Mismo estilo que la imagen para compartir (fuentes/og/og.html).
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        @font-face {
+            font-family: 'Tiny5 Duo';
+            src: url('../../src/assets/fonts/Tiny5Duo.ttf');
+            font-weight: 100 900;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Tiny5 Duo', sans-serif;
+            color: #fff;
+            background: #0a0508 url('../../public/png-banners/header.png') center 70% / cover;
+        }
+
+        /* Oscurece la izquierda para que se lea el texto; a la derecha se ve el render de Neorb */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(10, 5, 8, 0.95) 0%, rgba(10, 5, 8, 0.85) 50%, rgba(10, 5, 8, 0.2) 100%);
+        }
+
+        main {
+            position: absolute;
+            left: 120px;
+            top: 0;
+            bottom: 0;
+            width: 1150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .avatar {
+            width: 168px;
+            height: 168px;
+            image-rendering: pixelated;
+            border-radius: 18px;
+            border: 6px solid #ffaa00;
+        }
+
+        h1 {
+            font-size: 104px;
+            font-weight: 800;
+            line-height: 1.02;
+        }
+
+        .puestos {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff3333, #ffaa00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .linea {
+            font-size: 36px;
+            color: #cbd5e1;
+        }
+
+        .web {
+            font-size: 40px;
+            color: #00ff66;
+        }
+
+        .disponible {
+            font-size: 34px;
+            color: #00ff66;
+        }
+
+        /* El protagonista de BloodRunner, primer fotograma de su hoja (48x48) a 13 px por píxel */
+        .sprite {
+            position: absolute;
+            right: 110px;
+            bottom: 60px;
+            width: 624px;
+            height: 624px;
+            background: url('../../public/Pixel-art/Spritesheets/BloodRunner/Personaje_entero-Sheet.png') 0 0 / 9984px 10608px no-repeat;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.8));
+        }
+
+        [data-cartel] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <img class="avatar" src="../../public/png-banners/avatar.png" alt="" />
+        <h1>Miguel Ángel<br />Vera Ximénez</h1>
+        <p class="puestos">Pixel Artist · 2D/3D Animator · Technical Artist</p>
+        <p class="linea" data-cartel="inicio">Showreel</p>
+        <p class="web" data-cartel="final">kuren-porfolio-web.vercel.app</p>
+        <p class="linea" data-cartel="final">kurenmcontact@gmail.com</p>
+        <p class="disponible" data-cartel="final">● Available now · remote or in Madrid</p>
+    </main>
+    <div class="sprite"></div>
+
+    <script>
+        const cartel = location.search.includes('final') ? 'final' : 'inicio';
+        document.querySelectorAll(`[data-cartel="${cartel}"]`).forEach((e) => { e.style.display = 'block'; });
+    </script>
+</body>
+</html>

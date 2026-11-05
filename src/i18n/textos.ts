@@ -25,6 +25,7 @@ const es = {
     hero: {
         subtitulo: 'Digital Artist & Game Developer',
         presentacion: 'Hago arte para videojuegos, en pixel art y en 3D, y he trabajado en BloodRunner, OuroJam, Hells Gamble y Neorb.',
+        disponible: 'Disponible ya · en remoto o en Madrid',
         conoceme: 'Conóceme',
         proyectos: 'Mi Portfolio',
         pixelArt: 'Pixel Art',
@@ -49,6 +50,22 @@ const es = {
     },
     personales: {
         titulo: 'Trabajos personales',
+    },
+    showreel: {
+        titulo: 'Showreel',
+        texto: 'Lo mejor de mi trabajo en minuto y medio: pixel art, animación, 3D y materiales.',
+    },
+    hojas: {
+        reproducir: 'Reproducir',
+        pausar: 'Pausar',
+        anterior: 'Fotograma anterior',
+        siguiente: 'Fotograma siguiente',
+        fotograma: 'Fotograma',
+        velocidad: 'Velocidad',
+        cebolla: 'Papel cebolla',
+        animacion: 'Animación',
+        animacionAnterior: 'Animación anterior',
+        animacionSiguiente: 'Animación siguiente',
     },
     arteTecnico: {
         titulo: '3D y arte técnico',
@@ -91,7 +108,7 @@ const es = {
         titulo: 'Pixel Art',
         texto: 'Diseño de personajes, escenarios y animaciones creadas en Aseprite.',
         timelapses: 'Timelapses',
-        timelapsesTexto: 'Cómo se dibujó cada obra, paso a paso.',
+        timelapsesTexto: 'Cómo se dibujó cada obra, paso a paso. Mantén pulsado uno para acelerarlo.',
     },
     tresD: {
         titulo: 'Diseño 3D',
@@ -152,6 +169,7 @@ const en: typeof es = {
     hero: {
         subtitulo: 'Digital Artist & Game Developer',
         presentacion: 'I make art for video games, in pixel art and 3D, and I have worked on BloodRunner, OuroJam, Hells Gamble and Neorb.',
+        disponible: 'Available now · remote or in Madrid',
         conoceme: 'About me',
         proyectos: 'My portfolio',
         pixelArt: 'Pixel Art',
@@ -176,6 +194,22 @@ const en: typeof es = {
     },
     personales: {
         titulo: 'Personal work',
+    },
+    showreel: {
+        titulo: 'Showreel',
+        texto: 'The best of my work in a minute and a half: pixel art, animation, 3D and materials.',
+    },
+    hojas: {
+        reproducir: 'Play',
+        pausar: 'Pause',
+        anterior: 'Previous frame',
+        siguiente: 'Next frame',
+        fotograma: 'Frame',
+        velocidad: 'Speed',
+        cebolla: 'Onion skin',
+        animacion: 'Animation',
+        animacionAnterior: 'Previous animation',
+        animacionSiguiente: 'Next animation',
     },
     arteTecnico: {
         titulo: '3D & technical art',
@@ -218,7 +252,7 @@ const en: typeof es = {
         titulo: 'Pixel Art',
         texto: 'Characters, environments and animations made in Aseprite.',
         timelapses: 'Timelapses',
-        timelapsesTexto: 'How each piece was drawn, step by step.',
+        timelapsesTexto: 'How each piece was drawn, step by step. Press and hold one to speed it up.',
     },
     tresD: {
         titulo: '3D Art',

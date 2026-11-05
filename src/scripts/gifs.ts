@@ -27,10 +27,13 @@ export const ponerGif = async (imagen: HTMLImageElement, url: string) => {
 
 export const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// Duración total de un GIF en ms (la suma de los tiempos de sus fotogramas), leída de sus bloques
-export const duracionGif = async (url: string) => {
+// Duración total de un GIF en ms (la suma de los tiempos de sus fotogramas)
+export const duracionGif = async (url: string) => (await retrasosGif(url)).reduce((suma, ms) => suma + ms, 0);
+
+// El tiempo de cada fotograma de un GIF en ms, leído de sus bloques
+export const retrasosGif = async (url: string) => {
     const blob = await descargar(url);
-    if (!blob) return 0;
+    if (!blob) return [];
     const b = new Uint8Array(await blob.arrayBuffer());
     const saltarSubbloques = (i: number) => {
         while (b[i]) i += b[i] + 1;
@@ -38,10 +41,10 @@ export const duracionGif = async (url: string) => {
     };
 
     let i = 13 + (b[10] & 0x80 ? 3 * 2 ** ((b[10] & 7) + 1) : 0); // Cabecera + paleta global
-    let total = 0;
+    const retrasos: number[] = [];
     while (i < b.length && b[i] !== 0x3b) {
         if (b[i] === 0x21) {
-            if (b[i + 1] === 0xf9) total += (b[i + 4] | (b[i + 5] << 8)) * 10; // Control gráfico: retardo en centésimas
+            if (b[i + 1] === 0xf9) retrasos.push((b[i + 4] | (b[i + 5] << 8)) * 10); // Control gráfico: retardo en centésimas
             i = saltarSubbloques(i + 2);
         } else if (b[i] === 0x2c) {
             const paleta = b[i + 9] & 0x80 ? 3 * 2 ** ((b[i + 9] & 7) + 1) : 0;
@@ -50,5 +53,5 @@ export const duracionGif = async (url: string) => {
             break; // Bloque desconocido: GIF raro
         }
     }
-    return total;
+    return retrasos;
 };

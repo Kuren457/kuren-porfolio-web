@@ -75,7 +75,7 @@ const hoja = (archivo: string, title: string, tema: Obra['tema'], datos: Hoja): 
     ({ src: '/Pixel-art/Spritesheets/' + archivo, category: 'Animacion', title, description: 'Hoja de sprites', tema, hoja: datos });
 
 const HOJAS = 'Hojas de sprites';
-const HOJAS_DESCRIPCION = 'Cada tarjeta reproduce las animaciones desde su hoja, tal y como se exportó para el juego. Púlsala para ver la hoja entera.';
+const HOJAS_DESCRIPCION = 'Cada tarjeta reproduce las animaciones desde su hoja, tal y como se exportó para el juego. Debajo puedes pausarlas, verlas fotograma a fotograma, cambiar la velocidad y activar el papel cebolla. Púlsala para ver la hoja entera.';
 
 export const proyectos: Proyecto[] = [
     {

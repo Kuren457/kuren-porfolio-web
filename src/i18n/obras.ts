@@ -90,8 +90,8 @@ const FRASES: Record<string, string> = {
     'Topología': 'Topology',
     // Secciones de las fichas de proyecto
     'Hojas de sprites': 'Sprite sheets',
-    'Cada tarjeta reproduce las animaciones desde su hoja, tal y como se exportó para el juego. Púlsala para ver la hoja entera.':
-        'Each card plays the animations straight from its sheet, exactly as it was exported for the game. Click it to see the whole sheet.',
+    'Cada tarjeta reproduce las animaciones desde su hoja, tal y como se exportó para el juego. Debajo puedes pausarlas, verlas fotograma a fotograma, cambiar la velocidad y activar el papel cebolla. Púlsala para ver la hoja entera.':
+        'Each card plays the animations straight from its sheet, exactly as it was exported for the game. Below it you can pause them, step through them frame by frame, change the speed and turn on onion skinning. Click it to see the whole sheet.',
     // Títulos de colecciones
     'Animación': 'Animation',
     'Otros': 'Other',

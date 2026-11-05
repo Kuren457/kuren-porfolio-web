@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { imageMetadata } from 'astro/assets/utils';
 import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
 import { etiquetas, traducir } from '../i18n/obras';
 import { animacionesDe, type Hoja } from '../utils/hojas';
 
@@ -48,6 +49,17 @@ export interface Props {
 const { src, ampliada, alt = '', category, tema, hoja, timelapse, variante = 'galeria', copia = false } = Astro.props;
 // Los textos de las obras se escriben en español; en la versión en inglés se traducen (src/i18n/obras.ts)
 const idioma = idiomaDe(Astro);
+const controles = textos(idioma).hojas;
+// Iconos de los controles de las hojas de sprites: 16x16, hechos de píxeles
+const icono = (contenido: string) => `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" shape-rendering="crispEdges">${contenido}</svg>`;
+const ICONOS = {
+    anterior: icono('<rect x="3" y="3" width="2" height="10"/><path d="M13 3v10L6 8z"/>'),
+    siguiente: icono('<rect x="11" y="3" width="2" height="10"/><path d="M3 3v10l7-5z"/>'),
+    pausa: icono('<rect class="hoja__icono-pausa" x="4" y="3" width="3" height="10"/><rect class="hoja__icono-pausa" x="9" y="3" width="3" height="10"/><path class="hoja__icono-reproducir" d="M4 2v12l9-6z"/>'),
+    cebolla: icono('<rect x="1" y="4" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/><rect x="6" y="2" width="9" height="9"/>'),
+    animacionAnterior: icono('<path d="M8 3v10L2 8z"/><path d="M14 3v10L8 8z"/>'),
+    animacionSiguiente: icono('<path d="M2 3v10l6-5z"/><path d="M8 3v10l6-5z"/>'),
+};
 const title = traducir(Astro.props.title, idioma);
 const description = traducir(Astro.props.description, idioma);
 const temaActual: { logo?: string; intro?: string; logoAlt: string; marco: string; render?: boolean } | undefined = tema ? TEMAS[tema] : undefined;
@@ -97,6 +109,8 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
                     <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={estiloMedia} class={claseMedia.replace('group-hover:scale-105', claseZoom)} />
                     <img alt="" style={estiloMedia} class={`timelapse__proceso ${claseZoom}`} />
                     <div class="timelapse__progreso"></div>
+                    <!-- Sale mientras se mantiene pulsado para acelerarlo (timelapses.ts) -->
+                    <div class="timelapse__rapido" aria-hidden="true">×5</div>
                 </div>
             ) : animaciones
                 ? <canvas data-hoja={JSON.stringify(animaciones)} data-src={src} width={width} height={height} role="img" aria-label={alt || title} style={estiloMedia} class={`${claseMedia} pixel-card__hoja`}></canvas>
@@ -110,6 +124,29 @@ const claseZoom = timelapseAlPasar ? '' : 'group-hover:scale-105';
         </div>
 
         <!-- Logo en el hueco de la pestaña -->
+        <!-- Hojas de sprites: controles de la animación (src/scripts/hojas.ts) -->
+        {animaciones && (
+            <div class="hoja__controles" data-controles>
+                {animaciones.animaciones.length > 1 && (
+                    <div class="hoja__grupo">
+                        <button type="button" data-accion="animacion-anterior" aria-label={controles.animacionAnterior} title={controles.animacionAnterior} set:html={ICONOS.animacionAnterior} />
+                        <span data-animacion title={controles.animacion}>1/{animaciones.animaciones.length}</span>
+                        <button type="button" data-accion="animacion-siguiente" aria-label={controles.animacionSiguiente} title={controles.animacionSiguiente} set:html={ICONOS.animacionSiguiente} />
+                    </div>
+                )}
+                <div class="hoja__grupo">
+                    <button type="button" data-accion="anterior" aria-label={controles.anterior} title={controles.anterior} set:html={ICONOS.anterior} />
+                    <button type="button" data-accion="pausa" data-reproduciendo="true" data-pausar={controles.pausar} data-reproducir={controles.reproducir} aria-label={controles.pausar} title={controles.pausar} set:html={ICONOS.pausa} />
+                    <button type="button" data-accion="siguiente" aria-label={controles.siguiente} title={controles.siguiente} set:html={ICONOS.siguiente} />
+                    <span data-contador title={controles.fotograma}>1/{animaciones.animaciones[0].fotogramas.length}</span>
+                </div>
+                <div class="hoja__grupo">
+                    <button type="button" data-accion="velocidad" aria-label={controles.velocidad} title={controles.velocidad} class="hoja__velocidad">1×</button>
+                    <button type="button" data-accion="cebolla" aria-pressed="false" aria-label={controles.cebolla} title={controles.cebolla} set:html={ICONOS.cebolla} />
+                </div>
+            </div>
+        )}
+
         {logo && <img src={logo} alt={logoAlt} data-intro={logoIntro} class="pixel-card__logo" />}
     </div>
 </div>

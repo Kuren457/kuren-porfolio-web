@@ -14,7 +14,8 @@
     "cv": "node scripts/cv.mjs",
     "marcos": "node scripts/recolor-marco.mjs && node scripts/marcos-vegetales.mjs && node scripts/intros-logos.mjs && node scripts/mascotas.mjs",
     "og": "node scripts/og.mjs",
-    "pixel-1x": "node scripts/pixel-1x.mjs"
+    "pixel-1x": "node scripts/pixel-1x.mjs",
+    "showreel": "node scripts/showreel.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

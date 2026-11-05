@@ -1,0 +1,23 @@
+---
+// src/components/Showreel.astro
+// El showreel en la portada, debajo de la presentación. Se monta con npm run showreel (scripts/showreel.mjs) y la
+// versión para la web está recomprimida en public/showreel/. No se descarga hasta que se le da a reproducir (pesa
+// bastante y está casi al principio de la página): mientras, se ve el cartel del principio.
+import { marcoAleatorio } from '../utils/marcoAleatorio';
+import { idiomaDe } from '../i18n/idioma';
+import { textos } from '../i18n/textos';
+
+const t = textos(idiomaDe(Astro)).showreel;
+---
+
+<section id="showreel" class="pt-4 pb-16 px-5 relative z-10">
+    <div class="container mx-auto max-w-5xl text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-[#ff3333] to-[#ffaa00] text-transparent bg-clip-text">{t.titulo}</span>
+        </h2>
+        <p class="text-[#cbd5e1] max-w-2xl mx-auto mb-8">{t.texto}</p>
+        <div class={`showreel ${marcoAleatorio({ conTexto: true })}`}>
+            <video src="/showreel/showreel.mp4" poster="/showreel/showreel.webp" width="1920" height="1080" controls preload="none" playsinline aria-label={t.titulo}></video>
+        </div>
+    </div>
+</section>
