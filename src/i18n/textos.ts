@@ -9,6 +9,7 @@ const es = {
         descripcion: 'Portfolio de Miguel Ángel Vera Ximénez: pixel art, animación y 3D para videojuegos.',
         imagenAlt: 'Miguel Ángel Vera Ximénez: Pixel Artist, Animador 2D/3D y Technical Artist',
         cv: '/CV_Miguel_Angel_Vera_Ximenez.pdf',
+        kofi: 'https://ko-fi.com/kurenm', // Comisiones
     },
     navegacion: {
         general: 'General',
@@ -26,6 +27,7 @@ const es = {
         subtitulo: 'Digital Artist & Game Developer',
         presentacion: 'Hago arte para videojuegos, en pixel art y en 3D, y he trabajado en BloodRunner, OuroJam, Hells Gamble y Neorb.',
         disponible: 'Disponible ya · en remoto o en Madrid',
+        comisiones: 'Comisiones abiertas ↗',
         conoceme: 'Conóceme',
         proyectos: 'Mi Portfolio',
         pixelArt: 'Pixel Art',
@@ -90,8 +92,9 @@ const es = {
     },
     contacto: {
         titulo: '¿Quieres contactar conmigo?',
-        texto: 'Siempre estoy abierto a colaborar en nuevos proyectos, participar en jams o simplemente charlar sobre desarrollo de videojuegos y arte digital.',
+        texto: 'Siempre estoy abierto a colaborar en nuevos proyectos, participar en jams o simplemente charlar sobre desarrollo de videojuegos y arte digital. Y si buscas una pieza de pixel art para ti o para tu juego, tengo las comisiones abiertas en Ko-fi.',
         mensaje: 'Enviar un Mensaje',
+        kofi: 'Ko-fi · Comisiones',
         cv: 'Descargar CV ↓',
         hechoCon: 'Desarrollado con Astro & TailwindCSS',
     },
@@ -153,6 +156,7 @@ const en: typeof es = {
         descripcion: 'Portfolio of Miguel Ángel Vera Ximénez: pixel art, animation and 3D for video games.',
         imagenAlt: 'Miguel Ángel Vera Ximénez: Pixel Artist, 2D/3D Animator and Technical Artist',
         cv: '/CV_Miguel_Angel_Vera_Ximenez_EN.pdf',
+        kofi: 'https://ko-fi.com/kurenm', // Comisiones
     },
     navegacion: {
         general: 'Home',
@@ -170,6 +174,7 @@ const en: typeof es = {
         subtitulo: 'Digital Artist & Game Developer',
         presentacion: 'I make art for video games, in pixel art and 3D, and I have worked on BloodRunner, OuroJam, Hells Gamble and Neorb.',
         disponible: 'Available now · remote or in Madrid',
+        comisiones: 'Commissions open ↗',
         conoceme: 'About me',
         proyectos: 'My portfolio',
         pixelArt: 'Pixel Art',
@@ -234,8 +239,9 @@ const en: typeof es = {
     },
     contacto: {
         titulo: 'Want to get in touch?',
-        texto: "I'm always open to collaborating on new projects, joining jams or just chatting about game development and digital art.",
+        texto: "I'm always open to collaborating on new projects, joining jams or just chatting about game development and digital art. And if you're after a pixel art piece for yourself or your game, my commissions are open on Ko-fi.",
         mensaje: 'Send a message',
+        kofi: 'Ko-fi · Commissions',
         cv: 'Download CV ↓',
         hechoCon: 'Built with Astro & TailwindCSS',
     },

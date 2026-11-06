@@ -29,8 +29,11 @@ const r = rutas(idioma);
         {t.hero.presentacion}
     </p>
 
-    <!-- Disponibilidad -->
-    <p class="disponible mt-5 relative z-20">{t.hero.disponible}</p>
+    <!-- Disponibilidad y comisiones (Ko-fi) -->
+    <div class="flex flex-wrap justify-center items-center gap-3 mt-5 relative z-20">
+        <p class="disponible">{t.hero.disponible}</p>
+        <a href={t.sitio.kofi} target="_blank" rel="noopener noreferrer" class="comisiones">{t.hero.comisiones}</a>
+    </div>
 
     <!-- CV en PDF, en el idioma de la página, encima del resto de botones (se genera con `npm run cv` a partir de
          fuentes/cv/) -->
